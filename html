@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grammatik Trainer — B1 / B2</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.85);
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.05);
+    }
+    .glass-card-hover:hover {
+      background: rgba(255, 255, 255, 0.9);
+      border-color: rgba(255, 255, 255, 1);
+      box-shadow: 0 25px 50px -12px rgba(99, 102, 241, 0.12);
+      transform: translateY(-2px);
+    }
+    .glass-input {
+      background: rgba(255, 255, 255, 0.55);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.85);
+    }
+  </style>
+</head>
+<body class="bg-[#f1f5f9] text-slate-900 min-h-screen relative overflow-x-hidden flex flex-col items-center py-10 px-4 sm:px-6">
+
+  <!-- Декоративні розмиті сфери (Soft Glow Blobs) -->
+  <div class="fixed top-[-10%] left-[-5%] w-[450px] h-[450px] rounded-full bg-gradient-to-tr from-indigo-300/40 to-blue-200/40 blur-[100px] pointer-events-none -z-10"></div>
+  <div class="fixed top-[40%] right-[-5%] w-[500px] h-[500px] rounded-full bg-gradient-to-bl from-purple-300/35 to-pink-200/35 blur-[120px] pointer-events-none -z-10"></div>
+  <div class="fixed bottom-[-10%] left-[20%] w-[550px] h-[550px] rounded-full bg-gradient-to-tr from-sky-200/40 to-teal-200/30 blur-[110px] pointer-events-none -z-10"></div>
+
+  <!-- ГОЛОВНИЙ ЕКРАН ТЕМ -->
+  <main id="main-view" class="max-w-5xl w-full">
+    <header class="text-center mb-10">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 glass-card rounded-full text-indigo-700 text-xs font-semibold uppercase tracking-wider mb-3.5 shadow-sm">
+        ✨ Deutsch B1 · B2
+      </div>
+      <h1 class="text-4xl sm:text-5xl font-black text-slate-900 tracking-tight mb-2.5">
+        Grammatik <span class="bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-blue-600">Trainer</span>
+      </h1>
+      <p class="text-slate-500 font-medium text-sm sm:text-base">Коротке повторення правил та інтерактивні тести</p>
+      
+      <!-- Пошуковий рядок -->
+      <div class="mt-7 max-w-md mx-auto relative">
+        <input type="text" id="search-input" placeholder="Швидкий пошук теми або правила..." 
+          class="w-full glass-input rounded-2xl px-5 py-3.5 pl-12 text-sm shadow-sm outline-none focus:ring-2 focus:ring-indigo-500/50 transition-all placeholder:text-slate-400 text-slate-800">
+        <svg class="w-5 h-5 text-slate-400 absolute left-4 top-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+        </svg>
+      </div>
+    </header>
+
+    <!-- Сітка карток -->
+    <div id="topics-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5"></div>
+  </main>
+
+  <!-- ЕКРАН ТЕСТУВАННЯ -->
+  <section id="quiz-view" class="max-w-xl w-full hidden">
+    <div class="flex items-center justify-between mb-4">
+      <button id="back-btn" class="text-slate-500 hover:text-slate-900 font-medium text-sm inline-flex items-center gap-1.5 transition">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+        Всі теми
+      </button>
+
+      <button id="open-theory-btn" class="text-xs font-semibold text-indigo-700 bg-indigo-50/80 hover:bg-indigo-100 border border-indigo-200/60 px-3 py-1.5 rounded-full inline-flex items-center gap-1.5 transition">
+        💡 Правило
+      </button>
+    </div>
+
+    <div class="glass-card p-6 sm:p-9 rounded-[32px] relative">
+      <div class="flex justify-between items-center mb-6">
+        <span id="quiz-title" class="text-[11px] font-bold text-indigo-700 bg-indigo-50/80 px-3 py-1 rounded-full uppercase tracking-wider"></span>
+        <span id="quiz-progress" class="text-xs text-slate-400 font-mono font-medium">1 / 1</span>
+      </div>
+
+      <div class="w-full bg-slate-200/60 h-1.5 rounded-full mb-8 overflow-hidden">
+        <div id="progress-bar" class="bg-gradient-to-r from-indigo-500 to-blue-500 h-full transition-all duration-300 rounded-full" style="width: 0%"></div>
+      </div>
+
+      <p id="quiz-question" class="text-lg sm:text-xl font-semibold mb-8 leading-relaxed text-slate-800"></p>
+
+      <div id="options-container" class="space-y-3.5 mb-8"></div>
+
+      <div id="quiz-feedback" class="p-5 rounded-2xl mb-8 hidden text-sm font-medium leading-relaxed backdrop-blur-md"></div>
+
+      <div class="flex gap-3">
+        <button id="check-btn" class="w-full bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white font-semibold py-4 px-4 rounded-2xl transition shadow-lg shadow-indigo-500/25 active:scale-[0.99]">
+          Перевірити відповідь
+        </button>
+        <button id="next-btn" class="w-full bg-slate-900 hover:bg-black text-white font-semibold py-4 px-4 rounded-2xl transition shadow-lg shadow-slate-900/20 hidden active:scale-[0.99]">
+          Наступне питання →
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- МОДАЛЬНЕ ВІКНО З ТЕОРІЄЮ / ПОВТОРЕННЯМ -->
+  <div id="theory-modal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="glass-card bg-white/95 max-w-lg w-full p-6 sm:p-8 rounded-[32px] shadow-2xl relative max-h-[85vh] overflow-y-auto">
+      <div class="flex justify-between items-start mb-4">
+        <div>
+          <span class="text-[11px] font-bold tracking-wider text-indigo-600 uppercase block">Коротке правило</span>
+          <h3 id="modal-theory-title" class="text-xl font-bold text-slate-900"></h3>
+        </div>
+        <button id="close-theory-btn" class="text-slate-400 hover:text-slate-700 p-1 rounded-full transition">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+      </div>
+
+      <div id="modal-theory-content" class="text-sm text-slate-600 leading-relaxed space-y-3"></div>
+
+      <button id="modal-start-btn" class="mt-6 w-full bg-slate-900 hover:bg-black text-white font-semibold py-3 rounded-xl transition text-sm">
+        Зрозуміло, перейти до вправ
+      </button>
+    </div>
+  </div>
+
+  <!-- ЕКРАН РЕЗУЛЬТАТІВ -->
+  <section id="result-view" class="max-w-md w-full text-center hidden">
+    <div class="glass-card p-8 sm:p-10 rounded-[36px]">
+      <div class="text-5xl mb-4">🎯</div>
+      <h2 class="text-2xl font-extrabold text-slate-900 mb-1">Розділ завершено!</h2>
+      <p id="result-topic-name" class="text-slate-500 text-sm mb-6"></p>
+      
+      <div class="glass-input rounded-2xl p-5 mb-8 flex justify-around">
+        <div>
+          <span class="text-[11px] uppercase tracking-wider text-slate-400 font-bold block mb-1">Правильно</span>
+          <span id="score-correct" class="text-3xl font-black text-emerald-600">0</span>
+        </div>
+        <div class="border-r border-slate-300/60"></div>
+        <div>
+          <span class="text-[11px] uppercase tracking-wider text-slate-400 font-bold block mb-1">Всього</span>
+          <span id="score-total" class="text-3xl font-black text-slate-700">0</span>
+        </div>
+      </div>
+
+      <div class="space-y-3">
+        <button id="retry-btn" class="w-full bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white font-semibold py-3.5 rounded-2xl transition shadow-lg shadow-indigo-500/25">
+          Спробувати ще раз
+        </button>
+        <button id="finish-btn" class="w-full glass-input hover:bg-white/80 text-slate-700 font-semibold py-3.5 rounded-2xl transition">
+          До списку тем
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const database = [
+      {
+        id: "finalsaetze",
+        title: "Finalsätze (Damit & Um...zu)",
+        category: "B1",
+        theory: `
+          <p><b>Finalsätze</b> відповідають на питання <i>Wozu?</i> (Для чого?) або <i>Mit welcher Absicht?</i> (З якою метою?).</p>
+          <ul class="list-disc pl-5 space-y-1.5">
+            <li><b>um...zu + Infinitiv:</b> Вживається, якщо суб'єкт (підмет) у головному та підрядному реченні <b>однаковий</b>.<br><i>Приклад: Ich lerne Deutsch, <u>um</u> in Berlin zu <u>studieren</u>.</i></li>
+            <li><b>damit:</b> Вживається, коли підмети <b>різні</b> (або за бажанням, коли однаковий). Дієслово стоїть у кінці.<br><i>Приклад: Ich gebe dir Geld, <u>damit</u> du dir ein Buch <u>kaufst</u>.</i></li>
+          </ul>
+        `,
+        questions: [
+          { q: "Er lernt fleißig Deutsch, ____ in Deutschland als Arzt arbeiten zu können.", options: ["damit", "um", "weil", "sodass"], correct: 1, explanation: "Підмет однаковий + інфінітив з 'zu' -> вживаємо 'um...zu'." },
+          { q: "Die Lehrerin erklärt die Grammatik langsam, ____ alle Schüler es verstehen.", options: ["um", "damit", "obwohl", "denn"], correct: 1, explanation: "Різні підмети (Lehrerin / Schüler) -> сполучник 'damit'." }
+        ]
+      },
+      {
+        id: "perfekt",
+        title: "Das Perfekt",
+        category: "A2 / B1",
+        theory: `
+          <p><b>Perfekt</b> = допоміжне дієслово (<i>haben</i> або <i>sein</i>) + <i>Partizip II</i> у кінці речення.</p>
+          <ul class="list-disc pl-5 space-y-1.5">
+            <li><b>sein:</b> Дієслова руху (<i>gehen, fahren, fliegen</i>), зміни стану (<i>einschlafen, sterben</i>) та винятки (<i>sein, werden, bleiben</i>).</li>
+            <li><b>haben:</b> Перехідні дієслова (з Akkusativ), зворотні дієслова (<i>sich freuen</i>), модальні дієслова.</li>
+          </ul>
+        `,
+        questions: [
+          { q: "Letztes Jahr ____ wir nach Italien geflogen.", options: ["haben", "sind", "wurden", "waren"], correct: 1, explanation: "Дієслова переміщення утворюють Perfekt із допоміжним 'sein'." },
+          { q: "Was ____ du gestern Abend Schönes gekocht?", options: ["hast", "bist", "wirst", "hattest"], correct: 0, explanation: "Більшість перехідних дієслів потребують 'haben'." }
+        ]
+      },
+      {
+        id: "adjektiv-nominativ",
+        title: "Adjektivdeklination im Nominativ",
+        category: "A2 / B1",
+        theory: `
+          <p>Закінчення прикметників у <b>Nominativ</b> (називний відмінок):</p>
+          <ul class="list-disc pl-5 space-y-1.5">
+            <li><b>Після означеного артикля (der/die/das):</b> всі отримують закінчення <b>-e</b> (der gute Mann, die schöne Frau, das neue Auto). Множина (die) -> <b>-en</b>.</li>
+            <li><b>Після неозначеного артикля (ein / kein / mein):</b> показують рід іменника:<br>Maskulinum -> <b>-er</b> (ein alt<u>er</u> Baum)<br>Neutrum -> <b>-es</b> (ein klein<u>es</u> Kind)<br>Femininum -> <b>-e</b> (eine neu<u>e</u> Tasche)</li>
+          </ul>
+        `,
+        questions: [
+          { q: "Hier steht ein neu____ Wagen.", options: ["-er", "-e", "-es", "-en"], correct: 0, explanation: "Maskulinum + ein у Nominativ -> закінчення -er." },
+          { q: "Das schön____ Bild hängt an der Wand.", options: ["-er", "-e", "-es", "-en"], correct: 1, explanation: "Neutrum + das у Nominativ -> закінчення -e." }
+        ]
+      },
+      {
+        id: "futur-1",
+        title: "Futur I (Майбутній час)",
+        category: "B1",
+        theory: `
+          <p><b>Futur I</b> утворюється за формулою: <b>werden + Infinitiv</b> (у кінці речення).</p>
+          <ul class="list-disc pl-5 space-y-1.5">
+            <li>ich <b>werde</b>, du <b>wirst</b>, er/sie/es <b>wird</b>, wir <b>werden</b>, ihr <b>werdet</b>, sie/Sie <b>werden</b>.</li>
+            <li>Виражає намір у майбутньому, прогноз або припущення у теперішньому часі (<i>Er wird wohl schlafen</i>).</li>
+          </ul>
+        `,
+        questions: [
+          { q: "Nächste Woche ____ ich meine Prüfung ablegen.", options: ["werde", "wird", "wurde", "worden"], correct: 0, explanation: "Futur I: werden (ich werde) + Infinitiv." }
+        ]
+      },
+      {
+        id: "komparativ-superlativ",
+        title: "Komparativ & Superlativ",
+        category: "A2 / B1",
+        theory: `
+          <p>Ступені порівняння та сполучники:</p>
+          <ul class="list-disc pl-5 space-y-1.5">
+            <li><b>Рівність:</b> <i>so / genauso ... <b>wie</b></i> (Er ist so groß wie ich).</li>
+            <li><b>Нерівність (Komparativ + -er):</b> <i>... <b>als</b></i> (Er ist größer als ich).</li>
+            <li><b>Superlativ:</b> <i>am ...-(e)sten</i> або з артиклем <i>der/die/das ...-(e)ste</i>.</li>
+          </ul>
+        `,
+        questions: [
+          { q: "Dieser Koffer ist schwerer ____ jener.", options: ["wie", "als", "denn", "so"], correct: 1, explanation: "Для вищого ступеня порівняння використовується 'als'." },
+          { q: "Er läuft genauso schnell ____ sein Bruder.", options: ["als", "wie", "so", "von"], correct: 1, explanation: "Для рівності якостей використовується 'wie'." }
+        ]
+      },
+      {
+        id: "konnektoren-ursache",
+        title: "Deshalb, darum, deswegen, daher",
+        category: "B1",
+        theory: `
+          <p>Сполучникові прислівники причини та наслідку: <b>deshalb / darum / deswegen / daher</b> (тому, через це).</p>
+          <ul class="list-disc pl-5 space-y-1.5">
+            <li>Займають <b>1-шу позицію</b> у реченні.</li>
+            <li>Вимагають <b>інверсії</b>: відмінюване дієслово стоїть одразу після них (на 2-й позиції).<br><i>Приклад: Ich war krank. <u>Deshalb blieb ich</u> zu Hause.</i></li>
+          </ul>
+        `,
+        questions: [
+          { q: "Es regnete stark. ____ blieben wir zu Hause.", options: ["Deshalb", "Weil", "Da", "Obwohl"], correct: 0, explanation: "Deshalb вимагає зворотного порядку слів (дієслово на 2-й позиції)." }
+        ]
+      },
+      {
+        id: "reflexive-verben",
+        title: "Reflexive Verben (Зворотні дієслова)",
+        category: "A2 / B1",
+        theory: `
+          <p>Зворотні займенники (Reflexivpronomen):</p>
+          <ul class="list-disc pl-5 space-y-1.5">
+            <li><b>Akkusativ (за замовчуванням):</b> mich, dich, sich, uns, euch, sich.<br><i>Приклад: Ich beeile <u>mich</u>.</i></li>
+            <li><b>Dativ (якщо в реченні вже є прямий додаток):</b> mir, dir, sich, uns, euch, sich.<br><i>Приклад: Ich wasche <u>mir</u> die Hände (die Hände = Akkusativ-Objekt).</i></li>
+          </ul>
+        `,
+        questions: [
+          { q: "Ich muss ____ beeilen, der Zug fährt gleich ab.", options: ["mir", "mich", "sich", "dich"], correct: 1, explanation: "sich beeilen вимагає Akkusativ: ich beeile mich." },
+          { q: "Ich putze ____ die Zähne.", options: ["mich", "mir", "mein", "sich"], correct: 1, explanation: "При наявності прямого додатка вживається Dativ: ich putze mir die Zähne." }
+        ]
+      },
+      {
+        id: "fragewoerter-w",
+        title: "Fragewörter (W-Fragen)",
+        category: "A1 / A2",
+        theory: `
+          <p>Питальні слова з прийменниками:</p>
+          <ul class="list-disc pl-5 space-y-1.5">
+            <li><b>Для людей:</b> Прийменник + питальний займенник (<i>mit wem?, an wen?, für wen?</i>).</li>
+            <li><b>Для предметів та абстрактних понять:</b> <b>wo(r) + прийменник</b> (<i>womit?, woran?, wovon?, worüber?</i>).</li>
+          </ul>
+        `,
+        questions: [
+          { q: "____ hast du gesprochen? – Mit Herrn Müller.", options: ["Woran", "Womit", "Mit wem", "Worüber"], correct: 2, explanation: "Для осіб із прийменником mit: 'Mit wem?' (Dativ)." }
+        ]
+      },
+      {
+        id: "nomen-praepositionen",
+        title: "Nomen mit festen Präpositionen",
+        category: "B1 / B2",
+        theory: `
+          <p>Багато іменників утворюють сталі зв'язки з певними прийменниками та відмінками:</p>
+          <ul class="list-disc pl-5 space-y-1.5">
+            <li><i>die Angst <b>vor</b> + Dativ</i> (страх перед чимось)</li>
+            <li><i>das Interesse <b>an</b> + Dativ</i> (інтерес до чогось)</li>
+            <li><i>die Freude <b>auf / über</b> + Akkusativ</i> (радість з приводу чогось)</li>
+            <li><i>die Hoffnung <b>auf</b> + Akkusativ</i> (надія на щось)</li>
+          </ul>
+        `,
+        questions: [
+          { q: "Ich habe großes Interesse ____ diesem Kurs.", options: ["an", "für", "über", "auf"], correct: 0, explanation: "Стала сполучуваність: das Interesse an + Dativ." }
+        ]
+      },
+      {
+        id: "modalverben-subjektiv",
+        title: "Subjektive Bedeutung der Modalverben",
+        category: "B2",
+        theory: `
+          <p>Модальні дієслова для вираження суб'єктивної впевненості (припущення):</p>
+          <ul class="list-disc pl-5 space-y-1.5">
+            <li><b>müssen:</b> 90-100% впевненість (майже факт: <i>Er muss zu Hause sein</i>).</li>
+            <li><b>dürfte / könnte:</b> 50-70% ймовірність (<i>Es dürfte bald regnen</i>).</li>
+            <li><b>kann / mag:</b> 50% можливість (можливо так, можливо ні).</li>
+            <li><b>sollen:</b> чутки, переказ чужих слів (<i>Er soll reich sein</i> = кажуть, що він багатий).</li>
+          </ul>
+        `,
+        questions: [
+          { q: "Das Licht brennt noch. Er ____ wohl noch arbeiten.", options: ["muss", "soll", "will", "darf"], correct: 0, explanation: "'muss' позначає високу суб'єктивну впевненість мовця." }
+        ]
+      },
+      {
+        id: "indefinit-negativpronomen",
+        title: "Indefinitpronomen & Negativpronomen",
+        category: "A2 / B1",
+        theory: `
+          <p>Займенники для осіб та предметів:</p>
+          <ul class="list-disc pl-5 space-y-1.5">
+            <li><b>Особи:</b> <i>jemand</i> (хтось) $\leftrightarrow$ <i>niemand</i> (ніхто).</li>
+            <li><b>Речі:</b> <i>etwas</i> (щось) $\leftrightarrow$ <i>nichts</i> (нічого).</li>
+            <li><b>Узагальнення:</b> <i>man</i> (безособовий суб'єкт), <i>alle</i> (всі), <i>jeder/jede/jedes</i> (кожен).</li>
+          </ul>
+        `,
+        questions: [
+          { q: "Ist hier ____, der mir helfen kann?", options: ["jemand", "niemand", "etwas", "nichts"], correct: 0, explanation: "У ствердних питаннях: 'jemand' (хтось)." }
+        ]
+      },
+      {
+        id: "nebensaetze-indem-sodass",
+        title: "Nebensätze mit „indem“ & „sodass“",
+        category: "B1 / B2",
+        theory: `
+          <p>Підрядні речення (дієслово стоїть у кінці):</p>
+          <ul class="list-disc pl-5 space-y-1.5">
+            <li><b>indem (спосіб дії):</b> відповідає на <i>Wie? / Wodurch?</i> (яким чином, шляхом чого).<br><i>Er lernt, <u>indem</u> er Karteikarten <u>schreibt</u>.</i></li>
+            <li><b>sodass / so..., dass (наслідок):</b> результат дії.<br><i>Es schneite stark, <u>sodass</u> die Züge Verspätung <u>hatten</u>.</i></li>
+          </ul>
+        `,
+        questions: [
+          { q: "Er verbesserte sein Deutsch, ____ er Podcasts hörte.", options: ["indem", "sodass", "damit", "weil"], correct: 0, explanation: "'indem' позначає спосіб дії (яким чином)." }
+        ]
+      },
+      {
+        id: "futur1-vs-praesens",
+        title: "Futur I vs. Präsens",
+        category: "B1",
+        theory: `
+          <p>Вираження майбутнього часу в німецькій мові:</p>
+          <ul class="list-disc pl-5 space-y-1.5">
+            <li><b>Präsens + обставина часу:</b> Найчастіший розмовний варіант для запланованих дій (<i>Morgen fahre ich nach Berlin</i>).</li>
+            <li><b>Futur I (werden + Inf.):</b> Офіційні плани, тверді обіцянки або прогнози погоди / припущення (<i>Ich werde das nie vergessen</i>).</li>
+          </ul>
+        `,
+        questions: [
+          { q: "Morgen ____ ich meine Oma besuchen.", options: ["werde", "habe", "bin", "wurde"], correct: 0, explanation: "Futur I утворюється за допомогою допоміжного werden." }
+        ]
+      },
+      {
+        id: "fokuspartikeln",
+        title: "Fokuspartikeln (auch, sogar, gerade...)",
+        category: "B2",
+        theory: `
+          <p><b>Fokuspartikeln</b> виділяють певне слово чи частину речення:</p>
+          <ul class="list-disc pl-5 space-y-1.5">
+            <li><b>sogar:</b> додає підсилення / неочікуваність («навіть»).</li>
+            <li><b>gerade / ausgerechnet:</b> акцент саме на цьому елементі («саме зараз / саме він»).</li>
+            <li><b>nur / lediglich / bloß:</b> обмеження («лише / тільки»).</li>
+          </ul>
+        `,
+        questions: [
+          { q: "Alle bestanden, ____ der schwächste Schüler.", options: ["sogar", "lediglich", "gerade", "auch"], correct: 0, explanation: "'Sogar' посилює твердження ('навіть')." }
+        ]
+      },
+      {
+        id: "modalverben-alternativen",
+        title: "Modalverben und ihre Alternativen",
+        category: "B2",
+        theory: `
+          <p>Пасивні та безособові альтернативи модальним дієсловам:</p>
+          <ul class="list-disc pl-5 space-y-1.5">
+            <li><b>sein + zu + Infinitiv:</b><br>$\rightarrow$ можливість (= <i>können + Passiv</i>): <i>Das Problem ist zu lösen (= kann gelöst werden).</i><br>$\rightarrow$ обов'язок (= <i>müssen/sollen + Passiv</i>): <i>Die Rechnung ist zu bezahlen.</i></li>
+            <li><b>sich lassen + Infinitiv:</b> можливість (= <i>können</i>): <i>Das lässt sich machen.</i></li>
+          </ul>
+        `,
+        questions: [
+          { q: "Dieser Text ist leicht zu verstehen. = Man ____ ihn leicht verstehen.", options: ["muss", "kann", "soll", "darf"], correct: 1, explanation: "'sein + zu + Infinitiv' із пасивним значенням можливості відповідає 'können'." }
+        ]
+      },
+      {
+        id: "passivsatzformen",
+        title: "Passivsatzformen (Zustands- & Vorgangspassiv)",
+        category: "B1 / B2",
+        theory: `
+          <p>Види пасивного стану в німецькій мові:</p>
+          <ul class="list-disc pl-5 space-y-1.5">
+            <li><b>Vorgangspassiv (процес):</b> <b>werden + Partizip II</b>.<br><i>Die Tür wird geöffnet</i> (Двері відчиняють).</li>
+            <li><b>Zustandspassiv (результат / стан):</b> <b>sein + Partizip II</b>.<br><i>Die Tür ist geöffnet</i> (Двері відчинені).</li>
+          </ul>
+        `,
+        questions: [
+          { q: "Die Tür ____ bereits seit Stunden geschlossen.", options: ["wird", "ist", "wurde", "worden"], correct: 1, explanation: "Zustandspassiv (стан): sein + Partizip II." }
+        ]
+      },
+      {
+        id: "nebensaetze-subjunktionen",
+        title: "Nebensätze & Subjunktionen",
+        category: "B1",
+        theory: `
+          <p>Підрядні сполучники відправляють дієслово в кінець речення (KATI-Regel):</p>
+          <ul class="list-disc pl-5 space-y-1.5">
+            <li><b>weil / da:</b> причина (тому що / оскільки).</li>
+            <li><b>obwohl / obgleich:</b> поступка (хоча).</li>
+            <li><b>wenn / falls:</b> умова (якщо).</li>
+            <li><b>dass / ob:</b> з'ясувальні (що / чи).</li>
+          </ul>
+        `,
+        questions: [
+          { q: "____ er müde war, ging er noch zum Sport.", options: ["Weil", "Obwohl", "Dass", "Wenn"], correct: 1, explanation: "'Obwohl' виражає поступкову причину (хоча й)." }
+        ]
+      },
+      {
+        id: "zweiteilige-konjunktionen",
+        title: "Zweiteilige Konjunktionen",
+        category: "B1 / B2",
+        theory: `
+          <p>Подвійні сполучники для зв'язку слів і речень:</p>
+          <ul class="list-disc pl-5 space-y-1.5">
+            <li><b>sowohl ... als auch:</b> як одне, так і інше (+)</li>
+            <li><b>nicht nur ... sondern auch:</b> не тільки, але й (+)</li>
+            <li><b>weder ... noch:</b> ні те, ні інше (-)</li>
+            <li><b>entweder ... oder:</b> або ..., або ... (альтернатива)</li>
+            <li><b>zwar ... aber:</b> хоча ..., проте ... (протиставлення)</li>
+          </ul>
+        `,
+        questions: [
+          { q: "Er spricht ____ Deutsch als auch fließend Spanisch.", options: ["sowohl", "weder", "entweder", "nicht nur"], correct: 0, explanation: "Парна сполучникова конструкція: 'sowohl ... als auch'." }
+        ]
+      },
+      {
+        id: "funktion-es",
+        title: "Funktionen des Pronomens „es“",
+        category: "B1 / B2",
+        theory: `
+          <p>Займенник <b>„es“</b> виконує кілька різних ролей:</p>
+          <ul class="list-disc pl-5 space-y-1.5">
+            <li><b>Особовий займенник середнього роду:</b> <i>Das Kind weint. <u>Es</u> hat Hunger.</i></li>
+            <li><b>Безособовий підмет (погода / явища):</b> <i><u>Es</u> regnet. <u>Es</u> ist kalt.</i></li>
+            <li><b>Сталі вирази:</b> <i><u>Es</u> gibt... / <u>Es</u> geht mir gut / <u>Es</u> handelt sich um...</i></li>
+          </ul>
+        `,
+        questions: [
+          { q: "____ gefällt mir hier sehr gut.", options: ["Es", "Das", "Er", "Man"], correct: 0, explanation: "Безособове 'Es' як граматичний підмет." }
+        ]
+      },
+      {
+        id: "gerundiv",
+        title: "Das Gerundiv (Partizip I mit „zu“)",
+        category: "B2",
+        theory: `
+          <p><b>Герундирій (Gerundiv)</b> = <b>zu + Partizip I</b> (дієслово + -d-) + закінчення прикметника.</p>
+          <ul class="list-disc pl-5 space-y-1.5">
+            <li>Має пасивне значення необхідності або можливості.</li>
+            <li><i>eine nicht <u>zu lösende</u> Aufgabe = eine Aufgabe, die gelöst werden muss / kann</i> (завдання, яке має бути вирішене).</li>
+          </ul>
+        `,
+        questions: [
+          { q: "Das sind nicht zu unterschätzend____ Risiken.", options: ["-e", "-en", "-er", "-es"], correct: 0, explanation: "Plural у Nominativ без артикля: закінчення -e." }
+        ]
+      },
+      {
+        id: "suffixe-wortbildung",
+        title: "Suffixe und Wortbildung",
+        category: "B1 / B2",
+        theory: `
+          <p>Суфікси для утворення іменників та їхній рід:</p>
+          <ul class="list-disc pl-5 space-y-1.5">
+            <li><b>Femininum (die):</b> <i>-ung, -heit, -keit, -schaft, -tät, -tion</i> (die Freiheit, die Möglichkeit).</li>
+            <li><b>Maskulinum (der):</b> <i>-er, -or, -ist, -ismus</i> (der Lehrer, der Optimismus).</li>
+            <li><b>Neutrum (das):</b> <i>-chen, -lein, -um, -ment</i> (das Mädchen, das Dokument).</li>
+          </ul>
+        `,
+        questions: [
+          { q: "Die Eigen____ (від прикметника eigen).", options: ["-heit", "-schaft", "-keit", "-ung"], correct: 0, explanation: "Іменник: die Eigenheit." }
+        ]
+      },
+      {
+        id: "suffix-weise",
+        title: "Wortbildung: Suffix „-weise“",
+        category: "B2",
+        theory: `
+          <p>Суфікс <b>-weise</b> утворює прислівники від іменників або прикметників:</p>
+          <ul class="list-disc pl-5 space-y-1.5">
+            <li>Позначає спосіб дії: <i>schrittweise</i> (покроково), <i>teilweise</i> (частково), <i>paarweise</i> (попарно).</li>
+            <li>Позначає ставлення або оцінку: <i>möglicherweise</i> (можливо), <i>glücklicherweise</i> (на щастя), <i>beispielsweise</i> (наприклад).</li>
+          </ul>
+        `,
+        questions: [
+          { q: "Er hat das Problem schritt____ gelöst.", options: ["-weise", "-haft", "-los", "-bar"], correct: 0, explanation: "Суфікс способу дії: schrittweise." }
+        ]
+      },
+      {
+        id: "links-rechtsattribute",
+        title: "Links- und Rechtsattribute",
+        category: "B2",
+        theory: `
+          <p>Поширені означення у складному реченні:</p>
+          <ul class="list-disc pl-5 space-y-1.5">
+            <li><b>Linksattribut (ліве означення):</b> стоїть між артиклем та іменником.<br><i>Das <u>im 19. Jahrhundert erbaute</u> Schloss.</i></li>
+            <li><b>Rechtsattribut (праве означення):</b> стоїть після іменника (підрядні речення або прийменникові групи).<br><i>Das Schloss, <u>das im 19. Jahrhundert erbaut wurde</u>.</i></li>
+          </ul>
+        `,
+        questions: [
+          { q: "Das 1920 gebaut____ Haus wurde renoviert.", options: ["-e", "-en", "-er", "-es"], correct: 0, explanation: "Ліве означення: das Haus (Neutrum) -> gebaute." }
+        ]
+      },
+      {
+        id: "vorsilben-praefixe",
+        title: "Vorsilben bei Verben (Präfixe)",
+        category: "A2 / B1",
+        theory: `
+          <p>Префікси дієслів у німецькій мові:</p>
+          <ul class="list-disc pl-5 space-y-1.5">
+            <li><b>Завжди невідокремлювані (Untrennbar):</b> <i>be-, ge-, er-, ver-, zer-, ent-, emp-, miss-</i> (наголос падає на корінь).</li>
+            <li><b>Відокремлювані (Trennbar):</b> <i>ab-, an-, auf-, aus-, ein-, mit-, vor-, zu-, zurück-</i> (наголос падає на префікс).</li>
+          </ul>
+        `,
+        questions: [
+          { q: "Welches Präfix ist immer UNTRENNBAR?", options: ["ver-", "auf-", "an-", "mit-"], correct: 0, explanation: "Префікси be-, ge-, er-, ver-, zer-, ent-, emp-, miss- ніколи не відокремлюються." }
+        ]
+      },
+      {
+        id: "indirekte-fragesaetze",
+        title: "Indirekte Fragesätze (ob / W-Fragen)",
+        category: "B1",
+        theory: `
+          <p>Непрямі запитання є підрядними реченнями (дієслово в самому кінці):</p>
+          <ul class="list-disc pl-5 space-y-1.5">
+            <li><b>Ja/Nein-Fragen $\rightarrow$ сполучник „ob“ (чи):</b><br><i>Kommt er morgen? $\rightarrow$ Ich weiß nicht, <u>ob</u> er morgen <u>kommt</u>.</i></li>
+            <li><b>W-Fragen $\rightarrow$ зберігається питальне слово:</b><br><i>Wann fährt der Zug? $\rightarrow$ Können Sie mir sagen, <u>wann</u> der Zug <u>abfährt</u>?</i></li>
+          </ul>
+        `,
+        questions: [
+          { q: "Können Sie mir sagen, ____ der Zug abfährt?", options: ["wann", "ob", "warum", "dass"], correct: 0, explanation: "Спеціальне непряме питання зберігає питальне слово 'wann'." }
+        ]
+      },
+      {
+        id: "passiv-komplett",
+        title: "Passiv & Passivsatzformen",
+        category: "B1 / B2",
+        theory: `
+          <p>Пасивні форми з модальними дієсловами та в різних часах:</p>
+          <ul class="list-disc pl-5 space-y-1.5">
+            <li><b>Präsens Passiv:</b> <i>wird + Partizip II</i> (Es wird gemacht).</li>
+            <li><b>Präteritum Passiv:</b> <i>wurde + Partizip II</i> (Es wurde gemacht).</li>
+            <li><b>Passiv mit Modalverben:</b> <i>Modalverb + Partizip II + werden</i> (Es muss repariert werden).</li>
+          </ul>
+        `,
+        questions: [
+          { q: "Der Brief ____ sofort abgeschickt werden.", options: ["muss", "wird", "ist", "hat"], correct: 0, explanation: "Passiv mit Modalverben: Modalverb + Partizip II + werden." }
+        ]
+      }
+    ];
+
+    // Елементи DOM
+    const mainView = document.getElementById('main-view');
+    const quizView = document.getElementById('quiz-view');
+    const resultView = document.getElementById('result-view');
+    const topicsGrid = document.getElementById('topics-grid');
+    const searchInput = document.getElementById('search-input');
+    const quizTitle = document.getElementById('quiz-title');
+    const quizProgress = document.getElementById('quiz-progress');
+    const progressBar = document.getElementById('progress-bar');
+    const quizQuestion = document.getElementById('quiz-question');
+    const optionsContainer = document.getElementById('options-container');
+    const feedbackBox = document.getElementById('quiz-feedback');
+    const checkBtn = document.getElementById('check-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const backBtn = document.getElementById('back-btn');
+    const retryBtn = document.getElementById('retry-btn');
+    const finishBtn = document.getElementById('finish-btn');
+
+    // Модальне вікно теорії
+    const theoryModal = document.getElementById('theory-modal');
+    const modalTitle = document.getElementById('modal-theory-title');
+    const modalContent = document.getElementById('modal-theory-content');
+    const openTheoryBtn = document.getElementById('open-theory-btn');
+    const closeTheoryBtn = document.getElementById('close-theory-btn');
+    const modalStartBtn = document.getElementById('modal-start-btn');
+
+    let currentTopic = null;
+    let currentIdx = 0;
+    let selectedOption = null;
+    let correctCount = 0;
+
+    // Рендер карток
+    function renderTopics(filter = '') {
+      topicsGrid.innerHTML = '';
+      const filtered = database.filter(t => 
+        t.title.toLowerCase().includes(filter.toLowerCase()) ||
+        t.category.toLowerCase().includes(filter.toLowerCase())
+      );
+
+      filtered.forEach(topic => {
+        const card = document.createElement('div');
+        card.className = "glass-card glass-card-hover p-5 sm:p-6 rounded-[28px] transition-all duration-300 cursor-pointer flex flex-col justify-between min-h-[135px] group";
+        card.innerHTML = `
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[11px] font-bold tracking-wider text-indigo-500 uppercase">${topic.category}</span>
+              <span class="text-[11px] font-medium text-slate-400">💡 Правило + Тест</span>
+            </div>
+            <h2 class="font-bold text-slate-800 text-[15px] leading-snug group-hover:text-indigo-600 transition-colors">${topic.title}</h2>
+          </div>
+          <div class="flex items-center text-xs font-semibold text-indigo-600 mt-4 opacity-75 group-hover:opacity-100 transition-opacity">
+            Практикувати →
+          </div>
+        `;
+        card.onclick = () => startQuiz(topic);
+        topicsGrid.appendChild(card);
+      });
+    }
+
+    searchInput.addEventListener('input', (e) => renderTopics(e.target.value));
+
+    // Початок квізу
+    function startQuiz(topic) {
+      currentTopic = topic;
+      currentIdx = 0;
+      correctCount = 0;
+      mainView.classList.add('hidden');
+      resultView.classList.add('hidden');
+      quizView.classList.remove('hidden');
+      loadQuestion();
+    }
+
+    // Теорія (Модальне вікно)
+    function openTheory() {
+      if (!currentTopic) return;
+      modalTitle.innerText = currentTopic.title;
+      modalContent.innerHTML = currentTopic.theory;
+      theoryModal.classList.remove('hidden');
+    }
+
+    function closeTheory() {
+      theoryModal.classList.add('hidden');
+    }
+
+    openTheoryBtn.onclick = openTheory;
+    closeTheoryBtn.onclick = closeTheory;
+    modalStartBtn.onclick = closeTheory;
+
+    // Завантаження питання
+    function loadQuestion() {
+      selectedOption = null;
+      feedbackBox.classList.add('hidden');
+      checkBtn.classList.remove('hidden');
+      nextBtn.classList.add('hidden');
+
+      const q = currentTopic.questions[currentIdx];
+      quizTitle.innerText = currentTopic.title;
+      quizProgress.innerText = `${currentIdx + 1} / ${currentTopic.questions.length}`;
+      progressBar.style.width = `${((currentIdx + 1) / currentTopic.questions.length) * 100}%`;
+      quizQuestion.innerText = q.q;
+
+      optionsContainer.innerHTML = '';
+      q.options.forEach((opt, i) => {
+        const btn = document.createElement('button');
+        btn.className = "w-full text-left p-4 rounded-2xl glass-input hover:bg-white/90 font-medium text-sm transition-all flex items-center shadow-xs";
+        btn.innerHTML = `<span class="w-6 h-6 rounded-lg bg-white border border-slate-200/80 mr-3.5 flex items-center justify-center text-xs font-bold text-slate-500 shadow-xs">${String.fromCharCode(65 + i)}</span><span class="text-slate-700">${opt}</span>`;
+        btn.onclick = () => {
+          document.querySelectorAll('#options-container button').forEach(b => {
+            b.classList.remove('border-indigo-500', 'bg-white/95', 'ring-2', 'ring-indigo-500/20');
+            b.querySelector('span:last-child').classList.remove('text-indigo-900', 'font-bold');
+          });
+          btn.classList.add('border-indigo-500', 'bg-white/95', 'ring-2', 'ring-indigo-500/20');
+          btn.querySelector('span:last-child').classList.add('text-indigo-900', 'font-bold');
+          selectedOption = i;
+        };
+        optionsContainer.appendChild(btn);
+      });
+    }
+
+    checkBtn.onclick = () => {
+      if (selectedOption === null) {
+        alert("Оберіть варіант перед перевіркою.");
+        return;
+      }
+      const q = currentTopic.questions[currentIdx];
+      const isCorrect = selectedOption === q.correct;
+      if (isCorrect) correctCount++;
+
+      feedbackBox.classList.remove('hidden');
+      if (isCorrect) {
+        feedbackBox.className = "p-5 rounded-2xl mb-8 text-sm font-medium bg-emerald-50/80 text-emerald-900 border border-emerald-200/60 shadow-xs";
+        feedbackBox.innerHTML = `✅ <b>Правильно!</b> ${q.explanation}`;
+      } else {
+        feedbackBox.className = "p-5 rounded-2xl mb-8 text-sm font-medium bg-rose-50/80 text-rose-900 border border-rose-200/60 shadow-xs";
+        feedbackBox.innerHTML = `❌ <b>Неправильно.</b> Правильна відповідь: <b>${q.options[q.correct]}</b>.<br>${q.explanation}`;
+      }
+
+      checkBtn.classList.add('hidden');
+      nextBtn.classList.remove('hidden');
+    };
+
+    nextBtn.onclick = () => {
+      if (currentIdx + 1 < currentTopic.questions.length) {
+        currentIdx++;
+        loadQuestion();
+      } else {
+        quizView.classList.add('hidden');
+        resultView.classList.remove('hidden');
+        document.getElementById('result-topic-name').innerText = currentTopic.title;
+        document.getElementById('score-correct').innerText = correctCount;
+        document.getElementById('score-total').innerText = currentTopic.questions.length;
+      }
+    };
+
+    function exitToMain() {
+      quizView.classList.add('hidden');
+      resultView.classList.add('hidden');
+      mainView.classList.remove('hidden');
+      renderTopics(searchInput.value);
+    }
+
+    backBtn.onclick = exitToMain;
+    finishBtn.onclick = exitToMain;
+    retryBtn.onclick = () => startQuiz(currentTopic);
+
+    renderTopics();
+  </script>
+</body>
+</html>
