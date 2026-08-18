@@ -11,20 +11,20 @@
   <style>
     body { font-family: 'Plus Jakarta Sans', sans-serif; }
     .glass-card {
-      background: rgba(255, 255, 255, 0.75);
+      background: rgba(255, 255, 255, 0.72);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border: 1px solid rgba(255, 255, 255, 0.85);
       box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.05);
     }
     .glass-card-hover:hover {
-      background: rgba(255, 255, 255, 0.95);
+      background: rgba(255, 255, 255, 0.92);
       border-color: rgba(255, 255, 255, 1);
       box-shadow: 0 25px 50px -12px rgba(99, 102, 241, 0.12);
       transform: translateY(-2px);
     }
     .glass-input {
-      background: rgba(255, 255, 255, 0.6);
+      background: rgba(255, 255, 255, 0.55);
       backdrop-filter: blur(12px);
       border: 1px solid rgba(255, 255, 255, 0.85);
     }
@@ -46,7 +46,7 @@
       <h1 class="text-4xl sm:text-5xl font-black text-slate-900 tracking-tight mb-2.5">
         Grammatik <span class="bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-blue-600">Trainer</span>
       </h1>
-      <p class="text-slate-500 font-medium text-sm sm:text-base">Конструктор речень, вписування форм, пошук помилок і тести</p>
+      <p class="text-slate-500 font-medium text-sm sm:text-base">Короткі правила та інтерактивні тести</p>
       
       <!-- Пошуковий рядок -->
       <div class="mt-7 max-w-md mx-auto relative">
@@ -76,11 +76,8 @@
     </div>
 
     <div class="glass-card p-6 sm:p-9 rounded-[32px] relative">
-      <div class="flex justify-between items-center mb-6">
-        <div class="flex items-center gap-2">
-          <span id="quiz-title" class="text-[11px] font-bold text-indigo-700 bg-indigo-50/80 px-3 py-1 rounded-full uppercase tracking-wider"></span>
-          <span id="task-type-badge" class="text-[10px] font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded-md uppercase tracking-wider"></span>
-        </div>
+      <div class="flex justify-between items-center mb-4">
+        <span id="quiz-title" class="text-[11px] font-bold text-indigo-700 bg-indigo-50/80 px-3 py-1 rounded-full uppercase tracking-wider"></span>
         <span id="quiz-progress" class="text-xs text-slate-400 font-mono font-medium">1 / 1</span>
       </div>
 
@@ -88,16 +85,18 @@
         <div id="progress-bar" class="bg-gradient-to-r from-indigo-500 to-blue-500 h-full transition-all duration-300 rounded-full" style="width: 0%"></div>
       </div>
 
-      <!-- Інструкція та текст завдання -->
+      <!-- Рядок швидкого вибору номерів питань -->
+      <div id="question-nav" class="flex flex-wrap gap-1.5 mb-6"></div>
+
+      <!-- Блок питання -->
       <div class="mb-6">
         <span id="task-instruction" class="text-xs font-semibold text-indigo-600 block mb-1"></span>
         <p id="quiz-question" class="text-lg sm:text-xl font-semibold leading-relaxed text-slate-800"></p>
       </div>
 
-      <!-- Динамічний контейнер взаємодії -->
-      <div id="dynamic-container" class="mb-6"></div>
+      <div id="options-container" class="space-y-3.5 mb-6"></div>
 
-      <!-- Зворотний зв'язок -->
+      <!-- Пояснення -->
       <div id="quiz-feedback" class="p-5 rounded-2xl mb-6 hidden text-sm font-medium leading-relaxed backdrop-blur-md"></div>
 
       <div class="flex gap-3">
@@ -167,297 +166,353 @@
       {
         id: "finalsaetze",
         title: "Finalsätze (Damit & Um...zu)",
-        category: "B1",
+        category: "B1 / B2",
         theory: `
           <p><b>Finalsätze</b> позначають мету чи намір (<i>Wozu? / Mit welcher Absicht?</i>):</p>
           <ul class="list-disc pl-5 space-y-1.5">
-            <li><b>um...zu + Infinitiv:</b> коли суб'єкт однаковий в обох частинах (<i>Ich lerne Deutsch, um in Deutschland zu studieren</i>).</li>
-            <li><b>damit:</b> коли суб'єкти різні або однакові, дієслово йде в кінець (<i>Ich gebe dir Geld, damit du ein Buch kaufst</i>).</li>
+            <li><b>um...zu + Infinitiv:</b> використовується, коли підмет однаковий в обох частинах (<i>Ich lerne Deutsch, um in Deutschland zu studieren</i>).</li>
+            <li><b>damit:</b> використовується, коли підмети різні (або однакові), дієслово йде в кінець (<i>Ich gebe dir den Schlüssel, damit du die Tür öffnest</i>).</li>
+            <li><b>Passiv:</b> <i>um ... verstanden zu werden</i> або <i>damit ... minimiert werden</i>.</li>
           </ul>
         `,
         questions: [
+          {
+            type: "choice",
+            instruction: "Оберіть правильний сполучник:",
+            q: "Ich lerne jeden Tag neue Wörter, ____ meinen Wortschatz zu erweitern.",
+            options: ["damit", "um", "weil", "obwohl"],
+            correct: "um",
+            explanation: "Підмет однаковий (ich) + у кінці інфінітивна група з 'zu' (zu erweitern) -> використовуємо 'um...zu'."
+          },
+          {
+            type: "choice",
+            instruction: "Оберіть правильний сполучник:",
+            q: "Die Eltern sparen viel Geld, ____ ihre Kinder an einer guten Universität studieren können.",
+            options: ["damit", "um", "weil", "sodass"],
+            correct: "damit",
+            explanation: "Різні підмети (die Eltern / ihre Kinder) -> обов'язково вживається 'damit'."
+          },
+          {
+            type: "choice",
+            instruction: "Оберіть правильну форму з відокремлюваним префіксом:",
+            q: "Er geht heute früher schlafen, um morgen fit ____.",
+            options: ["aufzustehen", "aufstehen zu", "zu aufstehen", "aufgestanden"],
+            correct: "aufzustehen",
+            explanation: "У дієсловах із відокремлюваним префіксом частка 'zu' ставиться між префіксом і коренем: auf-zu-stehen."
+          },
+          {
+            type: "choice",
+            instruction: "Оберіть речення з правильним порядком слів:",
+            q: "Який варіант граматично правильний?",
+            options: [
+              "Ich gebe dir den Schlüssel, damit du die Tür öffnen kannst.",
+              "Ich gebe dir den Schlüssel, damit du kannst die Tür öffnen.",
+              "Ich gebe dir den Schlüssel, damit kannst du die Tür öffnen.",
+              "Ich gebe dir den Schlüssel, damit die Tür du öffnen kannst."
+            ],
+            correct: "Ich gebe dir den Schlüssel, damit du die Tür öffnen kannst.",
+            explanation: "Після 'damit' дієслово (kannst) стоїть у самому кінці підрядного речення."
+          },
+          {
+            type: "choice",
+            instruction: "Оберіть правильну інфінітивну конструкцію з модальним дієсловом:",
+            q: "Sie setzt ihre Brille auf, um den Text besser ____.",
+            options: ["lesen zu können", "zu lesen können", "können zu lesen", "gelesen zu haben"],
+            correct: "lesen zu können",
+            explanation: "Схема з модальним дієсловом: основний інфінітив + zu + модальне дієслово в інфінітиві (lesen zu können)."
+          },
+          {
+            type: "choice",
+            instruction: "Оберіть зворотний займенник:",
+            q: "Wir fahren ans Meer, um ____ nach dem stressigen Projekt zu erholen.",
+            options: ["uns", "sich", "euch", "wir"],
+            correct: "uns",
+            explanation: "Підмет — wir, тому зворотний займенник для sich erholen має форму 'uns'."
+          },
+          {
+            type: "choice",
+            instruction: "Оберіть правильний варіант завершення:",
+            q: "Der Lehrer spricht extra laut und deutlich, ____.",
+            options: [
+              "damit alle Schüler ihn verstehen",
+              "um alle Schüler ihn verstehen",
+              "damit alle Schüler ihn zu verstehen",
+              "um alle Schüler ihn verstehen können"
+            ],
+            correct: "damit alle Schüler ihn verstehen",
+            explanation: "Різні підмети (der Lehrer / alle Schüler), тому вживається 'damit' з відмінюваним дієсловом наприкінці."
+          },
+          {
+            type: "choice",
+            instruction: "Оберіть правильну форму:",
+            q: "Ich habe den Wecker auf 6 Uhr gestellt, ____ den Bus nicht zu verpassen.",
+            options: ["um", "damit", "weil", "ob"],
+            correct: "um",
+            explanation: "Підмет однаковий (ich) + конструкція з 'zu verpassen' -> 'um...zu'."
+          },
+          {
+            type: "choice",
+            instruction: "Оберіть правильний варіант:",
+            q: "Er nimmt einen Regenschirm mit, um nicht nass ____.",
+            options: ["zu werden", "werden zu", "geworden", "wird"],
+            correct: "zu werden",
+            explanation: "Інфінітивна група вимагає частку 'zu' перед інфінітивом дієслова (zu werden)."
+          },
+          {
+            type: "choice",
+            instruction: "Оберіть правильний сполучник:",
+            q: "Schalte bitte das Radio leiser, ____ ich mich auf die Arbeit konzentrieren kann!",
+            options: ["damit", "um", "denn", "weil"],
+            correct: "damit",
+            explanation: "Підмети різні (du — у наказовій формі / ich) -> вживаємо 'damit'."
+          },
+          {
+            type: "choice",
+            instruction: "Оберіть форму для невідокремлюваного префікса (bezahlen):",
+            q: "Er arbeitet am Wochenende zusätzlich, um seine Schulden schneller ____.",
+            options: ["zu bezahlen", "bezzuzahlen", "bezahlen zu", "bezahlt"],
+            correct: "zu bezahlen",
+            explanation: "Префікс 'be-' невідокремлюваний, тому частка 'zu' пишеться окремо перед усім дієсловом: 'zu bezahlen'."
+          },
+          {
+            type: "choice",
+            instruction: "Визначте, коли обов'язково потрібен сполучник 'damit':",
+            q: "У якому випадку НЕ МОЖНА використати конструкцію 'um...zu'?",
+            options: [
+              "Коли в головному та підрядному реченнях різні підмети",
+              "Коли в реченні є дієслово руху",
+              "Коли речення стоїть у минулому часі",
+              "Коли дієслово має відокремлюваний префікс"
+            ],
+            correct: "Коли в головному та підрядному реченнях різні підмети",
+            explanation: "Конструкція 'um...zu' вживається лише за умови однакового підмета. Якщо підмети різні — тільки 'damit'."
+          },
+          {
+            type: "choice",
+            instruction: "Оберіть правильну пасивну інфінітивну конструкцію (B2):",
+            q: "Er wiederholt die Argumente mehrfach, um von allen Anwesenden richtig ____.",
+            options: [
+              "verstanden zu werden",
+              "zu verstehen werden",
+              "verstanden werden zu",
+              "verstehen worden zu"
+            ],
+            correct: "verstanden zu werden",
+            explanation: "Passiv Infinitiv з часткою zu: Partizip II + zu + werden (verstanden zu werden)."
+          },
+          {
+            type: "choice",
+            instruction: "Оберіть дієслово на -ieren з часткою zu:",
+            q: "Das Unternehmen investiert viel Geld, um die Produktionsprozesse vollständig ____.",
+            options: [
+              "zu automatisieren",
+              "automatisierenzu",
+              "automatisieren zu",
+              "automatisierte"
+            ],
+            correct: "zu automatisieren",
+            explanation: "У дієсловах на -ieren частка 'zu' пишеться окремо перед інфінітивом: 'zu automatisieren'."
+          },
+          {
+            type: "choice",
+            instruction: "Оберіть правильний варіант завершення складної інфінітивної групи (B2):",
+            q: "Das Konzept muss überarbeitet werden, um bei der Konferenz überhaupt ____.",
+            options: [
+              "akzeptiert werden zu können",
+              "zu akzeptieren werden können",
+              "akzeptiert zu können werden",
+              "akzeptiert können zu werden"
+            ],
+            correct: "akzeptiert werden zu können",
+            explanation: "Складна конструкція B2: Partizip II + werden + zu + können (akzeptiert werden zu können)."
+          },
+          {
+    type: "choice",
+    instruction: "Оберіть правильний сполучник:",
+    q: "Er besucht einen Vorbereitungskurs, ____ die C1-Prüfung beim ersten Versuch zu bestehen.",
+    options: ["um", "damit", "obwohl", "sodass"],
+    correct: "um",
+    explanation: "Один суб'єкт дії (er) + інфінітивна конструкція з 'zu bestehen' -> вживаємо 'um'."
+  },
   {
     type: "choice",
     instruction: "Оберіть правильний сполучник:",
-    q: "Ich lerne jeden Tag neue Wörter, ____ meinen Wortschatz zu erweitern.",
-    options: ["damit", "um", "weil", "obwohl"],
-    correct: "um",
-    explanation: "Підмет однаковий (ich) + у кінці інфінітивна група з 'zu' (zu erweitern) -> використовуємо 'um...zu'."
-  },
-  {
-    type: "choice",
-    instruction: "Оберіть правильний варіант:",
-    q: "Die Eltern sparen viel Geld, ____ ihre Kinder an einer guten Universität studieren können.",
-    options: ["damit", "um", "weil", "sodass"],
+    q: "Die Dozentin spricht langsam und deutlich, ____ auch die ausländischen Studierenden alles problemlos verstehen.",
+    options: ["damit", "um", "weil", "denn"],
     correct: "damit",
-    explanation: "Різні підмети (die Eltern / ihre Kinder) -> обов'язково вживається 'damit'."
+    explanation: "Різні підмети (die Dozentin / die Studierenden) -> обов'язково використовується 'damit'."
   },
   {
     type: "choice",
-    instruction: "Оберіть правильну форму з відокремлюваним префіксом:",
-    q: "Er geht heute früher schlafen, um morgen fit ____.",
-    options: ["aufzustehen", "aufstehen zu", "zu aufstehen", "aufgestanden"],
-    correct: "aufzustehen",
-    explanation: "У дієсловах із відокремлюваним префіксом частка 'zu' ставиться між префіксом і коренем: auf-zu-stehen."
+    instruction: "Оберіть правильну форму дієслова з відокремлюваним префіксом:",
+    q: "Sie schaltet das Smartphone stumm, um sich nicht vom Lernen ____.",
+    options: ["ablenken zu lassen", "abzulenken lassen", "abzulassen lenken", "abgelenkt zu werden"],
+    correct: "ablenken zu lassen",
+    explanation: "Конструкція 'sich ablenken lassen' в інфінітиві з zu: основне дієслово + zu + lassen (ablenken zu lassen)."
   },
   {
     type: "choice",
-    instruction: "Оберіть речення з правильним порядком слів:",
-    q: "Який варіант граматично правильний?",
+    instruction: "Оберіть правильний порядок слів у підрядному реченні:",
+    q: "Який варіант граматично бездоганний?",
     options: [
-      "Ich gebe dir den Schlüssel, damit du die Tür öffnen kannst.",
-      "Ich gebe dir den Schlüssel, damit du kannst die Tür öffnen.",
-      "Ich gebe dir den Schlüssel, damit kannst du die Tür öffnen.",
-      "Ich gebe dir den Schlüssel, damit die Tür du öffnen kannst."
+      "Wir installieren eine Alarmanlage, damit unser Haus vor Einbrechern geschützt ist.",
+      "Wir installieren eine Alarmanlage, damit ist unser Haus vor Einbrechern geschützt.",
+      "Wir installieren eine Alarmanlage, damit unser Haus ist vor Einbrechern geschützt.",
+      "Wir installieren eine Alarmanlage, damit vor Einbrechern unser Haus geschützt ist."
     ],
-    correct: "Ich gebe dir den Schlüssel, damit du die Tür öffnen kannst.",
-    explanation: "Після 'damit' дієслово (kannst) стоїть у самому кінці підрядного речення."
-  },
-  {
-    type: "choice",
-    instruction: "Оберіть правильну інфінітивну конструкцію з модальним дієсловом:",
-    q: "Sie setzt ihre Brille auf, um den Text besser ____.",
-    options: ["lesen zu können", "zu lesen können", "können zu lesen", "gelesen zu haben"],
-    correct: "lesen zu können",
-    explanation: "Схема з модальним дієсловом: основний інфінітив + zu + модальне дієслово в інфінітиві (lesen zu können)."
+    correct: "Wir installieren eine Alarmanlage, damit unser Haus vor Einbrechern geschützt ist.",
+    explanation: "Після сполучника damit відмінюване дієслово (ist) обов'язково ставиться в самий кінець підрядного речення."
   },
   {
     type: "choice",
     instruction: "Оберіть зворотний займенник:",
-    q: "Wir fahren ans Meer, um ____ nach dem stressigen Projekt zu erholen.",
-    options: ["uns", "sich", "euch", "wir"],
-    correct: "uns",
-    explanation: "Підмет — wir, тому зворотний займенник для sich erholen має форму 'uns'."
+    q: "Er macht regelmäßig Pausen, um ____ bei der Arbeit besser konzentrieren zu können.",
+    options: ["sich", "ihn", "ihm", "sie"],
+    correct: "sich",
+    explanation: "Для підмета 'er' (він) зворотне дієслово sich konzentrieren вимагає займенника 'sich'."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть дієслово з невідокремлюваним префіксом (vermeiden):",
+    q: "Man muss die Regeln genau befolgen, um unnötige Missverständnisse ____.",
+    options: ["zu vermeiden", "verzumeiden", "vermeiden zu", "vermeidet"],
+    correct: "zu vermeiden",
+    explanation: "Префікс 'ver-' невідокремлюваний, тому частка 'zu' пишеться окремо перед усім інфінітивом: 'zu vermeiden'."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть правильну пасивну інфінітивну форму (B2):",
+    q: "Die Daten müssen verschlüsselt werden, um vor unbefugtem Zugriff ____.",
+    options: ["geschützt zu werden", "zu schützen werden", "geschützt werden zu", "schützen zu worden"],
+    correct: "geschützt zu werden",
+    explanation: "Пасивний стан у конструкції um...zu: Partizip II + zu + werden (geschützt zu werden)."
   },
   {
     type: "choice",
     instruction: "Оберіть правильний варіант завершення:",
-    q: "Der Lehrer spricht extra laut und deutlich, ____.",
+    q: "Der Architekt ändert den Bauplan, ____.",
     options: [
-      "damit alle Schüler ihn verstehen",
-      "um alle Schüler ihn verstehen",
-      "damit alle Schüler ihn zu verstehen",
-      "um alle Schüler ihn verstehen können"
+      "damit die Bauarbeiten pünktlich beginnen können",
+      "um die Bauarbeiten pünktlich beginnen können",
+      "damit die Bauarbeiten pünktlich zu beginnen",
+      "um können die Bauarbeiten pünktlich beginnen"
     ],
-    correct: "damit alle Schüler ihn verstehen",
-    explanation: "Різні підмети (der Lehrer / alle Schüler), тому вживається 'damit' з відмінюваним дієсловом наприкінці."
+    correct: "damit die Bauarbeiten pünktlich beginnen können",
+    explanation: "Різні підмети (der Architekt / die Bauarbeiten) -> сполучник damit + модальне дієслово (können) у кінці."
   },
   {
     type: "choice",
-    instruction: "Оберіть правильну форму:",
-    q: "Ich habe den Wecker auf 6 Uhr gestellt, ____ den Bus nicht zu verpassen.",
-    options: ["um", "damit", "weil", "ob"],
-    correct: "um",
-    explanation: "Підмет однаковий (ich) + конструкція з 'zu verpassen' -> 'um...zu'."
+    instruction: "Оберіть форму дієслова з відокремлюваним префіксом (teilnehmen):",
+    q: "Er reist extra nach Berlin, um an der Fachkonferenz ____.",
+    options: ["teilzunehmen", "zu teilnehmen", "teilnehmen zu", "teilgenommen"],
+    correct: "teilzunehmen",
+    explanation: "У дієсловах із відокремлюваним префіксом 'zu' ставиться всередину між префіксом і коренем: teil-zu-nehmen."
   },
   {
     type: "choice",
-    instruction: "Оберіть правильний варіант:",
-    q: "Er nimmt einen Regenschirm mit, um nicht nass ____.",
-    options: ["zu werden", "werden zu", "geworden", "wird"],
-    correct: "zu werden",
-    explanation: "Інфінітивна група вимагає частку 'zu' перед інфінітивом дієслова (zu werden)."
+    instruction: "Оберіть правильну інфінітивну групу з подвійним запереченням:",
+    q: "Sie verhandelt sehr geschickt, um ____.",
+    options: [
+      "keine finanziellen Verluste zu erleiden",
+      "nicht finanzielle Verluste erleiden zu",
+      "zu keine finanziellen Verluste erleiden",
+      "keine finanziellen Verluste erleiden zu"
+    ],
+    correct: "keine finanziellen Verluste zu erleiden",
+    explanation: "Частка 'zu' ставиться безпосередньо перед кінцевим інфінітивом дієслова (zu erleiden)."
   },
   {
     type: "choice",
-    instruction: "Оберіть правильний сполучник:",
-    q: "Schalte bitte das Radio leiser, ____ ich mich auf die Arbeit konzentrieren kann!",
-    options: ["damit", "um", "denn", "weil"],
+    instruction: "Оберіть граматично правильний сполучник:",
+    q: "Schreiben Sie mir bitte eine Bestätigungs-E-Mail, ____ ich den Termin im Kalender eintragen kann.",
+    options: ["damit", "um", "insofern", "obwohl"],
     correct: "damit",
-    explanation: "Підмети різні (du — у наказовій формі / ich) -> вживаємо 'damit'."
+    explanation: "Підмети різні (Sie у наказовому способі / ich) -> вживаємо 'damit'."
   },
   {
     type: "choice",
-    instruction: "Оберіть форму для невідокремлюваного префікса (bezahlen):",
-    q: "Er arbeitet am Wochenende zusätzlich, um seine Schulden schneller ____.",
-    options: ["zu bezahlen", "bezzuzahlen", "bezahlen zu", "bezahlt"],
-    correct: "zu bezahlen",
-    explanation: "Префікс 'be-' невідокремлюваний, тому частка 'zu' пишеться окремо перед усім дієсловом: 'zu bezahlen'."
-  },
-  {
-    type: "choice",
-    instruction: "Визначте, коли обов'язково потрібен сполучник 'damit':",
-    q: "У якому випадку НЕ МОЖНА використати конструкцію 'um...zu'?",
+    instruction: "Оберіть складну конструкцію з модальним дієсловом (B2):",
+    q: "Er lernt Fachbegriffe aus der Medizin, um im Krankenhaus als Krankenpfleger ____.",
     options: [
-      "Коли в головному та підрядному реченнях різні підмети",
-      "Коли в реченні є дієслово руху",
-      "Коли речення стоїть у минулому часі",
-      "Коли дієслово має відокремлюваний префікс"
+      "arbeiten zu dürfen",
+      "zu arbeiten dürfen",
+      "arbeiten dürfen zu",
+      "gearbeitet zu haben"
     ],
-    correct: "Коли в головному та підрядному реченнях різні підмети",
-    explanation: "Конструкція 'um...zu' вживається лише за умови однакового підмета. Якщо підмети різні — тільки 'damit'."
+    correct: "arbeiten zu dürfen",
+    explanation: "Конструкція з модальним дієсловом: Infinitiv + zu + Modalverb (arbeiten zu dürfen)."
   },
   {
     type: "choice",
-    instruction: "Оберіть правильний порядок слів із запереченням:",
-    q: "Sie fährt mit dem Taxi zum Bahnhof, um ____.",
+    instruction: "Оберіть правильний варіант для дієслова на -ieren:",
+    q: "Die Firma stellt zusätzliche Mitarbeiter ein, um den Kundenservice zu ____.",
+    options: ["optimieren", "optimiert", "optimieren zu", "optimierende"],
+    correct: "optimieren",
+    explanation: "Частка 'zu' вже винесена перед словом, тому дієслово стоїть у чистому інфінітиві: zu optimieren."
+  },
+  {
+    type: "choice",
+    instruction: "Визначте причину, чому вжито 'damit', а не 'um...zu':",
+    q: "«Ich leihe meinem Kollegen das Wörterbuch, damit er die Übersetzung rechtzeitig fertigstellt.»",
     options: [
-      "den Zug nicht zu verpassen",
-      "nicht den Zug verpassen zu",
-      "zu den Zug nicht verpassen",
-      "den Zug zu nicht verpassen"
+      "Тому що дію в обох частинах виконують різні особи (ich / er)",
+      "Тому що речення виражає умову, а не мету",
+      "Тому що в головному реченні є додаток у Dativ",
+      "Тому що дієслово fertigstellen відокремлюване"
     ],
-    correct: "den Zug nicht zu verpassen",
-    explanation: "Частка 'zu' стоїть безпосередньо перед інфінітивом у самому кінці речення: '...nicht zu verpassen'."
+    correct: "Тому що дію в обох частинах виконують різні особи (ich / er)",
+    explanation: "Якщо суб'єкти дій не збігаються, конструкція um...zu граматично неможлива."
   },
   {
     type: "choice",
-    instruction: "Оберіть правильний сполучник:",
-    q: "Ich ziehe mir eine warme Jacke an, ____ mich nicht zu erkälten.",
-    options: ["um", "damit", "obwohl", "sodass"],
-    correct: "um",
-    explanation: "Підмет однаковий (ich) + зворотне дієслово в інфінітиві (mich ... zu erkälten) -> 'um'."
+    instruction: "Оберіть правильну форму для дієслова (vorbereiten):",
+    q: "Wir treffen uns jeden Samstag in der Bibliothek, um uns intensiv auf die B2-Prüfung ____.",
+    options: ["vorzubereiten", "vorbereiten zu", "zu vorbereiten", "vorbereitet"],
+    correct: "vorzubereiten",
+    explanation: "Відокремлюваний префікс vor- вимагає вставки частки 'zu': vor-zu-bereiten."
   },
-  {
-    type: "choice",
-    instruction: "Оберіть граматично правильний варіант:",
-    q: "Der Arzt verschreibt dem Patienten Medikamente, ____.",
-    options: [
-      "damit die Schmerzen schnell nachlassen",
-      "um die Schmerzen schnell nachlassen",
-      "damit die Schmerzen schnell nachzulassen",
-      "um schnell nachlassen die Schmerzen"
-    ],
-    correct: "damit die Schmerzen schnell nachlassen",
-    explanation: "Підмети різні (der Arzt / die Schmerzen), тому вживається 'damit' з відмінюваним дієсловом (nachlassen) на кінці."
-  },
-  {
-    type: "choice",
-    instruction: "Оберіть правильну пасивну інфінітивну конструкцію (Passiv у Finalsatz):",
-    q: "Er wiederholt die Argumente mehrfach, um von allen Anwesenden richtig ____.",
-    options: [
-      "verstanden zu werden",
-      "zu verstehen werden",
-      "verstanden werden zu",
-      "verstehen worden zu"
-    ],
-    correct: "verstanden zu werden",
-    explanation: "Passiv Infinitiv з часткою zu: Partizip II + zu + werden (verstanden zu werden)."
-  },
-  {
-    type: "choice",
-    instruction: "Оберіть дієслово на -ieren з часткою zu:",
-    q: "Das Unternehmen investiert viel Geld, um die Produktionsprozesse vollständig ____.",
-    options: [
-      "zu automatisieren",
-      "automatisierenzu",
-      "automatisieren zu",
-      "automatisierte"
-    ],
-    correct: "zu automatisieren",
-    explanation: "У дієсловах на -ieren частка 'zu' пишеться окремо перед інфінітивом: 'zu automatisieren'."
-  },
-  {
-    type: "choice",
-    instruction: "Оберіть граматично коректний варіант для академічного контексту:",
-    q: "Der Forscher führt zusätzliche Experimente durch, ____ die Hypothese eindeutig belegen zu können.",
-    options: ["um", "damit", "obwohl", "insofern"],
-    correct: "um",
-    explanation: "Суб'єкт один (der Forscher) + інфінітивна конструкція з 'belegen zu können' -> вживаємо 'um'."
-  },
-  {
-    type: "choice",
-    instruction: "Оберіть правильну конструкцію з модальним дієсловом:",
-    q: "Die Regierung senkt die Steuern, ____ kleine Unternehmen die Krise besser überstehen können.",
-    options: ["damit", "um", "weil", "sodass"],
-    correct: "damit",
-    explanation: "Суб'єкти різні (die Regierung / kleine Unternehmen), тому необхідний сполучник 'damit' з дієсловом у кінці."
-  },
-  {
-    type: "choice",
-    instruction: "Оберіть правильну форму зворотного дієслова:",
-    q: "Sie nimmt sich eine Auszeit, um ____ ganz auf ihre Doktorarbeit zu konzentrieren.",
-    options: ["sich", "ihr", "sie", "ihnen"],
-    correct: "sich",
-    explanation: "Підмет 'sie' (вона) вимагає зворотного займенника 'sich': sich auf etwas konzentrieren."
-  },
-  {
-    type: "choice",
-    instruction: "Оберіть форму для дієслова зі складним відокремлюваним префіксом:",
-    q: "Wir treffen uns heute früher, um die Dokumente gemeinsam ____.",
-    options: [
-      "durchzugehen",
-      "zu durchgehen",
-      "durchgehen zu",
-      "durchgegangen"
-    ],
-    correct: "durchzugehen",
-    explanation: "У відокремлюваному дієслові durchgehen частка 'zu' ставиться між префіксом і коренем: durch-zu-gehen."
-  },
-  {
-    type: "choice",
-    instruction: "Оберіть варіант зі збереженням нормативного порядку слів B2:",
-    q: "Er spart monatlich einen festen Betrag, ____.",
-    options: [
-      "um sich im Alter finanziell absichern zu können",
-      "um sich im Alter finanziell zu absichern können",
-      "um kann sich im Alter finanziell absichern",
-      "damit im Alter sich finanziell absichern zu können"
-    ],
-    correct: "um sich im Alter finanziell absichern zu können",
-    explanation: "Нормативна інфінітивна група з модальним дієсловом: Infinitiv + zu + Modalverb (absichern zu können)."
-  },
-  {
-    type: "choice",
-    instruction: "Оберіть правильний сполучник у складному реченні:",
-    q: "Die Richtlinien wurden verschärft, ____ künftige Sicherheitsrisiken minimiert werden.",
-    options: ["damit", "um", "denn", "falls"],
-    correct: "damit",
-    explanation: "У підрядному реченні є власний граматичний підмет (Sicherheitsrisiken) та відмінюване дієслово (werden), тому потрібен сполучник 'damit'."
-  },
-  {
-    type: "choice",
-    instruction: "Оберіть правильний пасивний інфінітив з модальним відтінком:",
-    q: "Das Konzept muss überarbeitet werden, um bei der Konferenz überhaupt ____.",
-    options: [
-      "akzeptiert werden zu können",
-      "zu akzeptieren werden können",
-      "akzeptiert zu können werden",
-      "akzeptiert können zu werden"
-    ],
-    correct: "akzeptiert werden zu können",
-    explanation: "Складна конструкція B2: Partizip II + werden + zu + können (akzeptiert werden zu können)."
-  },
-  {
-    type: "choice",
-    instruction: "Оберіть дієслово з невідокремлюваним префіксом (hinterlassen):",
-    q: "Er verhielt sich unauffällig, um am Tatort keine Spuren ____.",
-    options: [
-      "zu hinterlassen",
-      "hinterzulassen",
-      "hinterlassen zu",
-      "hintergelassen"
-    ],
-    correct: "zu hinterlassen",
-    explanation: "Дієслово hinterlassen у значенні 'залишати після себе' є невідокремлюваним, тому частка 'zu' пишеться окремо: 'zu hinterlassen'."
-  }
-]
+        ]
       },
       {
-        id: "konnektoren-ursache",
-        title: "Deshalb, darum, deswegen, daher",
-        category: "B1",
+        id: "perfekt",
+        title: "Das Perfekt",
+        category: "A2 / B1",
         theory: `
-          <p>Сполучникові прислівники наслідку <b>deshalb / darum / deswegen / daher</b> ставляться на 1-шу позицію і вимагають інверсії (дієслово на 2-му місці перед підметом):</p>
-          <p><i>Es regnete. <b>Deshalb blieben wir</b> zu Hause.</i></p>
+          <p><b>Perfekt</b> = допоміжне дієслово (<i>haben/sein</i>) + <i>Partizip II</i> у кінці речення.</p>
+          <ul class="list-disc pl-5 space-y-1.5">
+            <li><b>sein:</b> дієслова руху (<i>fliegen, gehen, fahren</i>), зміна стану (<i>aufstehen, einschlafen</i>) та <i>sein, werden, bleiben</i>.</li>
+            <li><b>haben:</b> перехідні дієслова з Akkusativ, зворотні дієслова, модальні дієслова.</li>
+          </ul>
         `,
         questions: [
           {
-            type: "order",
-            instruction: "Складіть речення з правильним порядком слів:",
-            q: "Зворотний порядок після 'Deshalb':",
-            words: ["blieben", "Es", "regnete", "stark.", "Deshalb", "zu", "wir", "Hause."],
-            correct: ["Es", "regnete", "stark.", "Deshalb", "blieben", "wir", "zu", "Hause."],
-            explanation: "Після 'Deshalb' дієслово (blieben) стоїть одразу на 2-й позиції перед підметом (wir)."
+            type: "choice",
+            instruction: "Оберіть правильне допоміжне дієслово:",
+            q: "Letztes Jahr ____ wir nach Italien geflogen.",
+            options: ["haben", "sind", "wurden", "waren"],
+            correct: "sind",
+            explanation: "Дієслова переміщення (fliegen) утворюють Perfekt із допоміжним 'sein'."
           },
           {
-            type: "find_error",
-            instruction: "Знайдіть і натисніть на слово з помилкою у порядку:",
-            q: "Виберіть слово, що стоїть на неправильній позиції:",
-            sentence: ["Ich", "war", "krank.", "Deswegen", "ich", "bin", "zu", "Hause", "geblieben."],
-            errorWordIndex: 4,
-            correction: "bin ich",
-            explanation: "Після 'Deswegen' дієслово має стояти перед підметом: 'Deswegen bin ich zu Hause geblieben'."
+            type: "choice",
+            instruction: "Оберіть правильне допоміжне дієслово:",
+            q: "Was ____ du gestern Abend Schönes gekocht?",
+            options: ["hast", "bist", "wirst", "hattest"],
+            correct: "hast",
+            explanation: "Перехідні дієслова потребують допоміжного 'haben'."
+          },
+          {
+            type: "choice",
+            instruction: "Оберіть речення без граматичної помилки:",
+            q: "Яке речення правильне?",
+            options: [
+              "Gestern ist er nach Hause gegangen.",
+              "Gestern hat er nach Hause gegangen.",
+              "Gestern ist er nach Hause gegeht.",
+              "Gestern hat er nach Hause gehen."
+            ],
+            correct: "Gestern ist er nach Hause gegangen.",
+            explanation: "gehen позначає переміщення -> допоміжне 'sein' (ist) + неправильна форма Partizip II (gegangen)."
           }
         ]
       },
@@ -468,103 +523,34 @@
         theory: `
           <p>Закінчення прикметників у <b>Nominativ</b>:</p>
           <ul class="list-disc pl-5 space-y-1.5">
-            <li><b>Означений артикль (der/die/das):</b> закінчення <b>-e</b> (множина die -> <b>-en</b>).</li>
-            <li><b>Неозначений (ein/kein/mein):</b> Maskulinum -> <b>-er</b>, Neutrum -> <b>-es</b>, Femininum -> <b>-e</b>.</li>
+            <li><b>З означеним артиклем (der/die/das):</b> закінчення <b>-e</b> (множина die -> <b>-en</b>).</li>
+            <li><b>З неозначеним (ein/kein/mein):</b> Maskulinum -> <b>-er</b>, Neutrum -> <b>-es</b>, Femininum -> <b>-e</b>.</li>
           </ul>
         `,
         questions: [
           {
-            type: "input",
-            instruction: "Впишіть закінчення прикметника (-e, -er, -es, -en):",
+            type: "choice",
+            instruction: "Оберіть правильне закінчення прикметника:",
             q: "Hier steht ein neu____ Wagen.",
-            correct: ["er", "-er"],
-            explanation: "Maskulinum (der Wagen) + неозначений артикль ein у Nominativ -> закінчення -er (neuer Wagen)."
+            options: ["-er", "-e", "-es", "-en"],
+            correct: "-er",
+            explanation: "Maskulinum (der Wagen) + ein у Nominativ -> закінчення -er (neuer Wagen)."
           },
-          {
-            type: "input",
-            instruction: "Впишіть правильну повну форму прикметника:",
-            q: "Das ____ (schön) Bild hängt an der Wand.",
-            correct: ["schöne", "schone"],
-            explanation: "Neutrum (das Bild) + означений артикль das у Nominativ -> schöne."
-          }
-        ]
-      },
-      {
-        id: "perfekt",
-        title: "Das Perfekt",
-        category: "A2 / B1",
-        theory: `
-          <p><b>Perfekt</b> = допоміжне дієслово (<i>haben/sein</i>) + <i>Partizip II</i> у кінці.</p>
-        `,
-        questions: [
-          {
-            type: "input",
-            instruction: "Впишіть форму допоміжного дієслова (haben / sein):",
-            q: "Letztes Jahr ____ wir nach Italien geflogen.",
-            correct: ["sind"],
-            explanation: "Дієслова переміщення (fliegen) утворюють Perfekt із допоміжним 'sein' (wir sind geflogen)."
-          },
-          {
-            type: "find_error",
-            instruction: "Знайдіть неправильну граматичну форму в реченні:",
-            q: "Натисніть на помилкове слово:",
-            sentence: ["Gestern", "hat", "er", "nach", "Hause", "gegangen."],
-            errorWordIndex: 1,
-            correction: "ist",
-            explanation: "Дієслово gehen позначає переміщення, тому Perfekt утворюється із 'sein' (ist gegangen, а не hat)."
-          }
-        ]
-      },
-      {
-        id: "nebensaetze-subjunktionen",
-        title: "Nebensätze & Subjunktionen",
-        category: "B1",
-        theory: `
-          <p>Підрядні сполучники (<i>weil, obwohl, dass, wenn</i>) відправляють відмінюване дієслово в кінець речення.</p>
-        `,
-        questions: [
-          {
-            type: "order",
-            instruction: "Складіть правильне підрядне речення з obwohl:",
-            q: "Розставте слова у правильному порядку:",
-            words: ["ging", "war,", "er", "Obwohl", "er", "ins", "müde", "Fitnessstudio."],
-            correct: ["Obwohl", "er", "müde", "war,", "ging", "er", "ins", "Fitnessstudio."],
-            explanation: "У підрядному реченні дієслово (war) стоїть у кінці, а в головному реченні після коми дієслово (ging) стоїть одразу першим."
-          }
-        ]
-      },
-      {
-        id: "passiv-komplett",
-        title: "Passiv & Passivsatzformen",
-        category: "B1 / B2",
-        theory: `
-          <p>Пасив із модальними дієсловами: <b>Modalverb + Partizip II + werden</b> у кінці.</p>
-        `,
-        questions: [
-          {
-            type: "input",
-            instruction: "Впишіть правильне допоміжне слово у пасиві:",
-            q: "Der Brief muss sofort abgeschickt ____.",
-            correct: ["werden"],
-            explanation: "Схема Passiv із модальним дієсловом: Modalverb + Partizip II + werden."
-          }
-        ]
-      },
-      {
-        id: "reflexive-verben",
-        title: "Reflexive Verben (Зворотні дієслова)",
-        category: "A2 / B1",
-        theory: `
-          <p>Якщо в реченні є прямий додаток у Akkusativ, зворотний займенник стоїть у <b>Dativ</b> (<i>mir, dir</i>).</p>
-        `,
-        questions: [
           {
             type: "choice",
-            instruction: "Оберіть зворотний займенник:",
-            q: "Ich putze ____ die Zähne.",
-            options: ["mich", "mir", "mein", "sich"],
-            correct: "mir",
-            explanation: "При наявності прямого додатка (die Zähne) вживається Dativ: ich putze mir die Zähne."
+            instruction: "Оберіть форму прикметника:",
+            q: "Das schön____ Bild hängt an der Wand.",
+            options: ["-e", "-er", "-es", "-en"],
+            correct: "-e",
+            explanation: "Neutrum (das Bild) + das у Nominativ -> закінчення -e (schöne Bild)."
+          },
+          {
+            type: "choice",
+            instruction: "Оберіть правильну форму для множини:",
+            q: "Die fleißig____ Studenten haben die Prüfung bestanden.",
+            options: ["-en", "-e", "-er", "-es"],
+            correct: "-en",
+            explanation: "У множині після означеного артикля (die) прикметник завжди отримує -en."
           }
         ]
       },
@@ -577,11 +563,20 @@
         `,
         questions: [
           {
-            type: "input",
-            instruction: "Впишіть відмінювану форму дієслова werden:",
+            type: "choice",
+            instruction: "Оберіть правильну форму дієслова werden:",
             q: "Nächste Woche ____ ich meine Prüfung ablegen.",
-            correct: ["werde"],
-            explanation: "Futur I: werden для особи ich -> werde."
+            options: ["werde", "wird", "wurde", "worden"],
+            correct: "werde",
+            explanation: "Futur I для особи ich: werde + Infinitiv (ablegen)."
+          },
+          {
+            type: "choice",
+            instruction: "Оберіть правильну форму для 3-ї особи однини:",
+            q: "Er ____ morgen sicher pünktlich ankommen.",
+            options: ["wird", "werdet", "werden", "wurde"],
+            correct: "wird",
+            explanation: "er/sie/es -> wird."
           }
         ]
       },
@@ -594,11 +589,82 @@
         `,
         questions: [
           {
-            type: "input",
-            instruction: "Впишіть сполучник порівняння (als / wie):",
+            type: "choice",
+            instruction: "Оберіть сполучник порівняння:",
             q: "Dieser Koffer ist schwerer ____ jener.",
-            correct: ["als"],
+            options: ["als", "wie", "denn", "so"],
+            correct: "als",
             explanation: "У вищому ступені порівняння (schwerer) використовується сполучник 'als'."
+          },
+          {
+            type: "choice",
+            instruction: "Оберіть сполучник рівності:",
+            q: "Er läuft genauso schnell ____ sein Bruder.",
+            options: ["wie", "als", "so", "von"],
+            correct: "wie",
+            explanation: "Для рівності якостей (genauso schnell) використовується 'wie'."
+          }
+        ]
+      },
+      {
+        id: "konnektoren-ursache",
+        title: "Deshalb, darum, deswegen, daher",
+        category: "B1",
+        theory: `
+          <p>Сполучникові прислівники наслідку <b>deshalb / darum / deswegen / daher</b> ставляться на 1-шу позицію і вимагають інверсії (дієслово на 2-му місці перед підметом):</p>
+          <p><i>Es regnete. <b>Deshalb blieben wir</b> zu Hause.</i></p>
+        `,
+        questions: [
+          {
+            type: "choice",
+            instruction: "Оберіть речення з правильним порядком слів:",
+            q: "Der Akku war leer, deswegen ____.",
+            options: [
+              "konnte er nicht anrufen",
+              "er konnte nicht anrufen",
+              "er nicht anrufen konnte",
+              "nicht er konnte anrufen"
+            ],
+            correct: "konnte er nicht anrufen",
+            explanation: "Deswegen вимагає зворотний порядок слів: дієслово (konnte) -> підмет (er)."
+          },
+          {
+            type: "choice",
+            instruction: "Оберіть граматично правильний варіант:",
+            q: "Es war sehr kalt, darum ____ wir den ganzen Tag im Hotel.",
+            options: ["blieben", "wir blieben", "geblieben sind", "bleiben wir"],
+            correct: "blieben",
+            explanation: "Після darum дієслово стоїть на 2-й позиції перед підметом (darum blieben wir)."
+          }
+        ]
+      },
+      {
+        id: "reflexive-verben",
+        title: "Reflexive Verben (Зворотні дієслова)",
+        category: "A2 / B1",
+        theory: `
+          <p>Зворотні займенники:</p>
+          <ul class="list-disc pl-5 space-y-1.5">
+            <li><b>Akkusativ (за замовчуванням):</b> mich, dich, sich, uns, euch, sich.</li>
+            <li><b>Dativ (якщо є прямий додаток):</b> mir, dir, sich, uns, euch, sich.</li>
+          </ul>
+        `,
+        questions: [
+          {
+            type: "choice",
+            instruction: "Оберіть зворотний займенник:",
+            q: "Ich muss ____ beeilen, der Zug fährt gleich ab.",
+            options: ["mich", "mir", "sich", "dich"],
+            correct: "mich",
+            explanation: "sich beeilen вимагає Akkusativ: ich beeile mich."
+          },
+          {
+            type: "choice",
+            instruction: "Оберіть зворотний займенник при прямому додатку:",
+            q: "Ich putze ____ die Zähne.",
+            options: ["mir", "mich", "mein", "sich"],
+            correct: "mir",
+            explanation: "Оскільки 'die Zähne' — це Akkusativ-додаток, зворотний займенник стоїть у Dativ (mir)."
           }
         ]
       },
@@ -607,16 +673,24 @@
         title: "Fragewörter (W-Fragen)",
         category: "A1 / A2",
         theory: `
-          <p>Для людей: прийменник + займенник (<i>mit wem</i>), для неживого: <i>wo(r) + прийменник</i>.</p>
+          <p>Для людей: прийменник + займенник (<i>mit wem</i>), для неживих предметів: <i>wo(r) + прийменник</i> (<i>womit, woran</i>).</p>
         `,
         questions: [
           {
             type: "choice",
-            instruction: "Оберіть питальне слово:",
+            instruction: "Оберіть питальне слово для особи:",
             q: "____ hast du gesprochen? – Mit Herrn Müller.",
-            options: ["Woran", "Womit", "Mit wem", "Worüber"],
+            options: ["Mit wem", "Woran", "Womit", "Worüber"],
             correct: "Mit wem",
-            explanation: "Для людей із прийменником mit: 'Mit wem?'."
+            explanation: "Для людей із прийменником mit ставимо 'Mit wem?' (Dativ)."
+          },
+          {
+            type: "choice",
+            instruction: "Оберіть питальне слово для предмета:",
+            q: "____ denkst du gerade? – An meinen Urlaub.",
+            options: ["Woran", "An wen", "Womit", "Wozu"],
+            correct: "Woran",
+            explanation: "Для неживих понять із прийменником an: woran (wo + r + an)."
           }
         ]
       },
@@ -629,11 +703,20 @@
         `,
         questions: [
           {
-            type: "input",
-            instruction: "Впишіть потрібний прийменник:",
+            type: "choice",
+            instruction: "Оберіть правильний прийменник:",
             q: "Ich habe großes Interesse ____ diesem Kurs.",
-            correct: ["an"],
+            options: ["an", "für", "über", "auf"],
+            correct: "an",
             explanation: "Стала сполучуваність: das Interesse an + Dativ."
+          },
+          {
+            type: "choice",
+            instruction: "Оберіть прийменник для іменника Angst:",
+            q: "Viele Menschen haben Angst ____ Spinnen.",
+            options: ["vor", "an", "gegen", "bei"],
+            correct: "vor",
+            explanation: "Сталий вираз: die Angst vor + Dativ."
           }
         ]
       },
@@ -642,7 +725,7 @@
         title: "Subjektive Bedeutung der Modalverben",
         category: "B2",
         theory: `
-          <p><b>müssen</b> (90-100%), <b>dürfte/könnte</b> (50-70%), <b>sollen</b> (чутки).</p>
+          <p>Вираження суб'єктивної впевненості: <b>müssen</b> (90-100%), <b>dürfte/könnte</b> (50-70%), <b>sollen</b> (чутки).</p>
         `,
         questions: [
           {
@@ -651,7 +734,15 @@
             q: "Das Licht brennt noch. Er ____ wohl noch arbeiten.",
             options: ["muss", "soll", "will", "darf"],
             correct: "muss",
-            explanation: "'muss' вказує на високу впевненість на основі видимого факту."
+            explanation: "'muss' вказує на логічний висновок та високу впевненість мовця."
+          },
+          {
+            type: "choice",
+            instruction: "Оберіть модальне дієслово для переказу чуток:",
+            q: "Er ____ sehr reich sein, wie man im Dorf erzählt.",
+            options: ["soll", "muss", "kann", "darf"],
+            correct: "soll",
+            explanation: "'sollen' у суб'єктивному значенні позначає чутки / чужі слова ('кажуть, що він...')."
           }
         ]
       },
@@ -660,15 +751,24 @@
         title: "Indefinitpronomen & Negativpronomen",
         category: "A2 / B1",
         theory: `
-          <p><i>jemand</i> (хтось) $\leftrightarrow$ <i>niemand</i> (ніхто).</p>
+          <p><i>jemand</i> (хтось) $\leftrightarrow$ <i>niemand</i> (ніхто); <i>etwas</i> (щось) $\leftrightarrow$ <i>nichts</i> (нічого).</p>
         `,
         questions: [
           {
-            type: "input",
-            instruction: "Впишіть неозначений займенник (хтось):",
+            type: "choice",
+            instruction: "Оберіть неозначений займенник:",
             q: "Ist hier ____, der mir helfen kann?",
-            correct: ["jemand"],
-            explanation: "У ствердному значенні вживається 'jemand'."
+            options: ["jemand", "niemand", "etwas", "nichts"],
+            correct: "jemand",
+            explanation: "У ствердних питаннях вживається 'jemand' (хтось)."
+          },
+          {
+            type: "choice",
+            instruction: "Оберіть заперечний займенник:",
+            q: "Es war dunkel und ich konnte ____ sehen.",
+            options: ["nichts", "etwas", "niemand", "jemand"],
+            correct: "nichts",
+            explanation: "Заперечення для речей: 'nichts' (нічого)."
           }
         ]
       },
@@ -677,16 +777,24 @@
         title: "Nebensätze mit „indem“ & „sodass“",
         category: "B1 / B2",
         theory: `
-          <p><b>indem</b> (спосіб дії), <b>sodass</b> (наслідок).</p>
+          <p><b>indem:</b> спосіб дії (яким чином). <b>sodass:</b> результат чи наслідок дії.</p>
         `,
         questions: [
           {
             type: "choice",
             instruction: "Оберіть сполучник способу дії:",
-            q: "Er verbesserte sein Deutsch, ____ er Podcasts hörte.",
+            q: "Er verbesserte sein Deutsch, ____ er täglich Podcasts hörte.",
             options: ["indem", "sodass", "damit", "weil"],
             correct: "indem",
-            explanation: "'indem' вказує на спосіб досягнення результату."
+            explanation: "'indem' вказує на спосіб досягнення мети (шляхом чого)."
+          },
+          {
+            type: "choice",
+            instruction: "Оберіть сполучник наслідку:",
+            q: "Es hat die ganze Nacht geschneit, ____ die Straßen gesperrt wurden.",
+            options: ["sodass", "indem", "um", "obwohl"],
+            correct: "sodass",
+            explanation: "'sodass' виражає логічний наслідок."
           }
         ]
       },
@@ -695,16 +803,24 @@
         title: "Futur I vs. Präsens",
         category: "B1",
         theory: `
-          <p>Для запланованих дій із зазначенням часу частіше вживають <b>Präsens</b>.</p>
+          <p>Для запланованих дій із зазначенням часу частіше вживають <b>Präsens</b>. Для твердих обіцянок або припущень — <b>Futur I</b>.</p>
         `,
         questions: [
           {
             type: "choice",
-            instruction: "Оберіть природну форму теперішнього часу:",
-            q: "Morgen ____ ich nach Berlin.",
-            options: ["fahre", "werde fahren", "gefahren bin", "fuhr"],
-            correct: "fahre",
-            explanation: "З маркером часу (morgen) зазвичай використовується Präsens (fahre)."
+            instruction: "Оберіть природну форму для запланованої дії:",
+            q: "Morgen ____ ich meine Oma besuchen.",
+            options: ["besuche", "werde besuchen", "habe besucht", "besuchte"],
+            correct: "besuche",
+            explanation: "З маркером часу (morgen) типово використовують звичайний Präsens."
+          },
+          {
+            type: "choice",
+            instruction: "Оберіть форму припущення на теперішнє:",
+            q: "Er meldet sich nicht. Er ____ wohl noch bei der Arbeit sein.",
+            options: ["wird", "ist", "hat", "wurde"],
+            correct: "wird",
+            explanation: "Futur I (wird sein) часто вживається для припущення в теперішньому часі."
           }
         ]
       },
@@ -713,15 +829,24 @@
         title: "Fokuspartikeln (auch, sogar, gerade...)",
         category: "B2",
         theory: `
-          <p><b>sogar</b> (навіть), <b>gerade</b> (саме), <b>lediglich/nur</b> (тільки).</p>
+          <p><b>sogar:</b> посилення/крайність (навіть). <b>gerade:</b> саме цей. <b>lediglich/nur:</b> лише, тільки.</p>
         `,
         questions: [
           {
-            type: "input",
-            instruction: "Впишіть частку зі значенням «навіть»:",
-            q: "Alle bestanden, ____ der schwächste Schüler.",
-            correct: ["sogar", "Sogar"],
+            type: "choice",
+            instruction: "Оберіть підсилювальну частку:",
+            q: "Alle bestanden die Prüfung, ____ der schwächste Schüler.",
+            options: ["sogar", "lediglich", "gerade", "auch"],
+            correct: "sogar",
             explanation: "'Sogar' підсилює твердження ('навіть')."
+          },
+          {
+            type: "choice",
+            instruction: "Оберіть частку обмеження:",
+            q: "Ich habe ____ fünf Euro im Portemonnaie.",
+            options: ["nur", "sogar", "ebenfalls", "ausgerechnet"],
+            correct: "nur",
+            explanation: "'nur' вказує на обмеження кількості (лише 5 євро)."
           }
         ]
       },
@@ -730,16 +855,24 @@
         title: "Modalverben und ihre Alternativen",
         category: "B2",
         theory: `
-          <p><b>sein + zu + Infinitiv</b> = <i>können / müssen + Passiv</i>.</p>
+          <p><b>sein + zu + Infinitiv:</b> виражає пасивну можливість (= <i>können</i>) або обов'язок (= <i>müssen</i>).</p>
         `,
         questions: [
           {
             type: "choice",
             instruction: "Яке модальне дієслово відповідає за змістом:",
             q: "Dieser Text ist leicht zu verstehen. = Man ____ ihn leicht verstehen.",
-            options: ["muss", "kann", "soll", "darf"],
+            options: ["kann", "muss", "soll", "darf"],
             correct: "kann",
             explanation: "'sein + zu + Infinitiv' зі значенням можливості відповідає 'können'."
+          },
+          {
+            type: "choice",
+            instruction: "Яке модальне дієслово передає обов'язок:",
+            q: "Die Rechnung ist bis morgen zu bezahlen. = Die Rechnung ____ bezahlt werden.",
+            options: ["muss", "kann", "darf", "mag"],
+            correct: "muss",
+            explanation: "У контексті термінів і правил 'sein + zu + Infinitiv' виражає суворий обов'язок (müssen)."
           }
         ]
       },
@@ -748,15 +881,50 @@
         title: "Passivsatzformen (Zustands- & Vorgangspassiv)",
         category: "B1 / B2",
         theory: `
-          <p><b>Zustandspassiv</b> (стан) = <b>sein + Partizip II</b>.</p>
+          <p><b>Vorgangspassiv (дія):</b> <i>werden + Partizip II</i>. <b>Zustandspassiv (стан):</b> <i>sein + Partizip II</i>.</p>
         `,
         questions: [
           {
-            type: "input",
-            instruction: "Впишіть допоміжне дієслово стану (ist / wird):",
-            q: "Die Tür ____ bereits seit Stunden geschlossen.",
-            correct: ["ist"],
-            explanation: "Пасив стану (результат): sein + Partizip II -> ist geschlossen."
+            type: "choice",
+            instruction: "Оберіть дієслово для стану (Zustandspassiv):",
+            q: "Die Tür ____ bereits seit zwei Stunden geschlossen.",
+            options: ["ist", "wird", "wurde", "worden"],
+            correct: "ist",
+            explanation: "Zustandspassiv позначає стан/результат: sein (ist) + Partizip II."
+          },
+          {
+            type: "choice",
+            instruction: "Оберіть дієслово для дії (Vorgangspassiv Präteritum):",
+            q: "Das Auto ____ gestern in der Werkstatt repariert.",
+            options: ["wurde", "war", "worden", "ist"],
+            correct: "wurde",
+            explanation: "Минулий час пасивної дії: wurde + Partizip II."
+          }
+        ]
+      },
+      {
+        id: "nebensaetze-subjunktionen",
+        title: "Nebensätze & Subjunktionen",
+        category: "B1",
+        theory: `
+          <p>Підрядні сполучники відправляють дієслово в самий кінець речення: <i>weil, obwohl, wenn, dass</i>.</p>
+        `,
+        questions: [
+          {
+            type: "choice",
+            instruction: "Оберіть поступковий сполучник:",
+            q: "____ er müde war, ging er noch zum Sport.",
+            options: ["Obwohl", "Weil", "Dass", "Wenn"],
+            correct: "Obwohl",
+            explanation: "'Obwohl' (хоча) виражає протиставлення/поступку."
+          },
+          {
+            type: "choice",
+            instruction: "Оберіть правильний порядок слів у підрядному:",
+            q: "Er bleibt zu Hause, weil er ____.",
+            options: ["krank ist", "ist krank", "krank sein", "wird krank"],
+            correct: "krank ist",
+            explanation: "Після підрядного сполучника 'weil' дієслово (ist) стоїть у самому кінці."
           }
         ]
       },
@@ -765,15 +933,24 @@
         title: "Zweiteilige Konjunktionen",
         category: "B1 / B2",
         theory: `
-          <p><i>sowohl ... als auch</i>, <i>nicht nur ... sondern auch</i>, <i>weder ... noch</i>.</p>
+          <p><i>sowohl ... als auch</i> (+), <i>nicht nur ... sondern auch</i> (+), <i>weder ... noch</i> (-), <i>entweder ... oder</i>.</p>
         `,
         questions: [
           {
-            type: "input",
-            instruction: "Впишіть першу частину парного сполучника:",
+            type: "choice",
+            instruction: "Оберіть першу частину парного сполучника:",
             q: "Er spricht ____ Deutsch als auch Spanisch.",
-            correct: ["sowohl", "Sowohl"],
-            explanation: "Парна конструкція: 'sowohl ... als auch'."
+            options: ["sowohl", "weder", "entweder", "nicht nur"],
+            correct: "sowohl",
+            explanation: "Стала парна комбінація: 'sowohl ... als auch'."
+          },
+          {
+            type: "choice",
+            instruction: "Оберіть подвійне заперечення:",
+            q: "Er trinkt ____ Kaffee noch Tee.",
+            options: ["weder", "sowohl", "nicht", "kein"],
+            correct: "weder",
+            explanation: "Парна заперечна конструкція: 'weder ... noch' (ні ..., ні ...)."
           }
         ]
       },
@@ -782,15 +959,24 @@
         title: "Funktionen des Pronomens „es“",
         category: "B1 / B2",
         theory: `
-          <p>Безособовий підмет (<i>Es regnet, Es gibt</i>).</p>
+          <p>Функції „es“: безособовий підмет (<i>Es regnet</i>), сталі вирази (<i>Es gibt, Es geht</i>), займенник середнього роду.</p>
         `,
         questions: [
           {
-            type: "input",
-            instruction: "Впишіть безособовий займенник:",
+            type: "choice",
+            instruction: "Оберіть правильний безособовий підмет:",
             q: "____ gefällt mir hier sehr gut.",
-            correct: ["Es"],
-            explanation: "Безособовий займенник 'Es' як граматичний підмет."
+            options: ["Es", "Das", "Er", "Man"],
+            correct: "Es",
+            explanation: "Безособове 'Es' виступає граматичним підметом."
+          },
+          {
+            type: "choice",
+            instruction: "Оберіть форму для погоди:",
+            q: "Gestern hat ____ den ganzen Tag geschneit.",
+            options: ["es", "das", "er", "sie"],
+            correct: "es",
+            explanation: "Погодні явища завжди вимагають безособового підмета 'es'."
           }
         ]
       },
@@ -799,15 +985,24 @@
         title: "Das Gerundiv (Partizip I mit „zu“)",
         category: "B2",
         theory: `
-          <p><b>Gerundiv</b> = <b>zu + Partizip I + закінчення прикметника</b>.</p>
+          <p><b>Gerundiv</b> = <b>zu + Partizip I + закінчення прикметника</b>. Виражає дію, що має бути виконана (пасивна необхідність).</p>
         `,
         questions: [
           {
-            type: "input",
-            instruction: "Впишіть закінчення прикметника (-e, -en, -es):",
+            type: "choice",
+            instruction: "Оберіть закінчення герундива (Plural):",
             q: "Das sind nicht zu unterschätzend____ Risiken.",
-            correct: ["e", "-e"],
+            options: ["-e", "-en", "-er", "-es"],
+            correct: "-e",
             explanation: "Plural у Nominativ без артикля: закінчення -e."
+          },
+          {
+            type: "choice",
+            instruction: "Оберіть герундив для середнього роду з означеним артиклем:",
+            q: "Das zu ____ (lösen) Problem ist sehr komplex.",
+            options: ["lösende", "lösendes", "gelöste", "lösenden"],
+            correct: "lösende",
+            explanation: "Neutrum з означеним артиклем (das) у Nominativ отримує закінчення -e (das zu lösende Problem)."
           }
         ]
       },
@@ -816,15 +1011,24 @@
         title: "Suffixe und Wortbildung",
         category: "B1 / B2",
         theory: `
-          <p>Суфікси іменників жіночого роду: <i>-heit, -keit, -ung, -schaft</i>.</p>
+          <p>Рід суфіксів іменників: <b>die</b> (<i>-heit, -keit, -ung, -schaft, -tion</i>), <b>der</b> (<i>-er, -ismus</i>), <b>das</b> (<i>-ment, -um, -chen</i>).</p>
         `,
         questions: [
           {
-            type: "input",
-            instruction: "Впишіть правильний суфікс іменника:",
+            type: "choice",
+            instruction: "Оберіть правильний суфікс іменника:",
             q: "Die Eigen____ (від eigen).",
-            correct: ["heit", "-heit"],
+            options: ["-heit", "-schaft", "-keit", "-ung"],
+            correct: "-heit",
             explanation: "Іменник: die Eigenheit."
+          },
+          {
+            type: "choice",
+            instruction: "Оберіть суфікс від прикметника möglich:",
+            q: "Die Möglich____.",
+            options: ["-keit", "-heit", "-ung", "-schaft"],
+            correct: "-keit",
+            explanation: "Прикметники на -lich, -ig, -bar, -sam утворюють іменники з суфіксом -keit: die Möglichkeit."
           }
         ]
       },
@@ -833,15 +1037,24 @@
         title: "Wortbildung mit dem Suffix „-weise“",
         category: "B2",
         theory: `
-          <p>Суфікс <b>-weise</b> позначає спосіб дії (<i>schrittweise</i>).</p>
+          <p>Суфікс <b>-weise</b> утворює прислівники способу дії (<i>schrittweise, teilweise</i>) або оцінки (<i>glücklicherweise</i>).</p>
         `,
         questions: [
           {
-            type: "input",
-            instruction: "Впишіть суфікс способу дії:",
+            type: "choice",
+            instruction: "Оберіть суфікс способу дії:",
             q: "Er hat das Problem schritt____ gelöst.",
-            correct: ["weise", "-weise"],
+            options: ["-weise", "-haft", "-los", "-bar"],
+            correct: "-weise",
             explanation: "Суфікс -weise: schrittweise (покроково)."
+          },
+          {
+            type: "choice",
+            instruction: "Оберіть слово зі значенням «на щастя»:",
+            q: "____ hat niemand den Zug verpasst.",
+            options: ["Glücklicherweise", "Teilweise", "Paarweise", "Schrittweise"],
+            correct: "Glücklicherweise",
+            explanation: "Glücklicherweise = на щастя."
           }
         ]
       },
@@ -850,15 +1063,24 @@
         title: "Linksattribute und Rechtsattribute",
         category: "B2",
         theory: `
-          <p>Ліве означення узгоджується як прикметник: <i>Das im Jahr 1920 gebaute Haus</i>.</p>
+          <p><b>Linksattribut:</b> поширене означення перед іменником (<i>Das 1920 erbaute Haus</i>). <b>Rechtsattribut:</b> підрядне речення після іменника.</p>
         `,
         questions: [
           {
-            type: "input",
-            instruction: "Впишіть закінчення лівого означення:",
+            type: "choice",
+            instruction: "Оберіть закінчення лівого означення (Partizip II):",
             q: "Das im Jahr 1920 gebaut____ Haus wurde renoviert.",
-            correct: ["e", "-e"],
-            explanation: "Neutrum (das Haus) -> gebaute."
+            options: ["-e", "-en", "-er", "-es"],
+            correct: "-e",
+            explanation: "Neutrum з означеним артиклем (das Haus) -> das gebaute Haus."
+          },
+          {
+            type: "choice",
+            instruction: "Оберіть форму дієприкметника теперішнього часу (Partizip I):",
+            q: "Der laut lach____ Mann fiel allen auf.",
+            options: ["-ende", "-end", "-ender", "-enden"],
+            correct: "-ende",
+            explanation: "Maskulinum з означеним артиклем (der) у Nominativ -> der lachende Mann."
           }
         ]
       },
@@ -867,7 +1089,7 @@
         title: "Vorsilben bei Verben (Präfixe)",
         category: "A2 / B1",
         theory: `
-          <p>Невідокремлювані префікси: <i>be-, ge-, er-, ver-, zer-, ent-, emp-, miss-</i>.</p>
+          <p><b>Невідокремлювані:</b> <i>be-, ge-, er-, ver-, zer-, ent-, emp-, miss-</i>. <b>Відокремлювані:</b> <i>ab-, an-, auf-, aus-, ein-, mit-, vor-, zu-</i>.</p>
         `,
         questions: [
           {
@@ -877,6 +1099,14 @@
             options: ["ver-", "auf-", "an-", "mit-"],
             correct: "ver-",
             explanation: "Префікс ver- завжди невідокремлюваний."
+          },
+          {
+            type: "choice",
+            instruction: "Оберіть відокремлюваний префікс:",
+            q: "Welches Präfix ist TRENNBAR?",
+            options: ["auf-", "be-", "ent-", "zer-"],
+            correct: "auf-",
+            explanation: "Префікс auf- є відокремлюваним (aufstehen -> er steht auf)."
           }
         ]
       },
@@ -885,15 +1115,24 @@
         title: "Indirekte Fragesätze (ob / W-Fragen)",
         category: "B1",
         theory: `
-          <p>Непрямі запитання: спеціальні запитання зберігають питальне слово (<i>wann</i>), дієслово йде в кінець.</p>
+          <p>Непрямі запитання: загальні питання (так/ні) $\rightarrow$ сполучник <b>ob</b>, спеціальні запитання зберігають питальне слово. Дієслово стоїть у кінці.</p>
         `,
         questions: [
           {
-            type: "input",
-            instruction: "Впишіть питальне слово:",
+            type: "choice",
+            instruction: "Оберіть питальне слово для спеціального питання:",
             q: "Können Sie mir sagen, ____ der nächste Zug abfährt?",
-            correct: ["wann", "Wann"],
-            explanation: "Непряме спеціальне питання про час: 'wann'."
+            options: ["wann", "ob", "warum", "dass"],
+            correct: "wann",
+            explanation: "Непряме спеціальне питання про час зберігає 'wann'."
+          },
+          {
+            type: "choice",
+            instruction: "Оберіть сполучник для питання так/ні:",
+            q: "Ich weiß nicht, ____ er morgen zur Party kommt.",
+            options: ["ob", "dass", "wann", "weil"],
+            correct: "ob",
+            explanation: "Для непрямого питання так/ні використовується сполучник 'ob' (чи)."
           }
         ]
       }
@@ -906,12 +1145,12 @@
     const topicsGrid = document.getElementById('topics-grid');
     const searchInput = document.getElementById('search-input');
     const quizTitle = document.getElementById('quiz-title');
-    const taskTypeBadge = document.getElementById('task-type-badge');
     const taskInstruction = document.getElementById('task-instruction');
     const quizProgress = document.getElementById('quiz-progress');
     const progressBar = document.getElementById('progress-bar');
+    const questionNav = document.getElementById('question-nav');
     const quizQuestion = document.getElementById('quiz-question');
-    const dynamicContainer = document.getElementById('dynamic-container');
+    const optionsContainer = document.getElementById('options-container');
     const feedbackBox = document.getElementById('quiz-feedback');
     const checkBtn = document.getElementById('check-btn');
     const nextBtn = document.getElementById('next-btn');
@@ -928,14 +1167,20 @@
     const modalStartBtn = document.getElementById('modal-start-btn');
 
     let currentTopic = null;
+    let currentQuestionsList = [];
     let currentIdx = 0;
     let correctCount = 0;
+    let selectedOption = null;
+    let answersHistory = {};
 
-    // Стан для різних типів завдань
-    let userSelectedChoice = null;
-    let userOrderSentence = [];
-    let userAvailableWords = [];
-    let userSelectedErrorIndex = null;
+    function shuffleArray(array) {
+      const arr = [...array];
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
 
     function renderTopics(filter = '') {
       topicsGrid.innerHTML = '';
@@ -956,7 +1201,7 @@
             <h2 class="font-bold text-slate-800 text-[15px] leading-snug group-hover:text-indigo-600 transition-colors">${topic.title}</h2>
           </div>
           <div class="flex items-center text-xs font-semibold text-indigo-600 mt-4 opacity-75 group-hover:opacity-100 transition-opacity">
-            Практикувати →
+            Практикувати (${topic.questions.length}) →
           </div>
         `;
         card.onclick = () => startQuiz(topic);
@@ -968,8 +1213,11 @@
 
     function startQuiz(topic) {
       currentTopic = topic;
+      currentQuestionsList = shuffleArray(topic.questions);
       currentIdx = 0;
       correctCount = 0;
+      answersHistory = {};
+
       mainView.classList.add('hidden');
       resultView.classList.add('hidden');
       quizView.classList.remove('hidden');
@@ -991,228 +1239,93 @@
     closeTheoryBtn.onclick = closeTheory;
     modalStartBtn.onclick = closeTheory;
 
-    // Рендер завдання відповідно до типу
+    function renderQuestionNav() {
+      questionNav.innerHTML = '';
+      currentQuestionsList.forEach((_, idx) => {
+        const btn = document.createElement('button');
+        btn.innerText = idx + 1;
+        
+        let style = "w-8 h-8 rounded-xl text-xs font-bold transition flex items-center justify-center ";
+        
+        if (idx === currentIdx) {
+          style += "bg-indigo-600 text-white shadow-md ring-2 ring-indigo-300 ";
+        } else if (answersHistory[idx] === true) {
+          style += "bg-emerald-100 text-emerald-800 border border-emerald-300 ";
+        } else if (answersHistory[idx] === false) {
+          style += "bg-rose-100 text-rose-800 border border-rose-300 ";
+        } else {
+          style += "bg-slate-100 hover:bg-slate-200 text-slate-600 ";
+        }
+
+        btn.className = style;
+        btn.onclick = () => {
+          currentIdx = idx;
+          loadQuestion();
+        };
+        questionNav.appendChild(btn);
+      });
+    }
+
     function loadQuestion() {
+      selectedOption = null;
       feedbackBox.classList.add('hidden');
       checkBtn.classList.remove('hidden');
       nextBtn.classList.add('hidden');
 
-      const q = currentTopic.questions[currentIdx];
+      renderQuestionNav();
+
+      const q = currentQuestionsList[currentIdx];
       quizTitle.innerText = currentTopic.title;
-      quizProgress.innerText = `${currentIdx + 1} / ${currentTopic.questions.length}`;
-      progressBar.style.width = `${((currentIdx + 1) / currentTopic.questions.length) * 100}%`;
-      taskInstruction.innerText = q.instruction || "Виконайте завдання:";
+      quizProgress.innerText = `${currentIdx + 1} / ${currentQuestionsList.length}`;
+      progressBar.style.width = `${((currentIdx + 1) / currentQuestionsList.length) * 100}%`;
+      taskInstruction.innerText = q.instruction || "Оберіть правильний варіант відповіді:";
       quizQuestion.innerText = q.q;
 
-      dynamicContainer.innerHTML = '';
-
-      // ТИП 1: Multiple Choice
-      if (q.type === 'choice') {
-        taskTypeBadge.innerText = "Вибір";
-        userSelectedChoice = null;
-        const optionsWrapper = document.createElement('div');
-        optionsWrapper.className = "space-y-3";
-
-        q.options.forEach((opt, i) => {
-          const btn = document.createElement('button');
-          btn.className = "w-full text-left p-4 rounded-2xl glass-input hover:bg-white/90 font-medium text-sm transition-all flex items-center shadow-xs";
-          btn.innerHTML = `<span class="w-6 h-6 rounded-lg bg-white border border-slate-200/80 mr-3.5 flex items-center justify-center text-xs font-bold text-slate-500 shadow-xs">${String.fromCharCode(65 + i)}</span><span class="text-slate-700">${opt}</span>`;
-          btn.onclick = () => {
-            optionsWrapper.querySelectorAll('button').forEach(b => {
-              b.classList.remove('border-indigo-500', 'bg-white/95', 'ring-2', 'ring-indigo-500/20');
-              b.querySelector('span:last-child').classList.remove('text-indigo-900', 'font-bold');
-            });
-            btn.classList.add('border-indigo-500', 'bg-white/95', 'ring-2', 'ring-indigo-500/20');
-            btn.querySelector('span:last-child').classList.add('text-indigo-900', 'font-bold');
-            userSelectedChoice = opt;
-          };
-          optionsWrapper.appendChild(btn);
-        });
-        dynamicContainer.appendChild(optionsWrapper);
-      }
-
-      // ТИП 2: Вписування форми (Fill in the blank) з клавіатурою умлаутів
-      else if (q.type === 'input') {
-        taskTypeBadge.innerText = "Вписування";
-        const inputWrapper = document.createElement('div');
-        inputWrapper.className = "space-y-3";
-
-        const textInput = document.createElement('input');
-        textInput.type = "text";
-        textInput.id = "blank-input";
-        textInput.placeholder = "Введіть правильну відповідь...";
-        textInput.className = "w-full glass-input rounded-2xl px-5 py-3.5 text-base shadow-sm outline-none focus:ring-2 focus:ring-indigo-500/50 transition-all font-medium text-slate-800";
-        inputWrapper.appendChild(textInput);
-
-        // Панель умлаутів
-        const umlautBar = document.createElement('div');
-        umlautBar.className = "flex flex-wrap gap-1.5 pt-1";
-        ['ä', 'ö', 'ü', 'ß', 'Ä', 'Ö', 'Ü'].forEach(char => {
-          const uBtn = document.createElement('button');
-          uBtn.type = "button";
-          uBtn.className = "px-3 py-1.5 bg-white/80 hover:bg-white border border-slate-200/80 rounded-xl text-sm font-bold text-slate-700 shadow-xs hover:border-indigo-300 transition active:scale-95";
-          uBtn.innerText = char;
-          uBtn.onclick = () => {
-            textInput.value += char;
-            textInput.focus();
-          };
-          umlautBar.appendChild(uBtn);
-        });
-        inputWrapper.appendChild(umlautBar);
-        dynamicContainer.appendChild(inputWrapper);
-        setTimeout(() => textInput.focus(), 50);
-      }
-
-      // ТИП 3: Конструктор речень (Word Order)
-      else if (q.type === 'order') {
-        taskTypeBadge.innerText = "Порядок слів";
-        userOrderSentence = [];
-        userAvailableWords = [...q.words];
-
-        const orderWrapper = document.createElement('div');
-        orderWrapper.className = "space-y-4";
-
-        // Поле складеного речення
-        const resultZone = document.createElement('div');
-        resultZone.id = "order-result-zone";
-        resultZone.className = "min-h-[64px] p-3.5 rounded-2xl glass-input border-dashed border-2 border-indigo-200 flex flex-wrap gap-2 items-center";
-        
-        // Зона доступних слів
-        const sourceZone = document.createElement('div');
-        sourceZone.id = "order-source-zone";
-        sourceZone.className = "flex flex-wrap gap-2 pt-2";
-
-        orderWrapper.appendChild(resultZone);
-        orderWrapper.appendChild(sourceZone);
-        dynamicContainer.appendChild(orderWrapper);
-
-        renderWordOrderZones();
-      }
-
-      // ТИП 4: Пошук помилки (Find Error)
-      else if (q.type === 'find_error') {
-        taskTypeBadge.innerText = "Пошук помилки";
-        userSelectedErrorIndex = null;
-
-        const errorWrapper = document.createElement('div');
-        errorWrapper.className = "flex flex-wrap gap-2.5 p-4 rounded-2xl glass-input";
-
-        q.sentence.forEach((word, idx) => {
-          const wordBtn = document.createElement('button');
-          wordBtn.className = "px-3 py-2 bg-white/90 hover:bg-indigo-50 border border-slate-200/80 rounded-xl text-base font-semibold text-slate-800 shadow-xs transition active:scale-95";
-          wordBtn.innerText = word;
-          wordBtn.onclick = () => {
-            errorWrapper.querySelectorAll('button').forEach(b => b.classList.remove('ring-2', 'ring-rose-500', 'bg-rose-50', 'text-rose-900', 'border-rose-300'));
-            wordBtn.classList.add('ring-2', 'ring-rose-500', 'bg-rose-50', 'text-rose-900', 'border-rose-300');
-            userSelectedErrorIndex = idx;
-          };
-          errorWrapper.appendChild(wordBtn);
-        });
-
-        dynamicContainer.appendChild(errorWrapper);
-      }
-    }
-
-    // Допоміжна функція рендеру для Word Order
-    function renderWordOrderZones() {
-      const resultZone = document.getElementById('order-result-zone');
-      const sourceZone = document.getElementById('order-source-zone');
-      if (!resultZone || !sourceZone) return;
-
-      resultZone.innerHTML = '';
-      sourceZone.innerHTML = '';
-
-      if (userOrderSentence.length === 0) {
-        resultZone.innerHTML = '<span class="text-xs text-slate-400 font-medium italic">Клікайте на слова нижче, щоб побудувати речення...</span>';
-      } else {
-        userOrderSentence.forEach((word, idx) => {
-          const tile = document.createElement('button');
-          tile.className = "px-3 py-1.5 bg-indigo-600 text-white rounded-xl text-sm font-semibold shadow-xs hover:bg-indigo-700 transition active:scale-95";
-          tile.innerText = word;
-          tile.onclick = () => {
-            userOrderSentence.splice(idx, 1);
-            userAvailableWords.push(word);
-            renderWordOrderZones();
-          };
-          resultZone.appendChild(tile);
-        });
-      }
-
-      userAvailableWords.forEach((word, idx) => {
-        const tile = document.createElement('button');
-        tile.className = "px-3 py-1.5 bg-white border border-slate-200/90 text-slate-800 rounded-xl text-sm font-semibold shadow-xs hover:bg-slate-50 transition active:scale-95";
-        tile.innerText = word;
-        tile.onclick = () => {
-          userAvailableWords.splice(idx, 1);
-          userOrderSentence.push(word);
-          renderWordOrderZones();
+      optionsContainer.innerHTML = '';
+      q.options.forEach((opt, i) => {
+        const btn = document.createElement('button');
+        btn.className = "w-full text-left p-4 rounded-2xl glass-input hover:bg-white/90 font-medium text-sm transition-all flex items-center shadow-xs";
+        btn.innerHTML = `<span class="w-6 h-6 rounded-lg bg-white border border-slate-200/80 mr-3.5 flex items-center justify-center text-xs font-bold text-slate-500 shadow-xs">${String.fromCharCode(65 + i)}</span><span class="text-slate-700">${opt}</span>`;
+        btn.onclick = () => {
+          document.querySelectorAll('#options-container button').forEach(b => {
+            b.classList.remove('border-indigo-500', 'bg-white/95', 'ring-2', 'ring-indigo-500/20');
+            b.querySelector('span:last-child').classList.remove('text-indigo-900', 'font-bold');
+          });
+          btn.classList.add('border-indigo-500', 'bg-white/95', 'ring-2', 'ring-indigo-500/20');
+          btn.querySelector('span:last-child').classList.add('text-indigo-900', 'font-bold');
+          selectedOption = opt;
         };
-        sourceZone.appendChild(tile);
+        optionsContainer.appendChild(btn);
       });
     }
 
-    // Перевірка відповіді для всіх типів завдань
     checkBtn.onclick = () => {
-      const q = currentTopic.questions[currentIdx];
-      let isCorrect = false;
-      let userProvidedAnswer = "";
-
-      if (q.type === 'choice') {
-        if (userSelectedChoice === null) {
-          alert("Будь ласка, оберіть варіант відповіді.");
-          return;
-        }
-        isCorrect = userSelectedChoice === q.correct;
-      } 
-      else if (q.type === 'input') {
-        const inputVal = document.getElementById('blank-input').value.trim();
-        if (!inputVal) {
-          alert("Введіть відповідь у поле перед перевіркою.");
-          return;
-        }
-        userProvidedAnswer = inputVal;
-        const normalized = inputVal.toLowerCase().replace(/^-/, '');
-        isCorrect = q.correct.some(ans => ans.toLowerCase().replace(/^-/, '') === normalized);
-      }
-      else if (q.type === 'order') {
-        if (userOrderSentence.length !== q.correct.length) {
-          alert("Використайте всі слова для побудови речення.");
-          return;
-        }
-        isCorrect = userOrderSentence.join(' ') === q.correct.join(' ');
-      }
-      else if (q.type === 'find_error') {
-        if (userSelectedErrorIndex === null) {
-          alert("Натисніть на слово, у якому ви бачите помилку.");
-          return;
-        }
-        isCorrect = userSelectedErrorIndex === q.errorWordIndex;
+      if (selectedOption === null) {
+        alert("Будь ласка, оберіть варіант відповіді перед перевіркою.");
+        return;
       }
 
-      if (isCorrect) correctCount++;
+      const q = currentQuestionsList[currentIdx];
+      const isCorrect = selectedOption === q.correct;
+      
+      if (answersHistory[currentIdx] === undefined && isCorrect) {
+        correctCount++;
+      }
+      answersHistory[currentIdx] = isCorrect;
+      renderQuestionNav();
 
       feedbackBox.classList.remove('hidden');
       if (isCorrect) {
         feedbackBox.className = "p-5 rounded-2xl mb-6 text-sm font-medium bg-emerald-50/90 text-emerald-950 border border-emerald-200 shadow-xs";
         feedbackBox.innerHTML = `
-          <div class="font-bold text-emerald-800 mb-1">✅ Чудово! Правильно.</div>
+          <div class="font-bold text-emerald-800 mb-1">✅ Правильно!</div>
           <div>${q.explanation}</div>
         `;
       } else {
         feedbackBox.className = "p-5 rounded-2xl mb-6 text-sm font-medium bg-rose-50/90 text-rose-950 border border-rose-200 shadow-xs";
-        
-        let correctDisplay = "";
-        if (q.type === 'choice' || q.type === 'input') {
-          correctDisplay = `Правильна відповідь: <b>${Array.isArray(q.correct) ? q.correct[0] : q.correct}</b>.`;
-        } else if (q.type === 'order') {
-          correctDisplay = `Правильний порядок: <b>${q.correct.join(' ')}</b>.`;
-        } else if (q.type === 'find_error') {
-          correctDisplay = `Помилка в слові «<b>${q.sentence[q.errorWordIndex]}</b>». Правильно: <b>${q.correction}</b>.`;
-        }
-
         feedbackBox.innerHTML = `
-          <div class="font-bold text-rose-800 mb-1">❌ Помилка</div>
-          <div class="mb-1">${correctDisplay}</div>
+          <div class="font-bold text-rose-800 mb-1">❌ Неправильно</div>
+          <div class="mb-1">Правильна відповідь: <b>${q.correct}</b></div>
           <div>${q.explanation}</div>
         `;
       }
@@ -1222,7 +1335,7 @@
     };
 
     nextBtn.onclick = () => {
-      if (currentIdx + 1 < currentTopic.questions.length) {
+      if (currentIdx + 1 < currentQuestionsList.length) {
         currentIdx++;
         loadQuestion();
       } else {
@@ -1230,7 +1343,7 @@
         resultView.classList.remove('hidden');
         document.getElementById('result-topic-name').innerText = currentTopic.title;
         document.getElementById('score-correct').innerText = correctCount;
-        document.getElementById('score-total').innerText = currentTopic.questions.length;
+        document.getElementById('score-total').innerText = currentQuestionsList.length;
       }
     };
 
