@@ -3161,21 +3161,385 @@
         `,
         questions: [
           {
-            type: "choice",
-            instruction: "Оберіть питальне слово для особи:",
-            q: "____ hast du gesprochen? – Mit Herrn Müller.",
-            options: ["Mit wem", "Woran", "Womit", "Worüber"],
-            correct: "Mit wem",
-            explanation: "Для людей із прийменником mit ставимо 'Mit wem?' (Dativ)."
-          },
-          {
-            type: "choice",
-            instruction: "Оберіть питальне слово для предмета:",
-            q: "____ denkst du gerade? – An meinen Urlaub.",
-            options: ["Woran", "An wen", "Womit", "Wozu"],
-            correct: "Woran",
-            explanation: "Для неживих понять із прийменником an: woran (wo + r + an)."
-          }
+    type: "choice",
+    instruction: "Оберіть питальне слово для неживого предмета / явища з прийменником auf:",
+    q: "____ wartest du schon seit einer halben Stunde? – Auf den verspäteten Bus.",
+    options: ["Worauf", "Auf wen", "Woran", "Wozu"],
+    correct: "Worauf",
+    explanation: "Питання стосується неживого об'єкта (der Bus) з дієсловом warten auf (+ Akk.) -> wo + r + auf = Worauf."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть питальне слово для особи з прийменником auf:",
+    q: "____ wartest du so ungeduldig vor dem Eingang? – Auf meine Kollegin.",
+    options: ["Auf wen", "Worauf", "Auf wem", "Woran"],
+    correct: "Auf wen",
+    explanation: "Для людей використовується прийменник + займенник у відповідному відмінку (warten auf + Akk.) -> Auf wen."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть питальне слово для неживого предмета з прийменником an:",
+    q: "____ denkst du gerade so intensiv nach? – An meine morgige Präsentation.",
+    options: ["Woran", "An wen", "Worüber", "Womit"],
+    correct: "Woran",
+    explanation: "nachdenken / denken an (+ Akk.) для неживих понять утворює форму: wo + r + an = Woran."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть питальне слово для особи з прийменником an:",
+    q: "____ erinnerst du dich noch aus deiner Schulzeit? – An unseren Mathelehrer.",
+    options: ["An wen", "Woran", "An wem", "Worüber"],
+    correct: "An wen",
+    explanation: "sich erinnern an (+ Akk.) стосовно людини вимагає форми 'An wen'."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть питальне слово з прийменником über (неживе поняття):",
+    q: "____ ärgert sich der Abteilungsleiter so maßlos? – Über die ständigen Verzögerungen.",
+    options: ["Worüber", "Über wen", "Woran", "Wozu"],
+    correct: "Worüber",
+    explanation: "sich ärgern über (+ Akk.) для понять і речей: wo + r + über = Worüber."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть питальне слово з прийменником über (особа):",
+    q: "____ lacht ihr die ganze Zeit so laut? – Über den neuen Praktikanten.",
+    options: ["Über wen", "Worüber", "Über wem", "Woran"],
+    correct: "Über wen",
+    explanation: "lachen über (+ Akk.) стосовно людини утворює питальну форму 'Über wen'."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть питальне слово для знаряддя / засобу дії (mit):",
+    q: "____ fährst du heute zur Arbeit? – Mit der U-Bahn.",
+    options: ["Womit", "Mit wem", "Wodurch", "Woran"],
+    correct: "Womit",
+    explanation: "Питання про транспортний засіб або інструмент із прийменником mit утворює форму: wo + mit = Womit."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть питальне слово для супроводу / особи (mit):",
+    q: "____ hast du die Vereinbarung gestern telefonisch besprochen? – Mit dem Anwalt.",
+    options: ["Mit wem", "Womit", "Mit wen", "Worüber"],
+    correct: "Mit wem",
+    explanation: "Прийменник 'mit' завжди керує Dativ, для особи питальна форма: 'Mit wem?'."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть питальне слово для дієслова teilnehmen an (+ Dat.):",
+    q: "____ nimmst du am Wochenende teil? – An einem internationalen Fachseminar.",
+    options: ["Woran", "An wen", "Womit", "Worauf"],
+    correct: "Woran",
+    explanation: "teilnehmen an (+ Dat.) для подій і заходів: wo + r + an = Woran."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть питальне слово для дієслова sich interessieren für (+ Akk.):",
+    q: "____ interessiert sich der neue Kunde besonders? – Für unsere Sicherheitssoftware.",
+    options: ["Wofür", "Für wen", "Woran", "Worum"],
+    correct: "Wofür",
+    explanation: "sich interessieren für (+ Akk.) для речей і послуг: wo + für = Wofür."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть питальне слово для особи з прийменником für:",
+    q: "____ hast du dieses teure Geschenk gekauft? – Für meine Mutter.",
+    options: ["Für wen", "Wofür", "Für wem", "Woran"],
+    correct: "Für wen",
+    explanation: "Прийменник 'für' керує Akkusativ, стосовно людей: 'Für wen?'."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть питальне слово для теми / змісту (um):",
+    q: "____ geht es in diesem langen Zeitungsartikel eigentlich? – Um die Steuerreform.",
+    options: ["Worum", "Um wen", "Worüber", "Wozu"],
+    correct: "Worum",
+    explanation: "es geht um (+ Akk.) для понять і тем утворює форму: wo + r + um = Worum."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть питальне слово для побоювань / страхів (vor + Dat.):",
+    q: "____ hast du vor der mündlichen Prüfung am meisten Angst? – Vor einem Blackout.",
+    options: ["Wovor", "Vor wem", "Woran", "Woraus"],
+    correct: "Wovor",
+    explanation: "Angst haben vor (+ Dat.) для абстрактних речей і явищ: wo + vor = Wovor."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть питальне слово для особи з прийменником vor:",
+    q: "____ fürchtest du dich in der Dunkelheit? – Vor dem Einbrecher.",
+    options: ["Vor wem", "Wovor", "Vor wen", "Woran"],
+    correct: "Vor wem",
+    explanation: "sich fürchten vor (+ Dat.) стосовно живої особи: 'Vor wem?'."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть питальне слово для матеріалу / джерела (aus):",
+    q: "____ besteht dieser moderne Werkstoff hauptsächlich? – Aus recyceltem Kunststoff.",
+    options: ["Woraus", "Aus wem", "Woran", "Wovon"],
+    correct: "Woraus",
+    explanation: "bestehen aus (+ Dat.) для матеріалів і складників: wo + r + aus = Woraus."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть питальне слово для цілі / мети дії (zu):",
+    q: "____ brauchst du eigentlich so viel Bargeld? – Zum Bezahlen der Kaution.",
+    options: ["Wozu", "Zu wem", "Woran", "Womit"],
+    correct: "Wozu",
+    explanation: "Питання про призначення або мету (Wozu? = Навіщо? / Для чого?) утворюється як wo + zu = Wozu."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть питальне слово для дієслова zweifeln an (+ Dat.):",
+    q: "____ zweifeln die Gutachter bei diesem Projekt? – An der wirtschaftlichen Rentabilität.",
+    options: ["Woran", "An wen", "Worüber", "Wofür"],
+    correct: "Woran",
+    explanation: "zweifeln an (+ Dat.) для абстрактних понять: wo + r + an = Woran."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть питальне слово для причини / фактора впливу (durch):",
+    q: "____ wurde der schwere Schaden an der Maschine verursacht? – Durch eine Überspannung.",
+    options: ["Wodurch", "Durch wen", "Womit", "Woran"],
+    correct: "Wodurch",
+    explanation: "Питання про непряму причину або фактор (durch + Akk.) утворює займенниковий прислівник 'Wodurch'."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть правильне питальне слово для залежності (von + Dat.):",
+    q: "____ hängt der Erfolg der gesamten Kampagne ab? – Vom Budget und vom Timing.",
+    options: ["Wovon", "Von wem", "Woran", "Woraus"],
+    correct: "Wovon",
+    explanation: "abhängen von (+ Dat.) стосовно неживих факторів: wo + von = Wovon."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть питальне слово для особи з прийменником von:",
+    q: "____ hast du diesen wertvollen Tipp bekommen? – Von meinem Steuerberater.",
+    options: ["Von wem", "Wovon", "Von wen", "Woran"],
+    correct: "Von wem",
+    explanation: "Прийменник 'von' вимагає Dativ, для людей питальне слово: 'Von wem?'."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть порядок слів у непрямому питанні з питальним прислівником:",
+    q: "Können Sie mir erklären, ____ ?",
+    options: [
+      "worauf es bei dieser Verhandlung wirklich ankommt",
+      "worauf kommt es bei dieser Verhandlung wirklich an",
+      "worauf es kommt bei dieser Verhandlung wirklich an",
+      "bei dieser Verhandlung worauf es wirklich ankommt"
+    ],
+    correct: "worauf es bei dieser Verhandlung wirklich ankommt",
+    explanation: "У непрямому питанні питальне слово 'worauf' виступає сполучником, а відмінюване дієслово (ankommt) іде в кінець."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть питальне слово для дієслова sich bewerben um (+ Akk.):",
+    q: "____ hast du dich bei dem internationalen Konzern beworben? – Um die Stelle als Controller.",
+    options: ["Worum", "Um wen", "Worauf", "Wofür"],
+    correct: "Worum",
+    explanation: "sich bewerben um (+ Akk.) для посади чи вакансії: wo + r + um = Worum."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть питальне слово для дієслова leiden unter (+ Dat.):",
+    q: "____ leidet die Patientin seit mehreren Wochen? – Unter starker Schlaflosigkeit.",
+    options: ["Worunter", "Unter wem", "Woran", "Wovon"],
+    correct: "Worunter",
+    explanation: "leiden unter (+ Dat.) стосовно симптомів чи зовнішніх обставин: wo + r + unter = Worunter."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть питальне слово для дієслова gratulieren zu (+ Dat.):",
+    q: "____ haben die Kollegen dem Abteilungsleiter gratuliert? – Zum 50. Geburtstag.",
+    options: ["Wozu", "Zu wem", "Worüber", "Wofür"],
+    correct: "Wozu",
+    explanation: "gratulieren zu (+ Dat.) для свят чи приводів: wo + zu = Wozu."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть граматично правильний варіант непрямого спеціального питання про особу:",
+    q: "Der Manager wollte genau wissen, ____.",
+    options: [
+      "mit wem der Lieferant den Vertrag abgeschlossen hat",
+      "mit wem hat der Lieferant den Vertrag abgeschlossen",
+      "womit der Lieferant den Vertrag abgeschlossen hat",
+      "mit wen der Lieferant den Vertrag abgeschlossen hat"
+    ],
+    correct: "mit wem der Lieferant den Vertrag abgeschlossen hat",
+    explanation: "Для особи: 'mit wem' (Dativ) + кінцева позиція відмінюваного дієслова (abgeschlossen hat)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть питальне слово для неживого предмета з прийменником über:",
+    q: "____ ärgert sich der Abteilungsleiter so maßlos? – Über die ständigen Verzögerungen.",
+    options: ["Worüber", "Über wen", "Woran", "Wozu"],
+    correct: "Worüber",
+    explanation: "Дієслово sich ärgern über (+ Akk.) для неживих понять або абстрактних речей утворює питальний прислівник: wo + r + über = Worüber."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть питальне слово для особи з прийменником über:",
+    q: "____ lacht ihr die ganze Zeit so laut? – Über den neuen Praktikanten.",
+    options: ["Über wen", "Worüber", "Über wem", "Woran"],
+    correct: "Über wen",
+    explanation: "lachen über (+ Akk.) стосовно живої людини утворює комбінацію: прийменник über + займенник у знахідному відмінку wen → Über wen."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть питальне слово для дієслова teilnehmen an (+ Dat.):",
+    q: "____ nimmst du am kommenden Wochenende teil? – An einem internationalen Fachseminar.",
+    options: ["Woran", "An wen", "Womit", "Worauf"],
+    correct: "Woran",
+    explanation: "teilnehmen an (+ Dat.) стосовно заходів, подій або курсів: wo + r + an = Woran."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть питальне слово для дієслова sich interessieren für (+ Akk.):",
+    q: "____ interessiert sich der neue Kunde besonders? – Für unsere neue Sicherheitssoftware.",
+    options: ["Wofür", "Für wen", "Woran", "Worum"],
+    correct: "Wofür",
+    explanation: "sich interessieren für (+ Akk.) для неживих об'єктів/продуктів: wo + für = Wofür."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть питальне слово для особи з прийменником für:",
+    q: "____ hast du diesen großen Blumenstrauß gekauft? – Für meine Mutter.",
+    options: ["Für wen", "Wofür", "Für wem", "Woran"],
+    correct: "Für wen",
+    explanation: "Прийменник 'für' завжди вимагає знахідного відмінка (Akkusativ). Для людей питальна форма: Für wen."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть питальне слово для дієслова es geht um (+ Akk.):",
+    q: "____ geht es in diesem langen Zeitungsartikel eigentlich? – Um die geplante Steuerreform.",
+    options: ["Worum", "Um wen", "Worüber", "Wozu"],
+    correct: "Worum",
+    explanation: "es geht um (+ Akk.) для змісту або теми тексту: wo + r + um = Worum."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть питальне слово для побоювань / страхів (vor + Dat.):",
+    q: "____ hast du vor der morgigen Prüfung am meisten Angst? – Vor einem totalen Blackout.",
+    options: ["Wovor", "Vor wem", "Woran", "Woraus"],
+    correct: "Wovor",
+    explanation: "Angst haben vor (+ Dat.) для абстрактних речей або ситуацій: wo + vor = Wovor."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть питальне слово для особи з прийменником vor:",
+    q: "____ fürchtest du dich in diesem verlassenen Haus? – Vor dem Hausmeister.",
+    options: ["Vor wem", "Wovor", "Vor wen", "Woran"],
+    correct: "Vor wem",
+    explanation: "sich fürchten vor (+ Dat.) для живих осіб: прийменник vor + займенник wem (Dativ) → Vor wem."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть питальне слово для матеріалу / складників (aus + Dat.):",
+    q: "____ besteht dieser moderne Werkstoff hauptsächlich? – Aus recyceltem Kunststoff.",
+    options: ["Woraus", "Aus wem", "Woran", "Wovon"],
+    correct: "Woraus",
+    explanation: "bestehen aus (+ Dat.) для позначення компонентів чи матеріалів: wo + r + aus = Woraus."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть питальне слово для цілі / мети дії (zu):",
+    q: "____ brauchst du eigentlich so viel Bargeld? – Zum Bezahlen der Kaution.",
+    options: ["Wozu", "Zu wem", "Woran", "Womit"],
+    correct: "Wozu",
+    explanation: "Питання про призначення, сенс або мету дії утворюється як wo + zu = Wozu."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть питальне слово для дієслова zweifeln an (+ Dat.):",
+    q: "____ zweifeln die Gutachter bei diesem Bauprojekt? – An der statischen Sicherheit.",
+    options: ["Woran", "An wen", "Worüber", "Wofür"],
+    correct: "Woran",
+    explanation: "zweifeln an (+ Dat.) для фактів та абстрактних понять: wo + r + an = Woran."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть питальне слово для чинника впливу / непрямої причини (durch):",
+    q: "____ wurde der schwere Schaden an der Maschine verursacht? – Durch einen Kurzschluss.",
+    options: ["Wodurch", "Durch wen", "Womit", "Woran"],
+    correct: "Wodurch",
+    explanation: "Питання про фізичну причину або опосередкований чинник (durch + Akk.) утворює прислівник Wodurch."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть питальне слово для дієслова abhängen von (+ Dat.):",
+    q: "____ hängt der Gesamterfolg der Kampagne letztendlich ab? – Vom Marketingbudget.",
+    options: ["Wovon", "Von wem", "Woran", "Woraus"],
+    correct: "Wovon",
+    explanation: "abhängen von (+ Dat.) для неживих чинників: wo + von = Wovon."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть питальне слово для особи з прийменником von:",
+    q: "____ hast du diesen wertvollen finanziellen Ratschlag bekommen? – Von meinem Berater.",
+    options: ["Von wem", "Wovon", "Von wen", "Woran"],
+    correct: "Von wem",
+    explanation: "Прийменник 'von' вимагає давального відмінка (Dativ). Для особи: von + wem → Von wem."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть порядок слів у непрямому питанні з питальним прислівником:",
+    q: "Können Sie mir genau erklären, ____ ?",
+    options: [
+      "worauf es bei diesem Vorstellungsgespräch wirklich ankommt",
+      "worauf kommt es bei diesem Vorstellungsgespräch wirklich an",
+      "worauf es kommt bei diesem Vorstellungsgespräch wirklich an",
+      "bei diesem Vorstellungsgespräch worauf es wirklich ankommt"
+    ],
+    correct: "worauf es bei diesem Vorstellungsgespräch wirklich ankommt",
+    explanation: "У непрямому підрядному питанні відмінюване дієслово (ankommt) замикає речення."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть питальне слово для вакансії / посади (bewerben um + Akk.):",
+    q: "____ hast du dich bei diesem internationalen Konzern beworben? – Um die Stelle als IT-Berater.",
+    options: ["Worum", "Um wen", "Worauf", "Wofür"],
+    correct: "Worum",
+    explanation: "sich bewerben um (+ Akk.) для посади: wo + r + um = Worum."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть питальне слово для дієслова leiden unter (+ Dat.):",
+    q: "____ leidet der Patient in den letzten Monaten? – Unter chronischen Rückenschmerzen.",
+    options: ["Worunter", "Unter wem", "Woran", "Wovon"],
+    correct: "Worunter",
+    explanation: "leiden unter (+ Dat.) стосовно симптомів, діагнозів або умов: wo + r + unter = Worunter."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть питальне слово для приводу або свята (gratulieren zu + Dat.):",
+    q: "____ haben die Kollegen dem Chef so herzlich gratuliert? – Zum 50. Geburtstag.",
+    options: ["Wozu", "Zu wem", "Worüber", "Wofür"],
+    correct: "Wozu",
+    explanation: "gratulieren zu (+ Dat.) для подій та приводів: wo + zu = Wozu."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть граматично правильний варіант непрямого питання про людину:",
+    q: "Der Abteilungsleiter wollte wissen, ____.",
+    options: [
+      "mit wem der Projektleiter gestern verhandelt hat",
+      "mit wem hat der Projektleiter gestern verhandelt",
+      "womit der Projektleiter gestern verhandelt hat",
+      "mit wen der Projektleiter gestern verhandelt hat"
+    ],
+    correct: "mit wem der Projektleiter gestern verhandelt hat",
+    explanation: "Для людей у Dativ із прийменником mit: 'mit wem' + підмет (der Projektleiter) + присудок у кінці (verhandelt hat)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть питальне слово для дієслова sich verlassen auf (+ Akk.):",
+    q: "____ kann sich das Management in dieser kritischen Phase verlassen? – Auf die Loyalität der Mitarbeiter.",
+    options: ["Worauf", "Auf wen", "Woran", "Womit"],
+    correct: "Worauf",
+    explanation: "sich verlassen auf (+ Akk.) для абстрактних понять і гарантій: wo + r + auf = Worauf."
+  }
         ]
       },
       {
@@ -3222,21 +3586,365 @@
         `,
         questions: [
           {
-            type: "choice",
-            instruction: "Оберіть правильний прийменник:",
-            q: "Ich habe großes Interesse ____ diesem Kurs.",
-            options: ["an", "für", "über", "auf"],
-            correct: "an",
-            explanation: "Стала сполучуваність: das Interesse an + Dativ."
-          },
-          {
-            type: "choice",
-            instruction: "Оберіть прийменник для іменника Angst:",
-            q: "Viele Menschen haben Angst ____ Spinnen.",
-            options: ["vor", "an", "gegen", "bei"],
-            correct: "vor",
-            explanation: "Сталий вираз: die Angst vor + Dativ."
-          }
+    type: "choice",
+    instruction: "Оберіть правильний прийменник для іменника Interesse (+ Dat.):",
+    q: "Viele Studierende zeigen großes Interesse ____ moderner künstlicher Intelligenz.",
+    options: ["an", "für", "über", "auf"],
+    correct: "an",
+    explanation: "Стала сполучуваність: das Interesse an + Dativ (Interesse an etwas haben)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть прийменник для іменника Hoffnung (+ Akk.):",
+    q: "Die Ärzte gaben die Hoffnung ____ eine vollständige Genesung des Patienten nicht auf.",
+    options: ["auf", "an", "für", "über"],
+    correct: "auf",
+    explanation: "Керування: die Hoffnung auf + Akkusativ (Hoffnung auf Erfolg / Genesung)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть прийменник для іменника Angst (+ Dat.):",
+    q: "Vor der mündlichen Prüfung hatte er große Angst ____ einem totalen Blackout.",
+    options: ["vor", "an", "bei", "gegen"],
+    correct: "vor",
+    explanation: "Сталий вираз: die Angst vor + Dativ (Angst vor Hunden / Prüfungen)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть прийменник для іменника Bitte (+ Akk.):",
+    q: "Die Bürgerinitiative richtete eine dringende Bitte ____ Unterstützung an die Stadtverwaltung.",
+    options: ["um", "für", "nach", "auf"],
+    correct: "um",
+    explanation: "Керування: die Bitte um + Akkusativ (die Bitte um Hilfe / Unterstützung)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть прийменник для іменника Teilnahme (+ Dat.):",
+    q: "Die Teilnahme ____ der internationalen Fachkonferenz ist für alle Mitarbeiter verpflichtend.",
+    options: ["an", "in", "bei", "zu"],
+    correct: "an",
+    explanation: "Іменник, однокореневий з teilnehmen an: die Teilnahme an + Dativ."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть прийменник для майбутньої радісної події (die Freude ...):",
+    q: "Die Freude ____ die bevorstehenden Sommerferien war den Kindern anzusehen.",
+    options: ["auf", "über", "an", "zu"],
+    correct: "auf",
+    explanation: "Радість з приводу майбутньої події: die Freude auf + Akkusativ."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть прийменник для радості з приводу того, що вже відбулося (die Freude ...):",
+    q: "Seine Freude ____ den unerwarteten Prüfungserfolg war riesig.",
+    options: ["über", "auf", "an", "für"],
+    correct: "über",
+    explanation: "Радість з приводу теперішнього або минулого факту: die Freude über + Akkusativ."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть прийменник для іменника Suche (+ Dat.):",
+    q: "Das Unternehmen befindet sich derzeit auf der Suche ____ qualifizierten Fachkräften.",
+    options: ["nach", "für", "zu", "an"],
+    correct: "nach",
+    explanation: "Керування: die Suche nach + Dativ (auf der Suche nach etwas sein)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть прийменник для іменника Zweifel (+ Dat.):",
+    q: "Die Gutachter äußerten erhebliche Zweifel ____ der Glaubwürdigkeit des Zeugen.",
+    options: ["an", "über", "in", "von"],
+    correct: "an",
+    explanation: "Керування: der Zweifel an + Dativ (Zweifel an der Richtigkeit / Glaubwürdigkeit)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть прийменник для іменника Protest (+ Akk.):",
+    q: "Hunderte Menschen gingen aus Protest ____ die drastische Mieterhöhung auf die Straße.",
+    options: ["gegen", "vor", "um", "zu"],
+    correct: "gegen",
+    explanation: "Керування: der Protest gegen + Akkusativ (Protest gegen Ungerechtigkeit)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть прийменник для іменника Antwort (+ Akk.):",
+    q: "Wir warten nun schon seit Wochen auf eine klare Antwort ____ unsere offizielle Anfrage.",
+    options: ["auf", "zu", "für", "an"],
+    correct: "auf",
+    explanation: "Керування: die Antwort auf + Akkusativ (die Antwort auf eine Frage / Anfrage)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть прийменник для іменника Frage (+ Dat.):",
+    q: "Bei der Diskussion ging es hauptsächlich um die Frage ____ den Ursachen des Klimawandels.",
+    options: ["nach", "über", "zu", "für"],
+    correct: "nach",
+    explanation: "Керування: die Frage nach + Dativ (die Frage nach dem Sinn / dem Weg)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть прийменник для іменника Bereitschaft (+ Dat.):",
+    q: "Das Team zeigte große Bereitschaft ____ Übernahme zusätzlicher Aufgaben.",
+    options: ["zur", "an der", "für die", "in der"],
+    correct: "zur",
+    explanation: "Керування: die Bereitschaft zu + Dativ (zu + der = zur)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть прийменник для іменника Recht (+ Akk.):",
+    q: "Jeder Bürger hat ein verfassungsmäßiges Recht ____ freie Meinungsäußerung.",
+    options: ["auf", "an", "für", "über"],
+    correct: "auf",
+    explanation: "Керування: das Recht auf + Akkusativ (das Recht auf Bildung / Arbeit)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть прийменник для іменника Hinweis (+ Akk.):",
+    q: "Die Polizei bittet um sachdienliche Hinweise ____ den Aufenthaltsort des Flüchtigen.",
+    options: ["auf", "an", "nach", "zu"],
+    correct: "auf",
+    explanation: "Керування: der Hinweis auf + Akkusativ (ein Hinweis auf eine Gefahr)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть прийменник для іменника Vertrauen (+ Akk./Dat.):",
+    q: "Der neue Geschäftsführer genießt großes Vertrauen ____ die Fähigkeiten seiner Mitarbeiter.",
+    options: ["in", "an", "nach", "bei"],
+    correct: "in",
+    explanation: "Керування: das Vertrauen in + Akkusativ (Vertrauen in die Zukunft haben)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть прийменник для іменника Abhängigkeit (+ Dat.):",
+    q: "Die wirtschaftliche Abhängigkeit ____ fossilen Brennstoffen soll rasch reduziert werden.",
+    options: ["von", "an", "aus", "bei"],
+    correct: "von",
+    explanation: "Керування: die Abhängigkeit von + Dativ (abhängig sein von)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть прийменник для іменника Verständnis (+ Akk.):",
+    q: "Wir bitten alle Fahrgäste um Verständnis ____ die witterungsbedingten Ausfälle.",
+    options: ["für", "an", "über", "auf"],
+    correct: "für",
+    explanation: "Керування: das Verständnis für + Akkusativ (Verständnis für Probleme haben)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть прийменник для іменника Bericht (+ Akk.):",
+    q: "Der Journalist veröffentlichte einen ausführlichen Bericht ____ die finanzielle Krise.",
+    options: ["über", "von", "an", "für"],
+    correct: "über",
+    explanation: "Керування: der Bericht über + Akkusativ (berichten über etwas)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть прийменник для іменника Fähigkeit (+ Dat.):",
+    q: "Seine außergewöhnliche Fähigkeit ____ Problemlösung beeindruckte das Management.",
+    options: ["zur", "an die", "für die", "in der"],
+    correct: "zur",
+    explanation: "Керування: die Fähigkeit zu + Dativ (zu + der = zur)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть прийменник для іменника Grund (+ Akk.):",
+    q: "Es gibt absolut keinen Grund ____ Panik in dieser Situation.",
+    options: ["zur", "für", "an", "über"],
+    correct: "zur",
+    explanation: "Сталий зворот: der Grund zu + Dativ (keinen Grund zur Panik / zur Sorge haben)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть прийменник для іменника Entscheidung (+ Akk.):",
+    q: "Die Entscheidung ____ den Kauf der Immobilie fiel nach gründlicher Überlegung.",
+    options: ["für", "an", "nach", "zu"],
+    correct: "für",
+    explanation: "Керування: die Entscheidung für / gegen + Akkusativ."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть прийменник для іменника Neugier (+ Akk.):",
+    q: "Seine Neugier ____ fremde Kulturen motivierte ihn zu vielen weltweiten Reisen.",
+    options: ["auf", "über", "an", "für"],
+    correct: "auf",
+    explanation: "Керування: die Neugier auf + Akkusativ (neugierig sein auf)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть прийменник для іменника Rücksicht (+ Akk.):",
+    q: "Im Straßenverkehr muss man stets Rücksicht ____ schwächere Verkehrsteilnehmer nehmen.",
+    options: ["auf", "an", "für", "vor"],
+    correct: "auf",
+    explanation: "Сталий дієслівно-іменниковий зворот: Rücksicht nehmen auf + Akkusativ."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть прийменник для іменника Begeisterung (+ Akk.):",
+    q: "Die Begeisterung des Publikums ____ das neue Theaterstück war überwältigend.",
+    options: ["für", "an", "zu", "über"],
+    correct: "für",
+    explanation: "Керування: die Begeisterung für + Akkusativ (sich begeistern für)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть прийменник для іменника Bereitschaft (+ Dat.):",
+    q: "Die Tarifpartner signalisierten ihre grundsätzliche Bereitschaft ____ Aufnahme von Kompromissgesprächen.",
+    options: ["zur", "an der", "für die", "in der"],
+    correct: "zur",
+    explanation: "Керування: die Bereitschaft zu + Dativ (zu + der = zur Aufnahme)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть прийменник для іменника Skepsis (+ Dat./Akk.):",
+    q: "In der Bevölkerung herrscht nach wie vor erhebliche Skepsis ____ den vorgeschlagenen Steuerreformen.",
+    options: ["gegenüber", "vor", "an", "auf"],
+    correct: "gegenüber",
+    explanation: "Керування: die Skepsis gegenüber + Dativ (або Skepsis an + Dat. / gegen + Akk. — тут правильна форма gegenüber з Dativ)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть прийменник для іменника Mangel (+ Dat.):",
+    q: "Viele Krankenhäuser leiden akut unter einem gravierenden Mangel ____ qualifiziertem Pflegepersonal.",
+    options: ["an", "von", "aus", "nach"],
+    correct: "an",
+    explanation: "Стале керування: der Mangel an + Dativ (Mangel an Fachkräften / Ressourcen)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть прийменник для іменника Anspruch (+ Akk.):",
+    q: "Die Angestellten haben einen gesetzlichen Anspruch ____ bezahlten Erholungsurlaub.",
+    options: ["auf", "an", "für", "nach"],
+    correct: "auf",
+    explanation: "Юридичне керування: der Anspruch auf + Akkusativ (Anspruch auf Entschädigung / Urlaub)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть прийменник для іменника Furcht (+ Dat.):",
+    q: "Aus Furcht ____ den unabsehbaren Konsequenzen verweigerte der Zeuge die Aussage.",
+    options: ["vor", "an", "gegen", "bei"],
+    correct: "vor",
+    explanation: "Керування: die Furcht vor + Dativ (Furcht vor negativen Folgen)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть прийменник для іменника Einblick (+ Akk.):",
+    q: "Das Praktikum gewährte den Studierenden einen tiefen Einblick ____ die internen Abläufe des Ministeriums.",
+    options: ["in", "an", "auf", "zu"],
+    correct: "in",
+    explanation: "Керування: der Einblick in + Akkusativ (Einblick in die Praxis / Prozesse)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть прийменник для іменника Neigung (+ Dat.):",
+    q: "Der Gutachter stellte bei dem Angeklagten eine ausgeprägte Neigung ____ impulsivem Verhalten fest.",
+    options: ["zu", "an", "für", "auf"],
+    correct: "zu",
+    explanation: "Керування: die Neigung zu + Dativ (Neigung zu Übertreibungen / Aggression)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть прийменник для іменника Vorwurf (+ Dat.):",
+    q: "Die Opposition erhob schwere Vorwürfe ____ den amtierenden Wirtschaftsminister.",
+    options: ["gegen", "vor", "zu", "an"],
+    correct: "gegen",
+    explanation: "Політико-юридичний контекст: der Vorwurf gegen + Akkusativ (jemandem einen Vorwurf machen / Vorwurf gegen jemanden)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть прийменник для іменника Verstoß (+ Akk.):",
+    q: "Diese Handlung stellt einen eklatanten Verstoß ____ geltendes Völkerrecht dar.",
+    options: ["gegen", "auf", "an", "vor"],
+    correct: "gegen",
+    explanation: "Керування: der Verstoß gegen + Akkusativ (Verstoß gegen Gesetze / Richtlinien)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть прийменник для іменника Voraussetzung (+ Akk.):",
+    q: "Fließende Sprachkenntnisse sind eine zwingende Voraussetzung ____ die Zulassung zur Promotion.",
+    options: ["für", "an", "zu", "auf"],
+    correct: "für",
+    explanation: "Керування: die Voraussetzung für + Akkusativ (Voraussetzung für ein Studium)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть прийменник для іменника Bekenntnis (+ Dat.):",
+    q: "Die Bundesregierung erneuerte ihr klares Bekenntnis ____ den Zielen des Pariser Klimaabkommens.",
+    options: ["zu", "an", "für", "auf"],
+    correct: "zu",
+    explanation: "Офіційне керування: das Bekenntnis zu + Dativ (sich bekennen zu -> das Bekenntnis zu)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть прийменник для іменника Einfluss (+ Akk.):",
+    q: "Die geopolitischen Spannungen haben einen massiven Einfluss ____ die weltweite Preisentwicklung.",
+    options: ["auf", "an", "in", "über"],
+    correct: "auf",
+    explanation: "Керування: der Einfluss auf + Akkusativ (Einfluss auf die Wirtschaft / Entscheidungen)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть прийменник для іменника Misstrauen (+ Dat.):",
+    q: "Zwischen den Verhandlungspartnern entstand ein tiefes Misstrauen ____ den Absichten der Gegenseite.",
+    options: ["gegenüber", "vor", "an", "über"],
+    correct: "gegenüber",
+    explanation: "Керування: das Misstrauen gegenüber + Dativ (Misstrauen gegenüber Institutionen / Personen)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть прийменник для іменника Debatte (+ Akk.):",
+    q: "Der Vorfall löste eine hitzige gesellschaftliche Debatte ____ die Grenzen der Pressefreiheit aus.",
+    options: ["über", "für", "an", "um"],
+    correct: "über",
+    explanation: "Керування: die Debatte über + Akkusativ (eine Debatte über ein Thema führen)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть прийменник для іменника Nachfrage (+ Dat.):",
+    q: "In den letzten Monaten sank die Nachfrage ____ gewerblichen Immobilien drastisch.",
+    options: ["nach", "für", "an", "auf"],
+    correct: "nach",
+    explanation: "Економічне керування: die Nachfrage nach + Dativ (Angebot und Nachfrage nach Gütern)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть прийменник для іменника Abneigung (+ Akk./Dat.):",
+    q: "Er hegte schon immer eine tief sitzende Abneigung ____ bürokratische Hürden.",
+    options: ["gegen", "vor", "zu", "an"],
+    correct: "gegen",
+    explanation: "Керування: die Abneigung gegen + Akkusativ (Abneigung gegen Ungerechtigkeit / Routine)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть прийменник для іменника Anteil (+ Dat.):",
+    q: "Das Unternehmen sicherte sich einen maßgeblichen Anteil ____ den weltweiten Exporten.",
+    options: ["an", "von", "in", "auf"],
+    correct: "an",
+    explanation: "Керування: der Anteil an + Dativ (Anteil am Gewinn / Marktanteil an der Branche)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть прийменник для іменника Festhalten (+ Dat.):",
+    q: "Das starre Festhalten ____ veralteten Methoden blockiert jede Innovation im Betrieb.",
+    options: ["an", "auf", "zu", "bei"],
+    correct: "an",
+    explanation: "Субстантивований зворот: das Festhalten an + Dativ (festhalten an Prinzipien / Plänen)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть прийменник для іменника Aufruf (+ Dat.):",
+    q: "Die Hilfsorganisation startete einen dringenden Aufruf ____ Spenden für das Krisengebiet.",
+    options: ["zu", "für", "an", "nach"],
+    correct: "zu",
+    explanation: "Керування: der Aufruf zu + Dativ (Aufruf zum Streik / zu Spenden)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть прийменник для іменника Rückgriff (+ Akk.):",
+    q: "Die Lösung des Problems gelang nur durch den Rückgriff ____ bewährte mathematische Modelle.",
+    options: ["auf", "an", "nach", "zu"],
+    correct: "auf",
+    explanation: "Академічний зворот: der Rückgriff auf + Akkusativ (zurückgreifen auf -> Rückgriff auf)."
+  }
         ]
       },
       {
@@ -3290,21 +3998,480 @@
         `,
         questions: [
           {
-            type: "choice",
-            instruction: "Оберіть модальне дієслово з високою впевненістю:",
-            q: "Das Licht brennt noch. Er ____ wohl noch arbeiten.",
-            options: ["muss", "soll", "will", "darf"],
-            correct: "muss",
-            explanation: "'muss' вказує на логічний висновок та високу впевненість мовця."
-          },
-          {
-            type: "choice",
-            instruction: "Оберіть модальне дієслово для переказу чуток:",
-            q: "Er ____ sehr reich sein, wie man im Dorf erzählt.",
-            options: ["soll", "muss", "kann", "darf"],
-            correct: "soll",
-            explanation: "'sollen' у суб'єктивному значенні позначає чутки / чужі слова ('кажуть, що він...')."
-          }
+    type: "choice",
+    instruction: "Оберіть модальне дієслово для логічного висновку з максимальною впевненістю (95-100%):",
+    q: "Das Licht im Büro brennt noch und der Computer läuft. Der Kollege ____ noch bei der Arbeit sein.",
+    options: ["muss", "soll", "will", "darf"],
+    correct: "muss",
+    explanation: "'müssen' у суб'єктивному значенні позначає майже 100% впевненість мовця та логічний висновок ('він точно ще на роботі')."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть модальне дієслово для переказу чуток або інформації з преси (Hörensagen):",
+    q: "Laut aktuellen Presseberichten ____ das Pharmaunternehmen kurz vor der Übernahme durch einen Großkonzern stehen.",
+    options: ["soll", "muss", "will", "kann"],
+    correct: "soll",
+    explanation: "'sollen' у суб'єктивному значенні вказує на чутки або інформацію з третіх вуст ('кажуть, що / за повідомленнями...')."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть дієслово для сумнівного твердження особи про саму себе:",
+    q: "Der Zeuge ____ den Verdächtigen zur Tatzeit im Park gesehen haben, aber niemand glaubt ihm so recht.",
+    options: ["will", "soll", "muss", "darf"],
+    correct: "will",
+    explanation: "'wollen' + Infinitiv II виражає суб'єктивне твердження людини про себе, у правдивості якого інші сумніваються ('він стверджує, що бачив')."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть модальне дієслово для високої ймовірності (ca. 75%):",
+    q: "Der Zug hat keine Verspätung gemeldet. Er ____ in wenigen Minuten auf Gleis 4 einfahren.",
+    options: ["dürfte", "sollte", "wollte", "musste"],
+    correct: "dürfte",
+    explanation: "'dürfte' (Konjunktiv II від dürfen) виражає обґрунтовану високу ймовірність / впевнене припущення ('найімовірніше прибуде')."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть форму припущення про дію в минулому (Infinitiv II з müssen):",
+    q: "Die Straße ist nass und es gibt überall Pfützen. Es ____ heute Nacht stark geregnet ____.",
+    options: [
+      "muss / haben",
+      "soll / sein",
+      "muss / sein",
+      "will / haben"
+    ],
+    correct: "muss / haben",
+    explanation: "Припущення щодо минулого: müssen + Partizip II (geregnet) + haben (es muss geregnet haben — 'точно йшов дощ')."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть модальне дієслово для невпевненого припущення / однієї з опцій (ca. 50%):",
+    q: "Er antwortet nicht auf den Anruf. Er ____ vielleicht gerade im Besprechungsraum sitzen.",
+    options: ["könnte", "muss", "will", "soll"],
+    correct: "könnte",
+    explanation: "'könnte' виражає непевне припущення або одну з багатьох можливостей ('можливо / міг би сидіти')."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть правильне значення речення: «Der Minister will von den illegalen Spenden nichts gewusst haben.»",
+    q: "Що насправді означає це речення?",
+    options: [
+      "Міністр стверджує про себе, що нічого не знав (але є сумніви)",
+      "За чутками, міністр точно нічого не знав",
+      "Міністр обов'язково повинен був знати про це",
+      "Міністр мав намір дізнатися про пожертви"
+    ],
+    correct: "Міністр стверджує про себе, що нічого не знав (але є сумніви)",
+    explanation: "wollen + Infinitiv II (gewusst haben) позначає твердження суб'єкта про самого себе, яке викликає сумнів у суспільства."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть форму переказу чуток про минулу дію:",
+    q: "Man erzählt im Dorf, der alte Schlossbesitzer ____ sein gesamtes Vermögen im Garten vergraben ____.",
+    options: [
+      "solle / haben",
+      "wolle / sein",
+      "müsse / werden",
+      "dürfe / haben"
+    ],
+    correct: "solle / haben",
+    explanation: "sollen (solle) + Partizip II + haben = переказ чуток про минулі події ('кажуть, нібито він закопав багатство')."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть модальне дієслово для категоричного заперечення можливості:",
+    q: "Er hat kein Alibi, aber er ____ die Tat unmöglich begangen haben, da er zur Tatzeit nachweislich im Krankenhaus lag.",
+    options: ["kann", "muss", "soll", "darf"],
+    correct: "kann",
+    explanation: "'nicht / unmöglich können + Infinitiv II' виражає логічну неможливість дії в минулому ('він ніяк не міг цього вчинити')."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть правильну конструкцію високої ймовірності щодо минулого (dürfte + Infinitiv II):",
+    q: "Das Flugzeug ist vor einer Stunde gelandet. Die Passagiere ____ die Passkontrolle bereits passiert ____.",
+    options: [
+      "dürften / haben",
+      "dürften / sein",
+      "sollten / haben",
+      "müssten / werden"
+    ],
+    correct: "dürften / haben",
+    explanation: "passieren (проходити контроль) утворює Perfekt із haben: dürften + passiert + haben."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть дієслово для логічного висновку про рух у минулому (Infinitiv II з sein):",
+    q: "Sein Auto steht nicht mehr in der Garage. Er ____ schon vor einer halben Stunde abgefahren ____.",
+    options: [
+      "muss / sein",
+      "muss / haben",
+      "soll / haben",
+      "will / sein"
+    ],
+    correct: "muss / sein",
+    explanation: "Дієслово руху abfahren вимагає допоміжного sein у минулому інфінітиві: muss abgefahren sein."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть модальне дієслово, яке виражає значення «за словами інших людей»:",
+    q: "Die neue Direktorin ____ sehr streng, aber überaus gerecht sein.",
+    options: ["soll", "will", "muss", "darf"],
+    correct: "soll",
+    explanation: "'sollen' виражає думку або чутки інших людей ('кажуть, що вона сувора')."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть значення речення: «Er muss den Schlüsselbund zu Hause vergessen haben.»",
+    q: "Який ступінь суб'єктивної впевненості мовця передано в реченні?",
+    options: [
+      "Майже 100% впевненість на основі очевидних фактів",
+      "Припущення з 50% ймовірністю",
+      "Переказ чуток без власної впевненості",
+      "Претензія суб'єкта про власні заслуги"
+    ],
+    correct: "Майже 100% впевненість на основі очевидних фактів",
+    explanation: "'müssen + Infinitiv II' позначає безальтернативний логічний висновок про минуле."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть правильну конструкцію суб'єктивного твердження про знання кількох мов:",
+    q: "Der Bewerber ____ angeblich sechs Fremdsprachen verhandlungssicher beherrschen.",
+    options: ["will", "muss", "kann", "darf"],
+    correct: "will",
+    explanation: "Якщо особа стверджує щось про власні вміння ('angeblich' — нібито), вживається 'wollen'."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть порядок слів у підрядному реченні із суб'єктивним значенням модального дієслова:",
+    q: "Die Polizei geht davon aus, dass der Täter ____.",
+    options: [
+      "über das Dach entkommen sein muss",
+      "muss über das Dach entkommen sein",
+      "über das Dach muss entkommen sein",
+      "entkommen sein über das Dach muss"
+    ],
+    correct: "über das Dach entkommen sein muss",
+    explanation: "У підрядному реченні схема присудка: Partizip II (entkommen) + Hilfsverb (sein) + відмінюване Modalverb (muss) у самому кінці."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть модальне дієслово для ймовірності отримання результату:",
+    q: "Die Gutachter haben alle Daten analysiert. Der offizielle Bericht ____ morgen vorliegen.",
+    options: ["dürfte", "wollte", "musste", "konnte"],
+    correct: "dürfte",
+    explanation: "'dürfte + Infinitiv I' вказує на очікувану подію з високим ступенем імовірності."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть форму припущення для зміни стану в минулому (einschlafen):",
+    q: "Er reagiert auf kein Klopfen. Er ____ wohl vor Erschöpfung sofort eingeschlafen ____.",
+    options: [
+      "muss / sein",
+      "muss / haben",
+      "soll / haben",
+      "will / sein"
+    ],
+    correct: "muss / sein",
+    explanation: "einschlafen вимагає допоміжного sein у складному минулому інфінітиві: muss eingeschlafen sein."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть модальне дієслово для передачі легенди чи міфу:",
+    q: "In diesem alten Gemäuer ____ früher ein berühmter Alchemist gelebt haben.",
+    options: ["soll", "will", "muss", "darf"],
+    correct: "soll",
+    explanation: "Історичні перекази та легенди традиційно передаються через 'sollen + Infinitiv II'."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть правильний варіант завершення речення з сумнівом (könnte):",
+    q: "Es ist möglich, dass er den Termin vergessen hat. = Er ____.",
+    options: [
+      "könnte den Termin vergessen haben",
+      "muss den Termin vergessen haben",
+      "will den Termin vergessen haben",
+      "dürfte den Termin vergessen"
+    ],
+    correct: "könnte den Termin vergessen haben",
+    explanation: "'Es ist möglich, dass...' еквівалентно 'könnte + Infinitiv II (vergessen haben)'."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть граматично правильну конструкцію для заперечення твердження особи про себе:",
+    q: "Sie behauptet, sie sei die Tochter eines Diplomaten. = Sie ____ die Tochter eines Diplomaten sein.",
+    options: ["will", "soll", "muss", "kann"],
+    correct: "will",
+    explanation: "Трансформація 'jemand behauptet, dass er...' у суб'єктивне модальне дієслово: 'er/sie will ... sein'."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть порядок слів у підрядному реченні після 'obwohl':",
+    q: "Obwohl der Angeklagte zur Tatzeit am Tatort ____, bestritt er jede Beteiligung.",
+    options: [
+      "gesehen worden sein soll",
+      "soll gesehen worden sein",
+      "gesehen sein worden soll",
+      "gesehen worden soll sein"
+    ],
+    correct: "gesehen worden sein soll",
+    explanation: "Пасивний суб'єктивний інфінітив у кінці підрядного речення: Partizip II (gesehen) + worden + sein + відмінюване дієслово (soll)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть модальне дієслово для оцінки шансів (dürfte):",
+    q: "Nach den hervorragenden Testergebnissen ____ der Zulassung des Medikaments nichts mehr im Wege stehen.",
+    options: ["dürfte", "wollte", "musste", "sollte"],
+    correct: "dürfte",
+    explanation: "'dürfte + Infinitiv' оцінює високу ймовірність успішного завершення процесу."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть форму припущення для дієслова зі зворотною часткою (sich verirren):",
+    q: "Sie kommen seit Stunden nicht an. Sie ____ sich im dichten Nebel verirrt ____.",
+    options: [
+      "müssen / haben",
+      "müssen / sein",
+      "sollen / sein",
+      "wollen / haben"
+    ],
+    correct: "müssen / haben",
+    explanation: "Усі зворотні дієслова (sich verirren) утворюють Perfekt із haben: müssen sich verirrt haben."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть правильну інтерпретацію речення: «Das Projekt dürfte bis Ende des Monats abgeschlossen sein.»",
+    q: "Що виражає це висловлювання?",
+    options: [
+      "Обґрунтоване припущення мовця з високим ступенем імовірності",
+      "Категоричний наказ керівництва завершити роботу",
+      "Чутки, які поширюють конкуренти",
+      "Суворе правило або заборону"
+    ],
+    correct: "Обґрунтоване припущення мовця з високим ступенем імовірності",
+    explanation: "'dürfte sein' є маркером високої, обґрунтованої ймовірності в діловій німецькій мові."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть правильне дієслово для вираження впевненого логічного висновку в медичному контексті:",
+    q: "Der Patient hat hohes Fieber und Schüttelfrost. Er ____ sich mit einem schweren Virus infiziert ____.",
+    options: [
+      "muss / haben",
+      "soll / sein",
+      "will / haben",
+      "kann / sein"
+    ],
+    correct: "muss / haben",
+    explanation: "Очевидні симптоми дають підставу для 100% висновку: muss + Partizip II (sich infiziert) + haben."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть модальне дієслово для передачі чуток / тверджень третіх осіб у пасиві:",
+    q: "Der Konzernchef ____ laut Insiderberichten bereits vor Wochen über die Sicherheitsmängel informiert worden sein.",
+    options: ["soll", "will", "muss", "darf"],
+    correct: "soll",
+    explanation: "'sollen' у суб'єктивному значенні вказує на інформацію з третіх вуст або ЗМІ ('кажуть / за чутками, його нібито поінформували')."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть дієслово для сумнівного твердження суб'єкта про себе (subjektives Wollen):",
+    q: "Der Angeklagte ____ zum Tatzeitpunkt nachweislich im Ausland gewesen sein, doch seine Belege wirken gefälscht.",
+    options: ["will", "soll", "muss", "kann"],
+    correct: "will",
+    explanation: "'wollen + Infinitiv II' позначає твердження особи про саму себе, якому інші мало вірять ('він стверджує, нібито був за кордоном')."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть модальне дієслово для майже 100% логічного висновку про теперішній стан:",
+    q: "Nach diesem 14-stündigen Nachtflug ____ die gesamte Delegation vollkommen erschöpft sein.",
+    options: ["muss", "soll", "will", "darf"],
+    correct: "muss",
+    explanation: "'müssen' передає максимальну суб'єктивну впевненість мовця на основі фактів ('вони точно / безсумнівно виснажені')."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть форму високої обґрунтованої ймовірності (ca. 75-80%) для минулого часу:",
+    q: "Die Post wurde gestern per Express verschickt. Das Dokument ____ den Empfänger inzwischen erreicht ____.",
+    options: [
+      "dürfte / haben",
+      "dürfte / sein",
+      "sollte / sein",
+      "wollte / haben"
+    ],
+    correct: "dürfte / haben",
+    explanation: "'dürfte + Infinitiv II' виражає високу ймовірність події в минулому (erreichen утворює Perfekt із haben -> erreicht haben)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть модальне дієслово для вираження категоричної логічної неможливості:",
+    q: "Er war zur Tatzeit nachweislich bei einer Konferenz in Tokio. Er ____ den Einbruch unmöglich verübt haben.",
+    options: ["kann", "muss", "soll", "will"],
+    correct: "kann",
+    explanation: "Заперечна конструкція 'nicht / unmöglich können + Infinitiv II' виражає абсолютну неможливість дії в минулому."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть правильний складний інфінітив для дієслова руху з müssen:",
+    q: "Das Büro ist leer und sein Auto steht nicht auf dem Parkplatz. Der Manager ____ bereits nach Hause gefahren ____.",
+    options: [
+      "muss / sein",
+      "muss / haben",
+      "soll / haben",
+      "will / sein"
+    ],
+    correct: "muss / sein",
+    explanation: "Дієслово руху 'fahren' вимагає допоміжного sein у минулому інфінітиві: muss gefahren sein."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть порядок слів у підрядному реченні зі складним суб'єктивним інфінітивом:",
+    q: "Die Ermittler vermuten, dass der Täter ____.",
+    options: [
+      "über die Feuertreppe geflohen sein muss",
+      "muss über die Feuertreppe geflohen sein",
+      "über die Feuertreppe muss geflohen sein",
+      "geflohen sein muss über die Feuertreppe"
+    ],
+    correct: "über die Feuertreppe geflohen sein muss",
+    explanation: "У підрядному реченні схема: Partizip II (geflohen) + Hilfsverb (sein) + відмінюване модальне дієслово (muss) у самому кінці."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть правильну інтерпретацію висловлювання: «Der Zeuge will den Täter genau erkannt haben.»",
+    q: "Що виражає це речення?",
+    options: [
+      "Свідок запевняє, що впізнав злочинця, але слідство сумнівається в його словах",
+      "Свідок мав твердий намір упізнати злочинця на допиті",
+      "За повідомленнями преси, свідок точно знає злочинця",
+      "Свідок зобов'язаний був упізнати злочинця"
+    ],
+    correct: "Свідок запевняє, що впізнав злочинця, але слідство сумнівається в його словах",
+    explanation: "wollen + Infinitiv II = суб'єктивна заява особи про себе, яку сприймають із дистанцією або скепсисом."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть дієслово для передачі історичних міфів або переказів (Legenden):",
+    q: "In diesen unterirdischen Gewölben ____ im Mittelalter geheime Treffen stattgefunden haben.",
+    options: ["sollen", "wollen", "müssen", "dürfen"],
+    correct: "sollen",
+    explanation: "Історичні перекази та легенди традиційно вводяться суб'єктивною формою 'sollen + Infinitiv II'."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть модальне дієслово для невпевненої гіпотези (ca. 50%):",
+    q: "Das Gutachten ist noch unvollständig. Es ____ bei der Berechnung zu einem methodischen Fehler gekommen sein.",
+    options: ["könnte", "muss", "will", "sollte"],
+    correct: "könnte",
+    explanation: "'könnte + Infinitiv II' вказує на одну з можливих причин із помірним рівнем упевненості ('можливо, сталася помилка')."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть форму припущення для зміни стану в минулому (einschlafen):",
+    q: "Er meldet sich seit Stunden nicht. Er ____ vor lauter Erschöpfung sofort eingeschlafen ____.",
+    options: [
+      "muss / sein",
+      "muss / haben",
+      "soll / haben",
+      "will / sein"
+    ],
+    correct: "muss / sein",
+    explanation: "Дієслово зміни стану 'einschlafen' утворює форму: muss + eingeschlafen + sein."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть правильну форму для суб'єктивного пасиву (Passiv Infinitiv II з sollen):",
+    q: "Der Vertrag ____ bereits gestern Abend von beiden Parteien unterzeichnet worden ____.",
+    options: [
+      "soll / sein",
+      "soll / haben",
+      "will / sein",
+      "muss / haben"
+    ],
+    correct: "soll / sein",
+    explanation: "Passiv Infinitiv II: Partizip II (unterzeichnet) + worden + sein (soll unterzeichnet worden sein)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть модальне дієслово для оцінки перспектив (hohe Wahrscheinlichkeit):",
+    q: "Angesichts der stabilen Marktlage ____ die Zuteilung der Kredite ohne Verzögerung erfolgen.",
+    options: ["dürfte", "wollte", "musste", "sollte"],
+    correct: "dürfte",
+    explanation: "'dürfte + Infinitiv I' оцінює високу ймовірність сприятливого розвитку подій у найближчому майбутньому."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть граматично точний синонім до конструкції: «Es ist nahezu sicher, dass er den Zug verpasst hat.»",
+    q: "Який варіант є повним смисловим еквівалентом?",
+    options: [
+      "Er muss den Zug verpasst haben.",
+      "Er will den Zug verpasst haben.",
+      "Er soll den Zug verpasst haben.",
+      "Er könnte den Zug verpassen."
+    ],
+    correct: "Er muss den Zug verpasst haben.",
+    explanation: "'Nahezu sicher sein' (бути майже впевненим) трансформується саме в 'müssen + Infinitiv II'."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть форму для вираження впевненого логічного висновку зі зворотним дієсловом:",
+    q: "Sie finden den Ausgang nicht mehr. Die Wanderer ____ sich im dichten Nebel verirrt ____.",
+    options: [
+      "müssen / haben",
+      "müssen / sein",
+      "sollen / sein",
+      "wollen / haben"
+    ],
+    correct: "müssen / haben",
+    explanation: "Усі зворотні дієслова (sich verirren) утворюють минулі форми з haben: müssen sich verirrt haben."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть модальне дієслово для дистанціювання від тверджень політика:",
+    q: "Der Abgeordnete ____ nach eigener Aussage keine vertraulichen Informationen weitergegeben haben.",
+    options: ["will", "soll", "muss", "kann"],
+    correct: "will",
+    explanation: "Фраза 'nach eigener Aussage' (за його власними словами) у сполученні зі скепсисом вимагає модального дієслова 'wollen'."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть порядок слів у підрядному реченні після 'obwohl' для суб'єктивного sollen:",
+    q: "Obwohl das Dokument von Experten gefälscht worden ____, hielt der Kläger an seiner Forderung fest.",
+    options: [
+      "sein soll",
+      "soll sein",
+      "worden sein soll",
+      "soll worden sein"
+    ],
+    correct: "sein soll",
+    explanation: "У підрядному реченні відмінюване модальне дієслово 'soll' замикає конструкцію: gefälscht worden sein soll."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть модальне дієслово для високої обґрунтованої ймовірності в діловій німецькій:",
+    q: "Die Wirtschaftsprüfer sind fast fertig. Der Abschlussbericht ____ bis Freitag vorliegen.",
+    options: ["dürfte", "wollte", "musste", "konnte"],
+    correct: "dürfte",
+    explanation: "'dürfte + Infinitiv' виступає стандартним ввічливим засобом вираження високої впевненості у діловій сфері."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть модальне дієслово для твердження про володіння неперевіреним фактом:",
+    q: "Sie ____ die einzige Augenzeugin des Unfalls gewesen sein, weigert sich jedoch auszusagen.",
+    options: ["will", "muss", "soll", "kann"],
+    correct: "will",
+    explanation: "Якщо особа сама наполягає на певному статусі ('я була єдиним свідком'), використовується 'wollen'."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть значення конструкції «dürfte ... gereicht haben»:",
+    q: "«Die bisherigen Maßnahmen dürften für eine Stabilisierung des Wechselkurses gereicht haben.»",
+    options: [
+      "Мовець з високою ймовірністю вважає, що вжитих заходів виявилося достатньо",
+      "Заходи категорично заборонено переглядати",
+      "За чутками, заходів абсолютно недостатньо",
+      "Банк мав твердий намір стабілізувати курс"
+    ],
+    correct: "Мовець з високою ймовірністю вважає, що вжитих заходів виявилося достатньо",
+    explanation: "'dürfte + Partizip II + haben' передає обґрунтоване припущення з високим ступенем достовірності щодо минулого."
+  }
         ]
       },
       {
@@ -3359,21 +4526,285 @@
         `,
         questions: [
           {
-            type: "choice",
-            instruction: "Оберіть неозначений займенник:",
-            q: "Ist hier ____, der mir helfen kann?",
-            options: ["jemand", "niemand", "etwas", "nichts"],
-            correct: "jemand",
-            explanation: "У ствердних питаннях вживається 'jemand' (хтось)."
-          },
-          {
-            type: "choice",
-            instruction: "Оберіть заперечний займенник:",
-            q: "Es war dunkel und ich konnte ____ sehen.",
-            options: ["nichts", "etwas", "niemand", "jemand"],
-            correct: "nichts",
-            explanation: "Заперечення для речей: 'nichts' (нічого)."
-          }
+    type: "choice",
+    instruction: "Оберіть неозначений займенник для позначення невизначеної особи (Subjekt):",
+    q: "Hat ____ meinen Mantel an der Garderobe gesehen?",
+    options: ["jemand", "jemandem", "jemanden", "niemandem"],
+    correct: "jemand",
+    explanation: "У ролі підмета (Nominativ) у ствердному/питальному значенні вживається базова форма 'jemand' (хтось)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть заперечний займенник для осіб у Dativ:",
+    q: "Ich habe den geheimen PIN-Code ____ mitgeteilt.",
+    options: ["niemandem", "niemanden", "niemand", "keinem"],
+    correct: "niemandem",
+    explanation: "Дієслово mitteilen вимагає непрямого додатка в Dativ (кому?): niemand -> niemandem (нікому)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть неозначений займенник для неживих предметів:",
+    q: "Hörst du das? Da bewegt sich ____ im Nachbargarten.",
+    options: ["etwas", "jemand", "man", "nichts"],
+    correct: "etwas",
+    explanation: "Для позначення невизначеного предмета, явища або звуку вживається 'etwas' (щось)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть заперечний займенник для неживих предметів:",
+    q: "Er stand fassungslos da und sagte ____ zu den Vorwürfen.",
+    options: ["nichts", "nie", "kein", "etwas"],
+    correct: "nichts",
+    explanation: "'nichts' виступає заперечним займенником для неживих предметів чи фактів ('нічого')."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть неозначений займенник 'jemand' у Akkusativ:",
+    q: "Suchst du hier ____ Bestimmten?",
+    options: ["jemanden", "jemandem", "jemandes", "niemandem"],
+    correct: "jemanden",
+    explanation: "Дієслово suchen вимагає додатка в Akkusativ (кого?): jemand -> jemanden (когось)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть заперечний займенник для іменника жіночого роду (keine):",
+    q: "— Hast du eine passende Tasche für die Reise? — Nein, ich habe leider ____.",
+    options: ["keine", "keinen", "keines", "keinem"],
+    correct: "keine",
+    explanation: "Займенник замінює die Tasche в Akkusativ (Femininum) без іменника: keine."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть неозначений займенник 'einer / welche' для заміни іменника:",
+    q: "— Gibt es hier noch frische Brötchen? — Ja, in der Küche liegen noch ____.",
+    options: ["welche", "einer", "eines", "jemand"],
+    correct: "welche",
+    explanation: "У розмовній мові 'welche' замінює іменники у множині або незлічувані іменники ('кілька / трохи')."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть неозначений займенник для заміни Maskulinum в Akkusativ:",
+    q: "— Brauchst du einen Kugelschreiber? — Danke, ich habe schon ____ gefunden.",
+    options: ["einen", "ein", "einer", "welches"],
+    correct: "einen",
+    explanation: "Іменник der Kugelschreiber в Akkusativ замінюється самостійним займенником 'einen'."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть заперечний займенник у ролі підмета:",
+    q: "Obwohl das Büro besetzt sein sollte, war ____ anwesend.",
+    options: ["niemand", "jemand", "nichts", "keinerlei"],
+    correct: "niemand",
+    explanation: "Підмет у Nominativ зі значенням заперечення особи: 'niemand' (ніхто)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть заперечну форму 'keiner' для Maskulinum у Nominativ:",
+    q: "Von allen befragten Kandidaten wusste ____ die richtige Antwort.",
+    options: ["keiner", "kein", "keinen", "keinem"],
+    correct: "keiner",
+    explanation: "Займенник у ролі підмета чоловічого роду без іменника отримує закінчення артикля: keiner."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть неозначений займенник 'irgendwer / irgendwas' (високий рівень невизначеності):",
+    q: "Es hat an der Tür geklingelt, aber draußen steht absolut ____.",
+    options: ["niemand", "jemand", "irgendjemand", "nichts"],
+    correct: "niemand",
+    explanation: "Після частки 'absolut' для заперечення особи вживається 'niemand'."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть форму займенника 'man' у Dativ:",
+    q: "So ein Missgeschick kann ____ im Alltagsstress schnell passieren.",
+    options: ["einem", "man", "einen", "jemandem"],
+    correct: "einem",
+    explanation: "Займенник 'man' не має форми Dativ; замість нього використовується форма 'einem'."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть форму займенника 'man' у Akkusativ:",
+    q: "Diese ständigen Unterbrechungen machen ____ einfach wahnsinnig.",
+    options: ["einen", "man", "einem", "ihn"],
+    correct: "einen",
+    explanation: "У ролі додатка в Akkusativ займенник 'man' замінюється формою 'einen'."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть заперечний неозначений займенник 'keines' для Neutrum у Nominativ:",
+    q: "Wir haben drei Angebote geprüft, aber ____ entsprach unseren Kriterien.",
+    options: ["keines", "kein", "keiner", "keinem"],
+    correct: "keines",
+    explanation: "Іменник das Angebot замінюється займенником середнього роду в Nominativ: keines (жодне)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть неозначений займенник у Genitiv (чиясь власність):",
+    q: "Ist das ____ Regenschirm, der hier im Flur vergessen wurde?",
+    options: ["jemandes", "jemandem", "jemand", "jemanden"],
+    correct: "jemandes",
+    explanation: "У родовому відмінку (Genitiv — 'чийсь') неозначений займенник має закінчення -es: jemandes."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть закінчення субстантивованого прикметника після 'etwas':",
+    q: "Gibt es in den Nachrichten heute etwas wirklich Interessant____?",
+    options: ["-es", "-e", "-en", "-er"],
+    correct: "-es",
+    explanation: "Після неозначених слів etwas, viel, wenig, nichts субстантивовані прикметники пишуться з великої літери та отримують закінчення -es (etwas Interessantes)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть закінчення субстантивованого прикметника після 'nichts':",
+    q: "Er konnte sich nach dem Unfall an nichts Wichtig____ erinnern.",
+    options: ["-es", "-en", "-e", "-er"],
+    correct: "-es",
+    explanation: "Після заперечного займенника 'nichts' субстантивований прикметник завжди отримує сильне закінчення середнього роду: nichts Wichtiges."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть правильний заперечний займенник для числівника / множини:",
+    q: "Von all den eingeladenen Gästen ist ____ zur Feier erschienen.",
+    options: ["keiner", "nicht", "nichts", "kein"],
+    correct: "keiner",
+    explanation: "Коли заперечується особа з певної групи (von den Gästen), використовується займенник 'keiner' (у ролі підмета однини)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть неозначений займенник 'jemand' у Dativ:",
+    q: "Hast du davon schon ____ aus der Abteilung erzählt?",
+    options: ["jemandem", "jemanden", "jemand", "jemandes"],
+    correct: "jemandem",
+    explanation: "Дієслово erzählen вимагає непрямого додатка в Dativ (кому?): jemandem."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть форму заміни іменника середнього роду (das Auto) у Akkusativ:",
+    q: "— Hast du ein Auto für die Fahrt gemietet? — Nein, ich brauche ____.",
+    options: ["keines", "kein", "keinen", "keiner"],
+    correct: "keines",
+    explanation: "Самостійний заперечний займенник без іменника для Neutrum у знахідному відмінку (Akkusativ) отримує закінчення -es: keines."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть неозначений займенник для заміни іменника чоловічого роду (der Schlüssel) у Nominativ:",
+    q: "Da liegt ein Schlüsselbund auf dem Tisch. Ist das ____ von deinen?",
+    options: ["einer", "ein", "einen", "einem"],
+    correct: "einer",
+    explanation: "У ролі самостійного підмета чоловічого роду (der Schlüssel) неозначений займенник має закінчення -er: einer."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть заперечний займенник для неживих предметів у ролі підмета:",
+    q: "Es war so dunkel im Raum, dass man absolut ____ erkennen konnte.",
+    options: ["nichts", "niemand", "keiner", "etwas"],
+    correct: "nichts",
+    explanation: "Для позначення повної відсутності предметів чи візуальних образів вживається 'nichts'."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть неозначений займенник 'irgendwer' у знахідному відмінку (Akkusativ):",
+    q: "Wir müssen dringend ____ finden, der die Spätschicht übernimmt.",
+    options: ["irgendjemanden", "irgendjemandem", "irgendjemand", "irgendwas"],
+    correct: "irgendjemanden",
+    explanation: "Akkusativ від irgendjemand для живої особи: irgendjemanden (знайти когось)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть форму неозначеного займенника 'man' у Dativ:",
+    q: "Eine solche Situation bereitet ____ große Sorgen.",
+    options: ["einem", "man", "einen", "ihm"],
+    correct: "einem",
+    explanation: "Займенник 'man' у давальному відмінку (Dativ) обов'язково замінюється формою 'einem'."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть форму неозначеного займенника 'man' у Akkusativ:",
+    q: "Der plötzliche Lärm erschreckte ____ zu Tode.",
+    options: ["einen", "man", "einem", "jemand"],
+    correct: "einen",
+    explanation: "У ролі прямого додатка (Akkusativ) узагальнений займенник 'man' переходить у форму 'einen'."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть самостійний займенник 'welche' для незлічуваного іменника (die Milch):",
+    q: "— Haben wir noch Milch im Kühlschrank? — Ja, es ist noch ____ da.",
+    options: ["welche", "einer", "etwas", "welches"],
+    correct: "welche",
+    explanation: "Іменник жіночого роду die Milch замінюється розмовним неозначеним займенником 'welche'."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть заперечний займенник 'keinerlei' (незмінний посилювач заперечення):",
+    q: "Der Angeklagte zeigte während des gesamten Prozesses ____ Reue.",
+    options: ["keinerlei", "kein", "keine", "nichts"],
+    correct: "keinerlei",
+    explanation: "'keinerlei' є незмінним підсиленим заперечним займенником ('жодного / ані найменшого') перед будь-яким родом."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть займенник для вираження володіння (Genitiv від jemand):",
+    q: "Das ist doch bestimmt ____ private Telefonnummer, die hier notiert ist.",
+    options: ["jemandes", "jemandem", "jemanden", "jemand"],
+    correct: "jemandes",
+    explanation: "Форма Genitiv для неозначеного займенника jemand: jemandes (чиясь)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть заперечний займенник у ролі непрямого додатка (Dativ):",
+    q: "Der Professor hat die Prüfungsfragen vorab ____ gezeigt.",
+    options: ["niemandem", "niemanden", "niemand", "keinem"],
+    correct: "niemandem",
+    explanation: "Дієслово zeigen кому? -> Dativ особи: niemandem (нікому)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть форму займенника 'alles' у Dativ:",
+    q: "Mit ____, was er bisher gesagt hat, bin ich vollkommen einverstanden.",
+    options: ["allem", "alles", "allen", "aller"],
+    correct: "allem",
+    explanation: "Прийменник 'mit' керує Dativ -> займенник alles отримує закінчення -em: mit allem."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть займенник для позначення 'жоден із двох' (beide vs. keiner):",
+    q: "Ich habe zwei Vorschläge erhalten, aber ____ davon überzeugt mich wirklich.",
+    options: ["keiner", "beide", "nichts", "kein"],
+    correct: "keiner",
+    explanation: "У ролі суб'єкта для заперечення одного/обох варіантів вживається 'keiner von ihnen'."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть неозначений займенник для неживих понять із прийменником:",
+    q: "Wir müssen uns über ____ unterhalten, das mir schon lange auf dem Herzen liegt.",
+    options: ["etwas", "jemanden", "nichts", "man"],
+    correct: "etwas",
+    explanation: "Після прийменника über (+ Akk.) для неживих понять вживається незмінний займенник 'etwas'."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть форму заперечного займенника для множини в Dativ:",
+    q: "Er wollte von ____ seiner ehemaligen Kollegen mehr gestört werden.",
+    options: ["keinen", "keinem", "keiner", "keines"],
+    correct: "keinen",
+    explanation: "Прийменник 'von' вимагає Dativ Plural: von keinen seiner Kollegen."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть правильний займенник для виразу 'хтось інший':",
+    q: "Wenn du keine Zeit hast, muss das eben ____ für dich erledigen.",
+    options: ["jemand anderes", "etwas anderes", "niemand anderes", "wer anderes"],
+    correct: "jemand anderes",
+    explanation: "'jemand anderes' позначає невизначену іншу особу в називному відмінку (Nominativ)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть правильну форму займенника в заперечному реченні без частки nicht:",
+    q: "Im Sitzungssaal war während der gesamten Mittagspause ____ anzutreffen.",
+    options: ["niemand", "jemand", "nichts", "kein Mensch mehr"],
+    correct: "niemand",
+    explanation: "Займенник 'niemand' сам по собі виражає повне заперечення особи і не потребує додаткових часток заперечення."
+  }
         ]
       },
       {
@@ -3418,21 +4849,420 @@
         `,
         questions: [
           {
-            type: "choice",
-            instruction: "Оберіть сполучник способу дії:",
-            q: "Er verbesserte sein Deutsch, ____ er täglich Podcasts hörte.",
-            options: ["indem", "sodass", "damit", "weil"],
-            correct: "indem",
-            explanation: "'indem' вказує на спосіб досягнення мети (шляхом чого)."
-          },
-          {
-            type: "choice",
-            instruction: "Оберіть сполучник наслідку:",
-            q: "Es hat die ganze Nacht geschneit, ____ die Straßen gesperrt wurden.",
-            options: ["sodass", "indem", "um", "obwohl"],
-            correct: "sodass",
-            explanation: "'sodass' виражає логічний наслідок."
-          }
+    type: "choice",
+    instruction: "Оберіть сполучник способу дії (Modalsatz):",
+    q: "Er verbesserte seine Aussprache deutlich, ____ er täglich deutsche Hörbücher laut mitlas.",
+    options: ["indem", "sodass", "damit", "weil"],
+    correct: "indem",
+    explanation: "'indem' вказує на конкретний спосіб або засіб досягнення результату ('шляхом того, що / як саме')."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть сполучник реального наслідку (Konsekutivsatz):",
+    q: "Der Sturm beschädigte die Stromleitungen schwer, ____ mehrere Dörfer stundenlang ohne Licht blieben.",
+    options: ["sodass", "indem", "damit", "obwohl"],
+    correct: "sodass",
+    explanation: "'sodass' позначає фактичний наслідок або результат події з головного речення."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть правильний варіант розривного сполучника наслідку (so ... dass):",
+    q: "Der Vortrag war ____ spannend aufgebaut, ____ das gesamte Publikum bis zum Ende aufmerksam zuhörte.",
+    options: ["so / dass", "indem / dass", "zu / sodass", "sehr / indem"],
+    correct: "so / dass",
+    explanation: "Конструкція 'so + Adjektiv / Adverb ..., dass' виражає міру ознаки та її прямий наслідок."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть порядок слів у підрядному реченні з 'indem':",
+    q: "Man spart im Haushalt viel Energie, ____.",
+    options: [
+      "indem man die Heizung beim Verlassen der Wohnung herunterdreht",
+      "indem man dreht die Heizung beim Verlassen der Wohnung herunter",
+      "indem die Heizung man beim Verlassen der Wohnung herunterdreht",
+      "indem man beim Verlassen der Wohnung herunterdreht die Heizung"
+    ],
+    correct: "indem man die Heizung beim Verlassen der Wohnung herunterdreht",
+    explanation: "Після підрядного сполучника 'indem' відмінюване дієслово з відокремлюваним префіксом (herunterdreht) замикає речення."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть сполучник для опису економічної стратегії:",
+    q: "Das Unternehmen senkte die Produktionskosten, ____ es veraltete Maschinen durch moderne Roboter ersetzte.",
+    options: ["indem", "sodass", "damit", "falls"],
+    correct: "indem",
+    explanation: "'indem' описує спосіб реалізації дії ('завдяки тому, що замінило машини')."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть сполучник для медичного висновку:",
+    q: "Der Patient nahm die Antibiotika unregelmäßig ein, ____ die Infektion erneut aufflammte.",
+    options: ["sodass", "indem", "um", "insofern"],
+    correct: "sodass",
+    explanation: "'sodass' вводить логічний і реальний негативний наслідок дій пацієнта."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть правильну конструкцію з модальним дієсловом у реченні наслідку:",
+    q: "Die Nachfrage stieg unerwartet stark an, ____ der Betrieb Sonderschichten anordnen ____.",
+    options: [
+      "sodass / musste",
+      "indem / musste",
+      "sodass / hat",
+      "indem / konnte"
+    ],
+    correct: "sodass / musste",
+    explanation: "'sodass' вводить наслідок, а відмінюване модальне дієслово (musste) займає останнє місце в підрядному реченні."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть синонімічну конструкцію до 'indem' (B2):",
+    q: "«Er sicherte sich den Auftrag, indem er das beste Angebot abgab.» = Er sicherte sich den Auftrag ____, dass er das beste Angebot abgab.",
+    options: ["dadurch", "deshalb", "sodass", "trotzdem"],
+    correct: "dadurch",
+    explanation: "Конструкція 'dadurch, dass...' є абсолютним синтаксичним синонімом сполучника способу дії 'indem'."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть правильний сполучник у технічному контексті:",
+    q: "Die Datenübertragung wurde lückenlos verschlüsselt, ____ unbefugte Dritte keinen Zugriff darauf hatten.",
+    options: ["sodass", "indem", "um", "weil"],
+    correct: "sodass",
+    explanation: "Підрядне наслідку з власним підметом (unbefugte Dritte) вимагає сполучника 'sodass'."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть правильне дієслово в кінці підрядного речення способу дії:",
+    q: "Er beruhigte den aufgebrachten Kunden, indem er ihm aufmerksam ____.",
+    options: ["zuhörte", "zuhören", "gehört zu", "hörte zu"],
+    correct: "zuhörte",
+    explanation: "У підрядному реченні відокремлюваний префікс зливається з дієсловом у кінцевій позиції: zu-hörte -> zuhörte."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть розривну конструкцію наслідку (so viel ..., dass):",
+    q: "Es fielen in den Bergen ____ Schneemengen, ____ akute Lawinengefahr ausgerufen werden musste.",
+    options: ["so große / dass", "indem / dass", "solche / sodass", "zu / dass"],
+    correct: "so große / dass",
+    explanation: "so große Schneemengen ..., dass: зв'язок інтенсивності ознаки з підрядним реченням наслідку."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть сполучник для розв'язання проблеми:",
+    q: "Die Geschäftsleitung löste den Konflikt, ____ sie beide Parteien zu einem Schlichtungsgespräch einlud.",
+    options: ["indem", "sodass", "damit", "obwohl"],
+    correct: "indem",
+    explanation: "Вказується інструмент / спосіб вирішення конфлікту -> 'indem'."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть граматично правильний порядок слів після 'sodass':",
+    q: "Die Fluggesellschaft streikte, ____.",
+    options: [
+      "sodass Tausende Passagiere am Flughafen übernachten mussten",
+      "sodass mussten Tausende Passagiere am Flughafen übernachten",
+      "sodass Tausende Passagiere mussten am Flughafen übernachten",
+      "sodass am Flughafen Tausende Passagiere übernachten mussten haben"
+    ],
+    correct: "sodass Tausende Passagiere am Flughafen übernachten mussten",
+    explanation: "У підрядному реченні після 'sodass' відмінюване модальне дієслово (mussten) замикає речення."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть сполучник у фінансовому контексті:",
+    q: "Der Investor diversifizierte sein Aktienportfolio, ____ er das Verlustrisiko minimieren konnte.",
+    options: ["sodass", "indem", "um", "inwiefern"],
+    correct: "sodass",
+    explanation: "Головна дія призвела до результату, вираженого в підрядному: 'sodass er ... minimieren konnte'."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть сполучник способу дій для юридичної сфери:",
+    q: "Der Angeklagte entlastete sich, ____ er ein lückenloses Alibi vorlegte.",
+    options: ["indem", "sodass", "damit", "sowie"],
+    correct: "indem",
+    explanation: "Спосіб захисту / зняття звинувачень: 'indem' (шляхом надання алібі)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть сполучник для наслідку в минулому часі:",
+    q: "Der Bus hatte einen schweren Motorschaden, ____ alle Fahrgäste in ein Ersatzfahrzeug umsteigen mussten.",
+    options: ["sodass", "indem", "damit", "denn"],
+    correct: "sodass",
+    explanation: "Поломка двигуна мала наслідком пересадку пасажирів -> 'sodass'."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть речення, де сполучник 'indem' вжито правильно за змістом:",
+    q: "У якому реченні сполучник виражає спосіб дії, а не мету чи причину?",
+    options: [
+      "Man lernt eine fremde Sprache am besten, indem man sie täglich aktiv anwendet.",
+      "Er beeilte sich sehr, indem er den Zug nicht verpasste.",
+      "Es regnete stark, indem alle Straßen überschwemmt wurden.",
+      "Er blieb zu Hause, indem er hohes Fieber hatte."
+    ],
+    correct: "Man lernt eine fremde Sprache am besten, indem man sie täglich aktiv anwendet.",
+    explanation: "Тільки в першому варіанті 'indem' відповідає на питання 'Wie? / Auf welche Weise?' (шляхом щоденного застосування)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть порядок слів у підрядному реченні способу дії з пасивом:",
+    q: "Die Umwelt wird geschützt, ____.",
+    options: [
+      "indem mehr Plastikmüll recycelt wird",
+      "indem wird mehr Plastikmüll recycelt",
+      "indem mehr Plastikmüll wird recycelt",
+      "indem mehr Plastikmüll recycelt werden"
+    ],
+    correct: "indem mehr Plastikmüll recycelt wird",
+    explanation: "Пасивний стан у підрядному реченні з indem: Partizip II (recycelt) + відмінюване дієслово werden (wird) у кінці."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть правильний сполучник наслідку з запереченням:",
+    q: "Die Sicherheitsvorkehrungen griffen sofort, ____ kein nennenswerter Schaden entstehen konnte.",
+    options: ["sodass", "indem", "um", "obgleich"],
+    correct: "sodass",
+    explanation: "Спрацювання безпеки призвело до наслідку, що шкоди не сталося -> 'sodass'."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть сполучник для побутового способу вирішення задачі:",
+    q: "Sie öffnete das verschlossene Paket vorsichtig, ____ sie das Klebeband mit einem Messer durchtrennte.",
+    options: ["indem", "sodass", "damit", "weil"],
+    correct: "indem",
+    explanation: "'indem' позначає конкретну фізичну дію-інструмент (розрізавши стрічку)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть розривний сполучник для ступеня втоми (so müde ..., dass):",
+    q: "Nach der langen Schicht war die Krankenschwester ____ erschöpft, ____ sie sofort einschlief.",
+    options: ["so / dass", "indem / dass", "sehr / sodass", "zu / dass"],
+    correct: "so / dass",
+    explanation: "so + Adjektiv (erschöpft) + dass: виражає наслідок крайнього стану виснаження."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть правильний присудок у реченні зі сполучником 'indem' у Perfekt:",
+    q: "Er hat sich beruflich weiterentwickelt, indem er an mehreren Fachseminaren teilgenommen ____.",
+    options: ["hat", "ist", "wurde", "haben"],
+    correct: "hat",
+    explanation: "Perfekt від teilnehmen утворюється з haben: teilgenommen hat (у самому кінці речення)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть сполучник для наслідку непорозуміння:",
+    q: "Die Adresse war undeutlich geschrieben, ____ der Bote das Haus nicht auf Anhieb fand.",
+    options: ["sodass", "indem", "damit", "sowie"],
+    correct: "sodass",
+    explanation: "Нерозбірлива адреса спричинила наслідок: кур'єр не знайшов будинок відразу -> 'sodass'."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть сполучник способу підвищення кваліфікації:",
+    q: "Ärzte halten ihr medizinisches Wissen aktuell, ____ sie regelmäßig Fachliteratur studieren.",
+    options: ["indem", "sodass", "damit", "inwiefern"],
+    correct: "indem",
+    explanation: "'indem' вказує на регулярний засіб підтримання знань (вивчення літератури)."
+  },
+  {
+    type: "choice",
+    instruction: "Визначте головну різницю між 'damit' (мета) та 'sodass' (наслідок):",
+    q: "«Er schloss das Fenster, sodass der Lärm draußen blieb.» Чому тут вжито 'sodass', а не 'damit'?",
+    options: [
+      "Тому що речення описує вже доконаний реальний наслідок, а не лише намір чи мету",
+      "Тому що в головній і підрядній частинах різні підмети",
+      "Тому що речення стоїть у теперішньому часі",
+      "Тому що дієслово schließen є перехідним"
+    ],
+    correct: "Тому що речення описує вже доконаний реальний наслідок, а не лише намір чи мету",
+    explanation: "Finalsatz (damit) виражає бажану мету/намір на майбутнє, а Konsekutivsatz (sodass) констатує реальний результат виконаної дії."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть сполучник способу дії (Modalsatz):",
+    q: "Man kann komplexe Sachverhalte oft am besten veranschaulichen, ____ man praxisnahe Beispiele heranzieht.",
+    options: ["indem", "sodass", "damit", "obwohl"],
+    correct: "indem",
+    explanation: "'indem' відповідає на питання 'Wie? / Auf welche Art und Weise?' і показує інструмент досягнення результату."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть сполучник реального наслідку (Konsekutivsatz):",
+    q: "Der Server fiel mitten im Arbeitstag unerwartet aus, ____ alle laufenden Transaktionen abgebrochen wurden.",
+    options: ["sodass", "indem", "um", "insofern"],
+    correct: "sodass",
+    explanation: "'sodass' вводить фактичний результат/наслідок раптової технічної аварії."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть розривну форму наслідку (so + Adjektiv ..., dass):",
+    q: "Die Argumente der Klägerseite waren ____ stichhaltig vorgetragen, ____ das Gericht die Klage vollumfänglich abwies.",
+    options: ["so / dass", "indem / dass", "zu / sodass", "sehr / indem"],
+    correct: "so / dass",
+    explanation: "Конструкція 'so + Adjektiv / Adverb ..., dass' вказує на інтенсивність ознаки та її прямий наслідок."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть порядок слів у підрядному реченні способу дії з відокремлюваним дієсловом:",
+    q: "Der Betrieb steigerte seine Effizienz, ____.",
+    options: [
+      "indem er überflüssige Bürokratie konsequent abbaute",
+      "indem er baute überflüssige Bürokratie konsequent ab",
+      "indem überflüssige Bürokratie er konsequent abbaute",
+      "indem er konsequent abbaute überflüssige Bürokratie"
+    ],
+    correct: "indem er überflüssige Bürokratie konsequent abbaute",
+    explanation: "У підрядному реченні з 'indem' відмінюване дієслово разом із префіксом (abbaute) займає кінцеву позицію."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть синонімічний синтаксичний еквівалент до 'indem' (B2):",
+    q: "«Er löste den Konflikt, indem er vermittelte.» = Er löste den Konflikt ____, dass er vermittelte.",
+    options: ["dadurch", "deshalb", "sodass", "trotzdem"],
+    correct: "dadurch",
+    explanation: "Конструкція 'dadurch, dass...' є синтаксичним еквівалентом сполучника 'indem'."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть правильний сполучник у сфері безпеки праці:",
+    q: "Die Arbeiter trugen vorgeschriebene Schutzbrillen, ____ schwere Augenverletzungen vermieden werden konnten.",
+    options: ["sodass", "indem", "damit", "weil"],
+    correct: "sodass",
+    explanation: "Підрядне речення описує доконаний наслідок захисних дій працівників ('sodass ... vermieden werden konnten')."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть сполучник для опису методики дослідження:",
+    q: "Die Forscher ermittelten die genaue Struktur des Proteins, ____ sie hochauflösende Mikroskope einsetzten.",
+    options: ["indem", "sodass", "damit", "inwiefern"],
+    correct: "indem",
+    explanation: "Вказується конкретний науковий інструмент/метод ('indem sie ... einsetzten')."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть граматично правильний порядок слів із модальним дієсловом після 'sodass':",
+    q: "Der Zugverkehr war komplett blockiert, ____.",
+    options: [
+      "sodass viele Pendler auf Taxis ausweichen mussten",
+      "sodass mussten viele Pendler auf Taxis ausweichen",
+      "sodass viele Pendler mussten auf Taxis ausweichen",
+      "sodass ausweichen viele Pendler auf Taxis mussten"
+    ],
+    correct: "sodass viele Pendler auf Taxis ausweichen mussten",
+    explanation: "Після 'sodass' дієслово вимагає кінцевої позиції: Infinitiv (ausweichen) + відмінюване Modalverb (mussten)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть розривний сполучник для позначення інтенсивності (so schnell ..., dass):",
+    q: "Die Inflation stieg im letzten Quartal ____ rasant, ____ die Kaufkraft der Bevölkerung massiv sank.",
+    options: ["so / dass", "indem / dass", "sehr / sodass", "zu / dass"],
+    correct: "so / dass",
+    explanation: "so + rasant (Adverb) + dass: виражає міру швидкості зростання та її прямий економічний результат."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть сполучник для юридичного захисту прав:",
+    q: "Der Mieter wehrte sich gegen die Kündigung, ____ er fristgerecht Widerspruch beim Gericht einlegte.",
+    options: ["indem", "sodass", "damit", "obgleich"],
+    correct: "indem",
+    explanation: "Описується юридичний спосіб протидії ('indem er Widerspruch einlegte')."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть порядок слів у пасивному стані з 'indem':",
+    q: "Das finanzielle Risiko wird minimiert, ____.",
+    options: [
+      "indem das Kapital breit gestreut wird",
+      "indem wird das Kapital breit gestreut",
+      "indem das Kapital wird breit gestreut",
+      "indem das Kapital breit gestreut werden"
+    ],
+    correct: "indem das Kapital breit gestreut wird",
+    explanation: "Vorgangspassiv у підрядному: Partizip II (gestreut) + відмінювана форма werden (wird) наприкінці."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть правильний сполучник для опису кліматичного наслідку:",
+    q: "Es regnete tagelang ununterbrochen, ____ der Flusspegel bedrohlich anstieg.",
+    options: ["sodass", "indem", "um", "insofern"],
+    correct: "sodass",
+    explanation: "Тривалий дощ мав реальний наслідок — підняття рівня води в річці."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть сполучник для досягнення спортивного результату:",
+    q: "Die Athletin verbesserte ihre Ausdauer, ____ sie fünfmal wöchentlich intensive Intervalle trainierte.",
+    options: ["indem", "sodass", "damit", "denn"],
+    correct: "indem",
+    explanation: "'indem' вказує на тренувальний процес як засіб покращення витривалості."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть правильне дієслово наприкінці речення з 'indem' у Perfekt:",
+    q: "Er hat sich vor finanziellen Verlusten geschützt, indem er rechtzeitig eine Versicherung abgeschlossen ____.",
+    options: ["hat", "ist", "wurde", "haben"],
+    correct: "hat",
+    explanation: "Perfekt від abschließen вимагає допоміжного haben: abgeschlossen hat."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть розривну конструкцію наслідку (so laut ..., dass):",
+    q: "Die Musik auf der Baustelle war ____ laut, ____ man sein eigenes Wort kaum verstehen konnte.",
+    options: ["so / dass", "indem / dass", "sehr / sodass", "zu / dass"],
+    correct: "so / dass",
+    explanation: "so + laut + dass: зв'язок рівня шуму з його прямим наслідком."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть варіант зі сполучником 'indem' у медичному контексті:",
+    q: "Der Arzt senkte den Blutdruck des Patienten, ____ er die Dosierung des Medikaments anpasste.",
+    options: ["indem", "sodass", "damit", "sowie"],
+    correct: "indem",
+    explanation: "Коригування дозування виступає медичним способом нормалізації тиску."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть сполучник для неочікуваного фінансового результату:",
+    q: "Die Werbekampagne war unerwartet erfolgreich, ____ das Produkt innerhalb weniger Stunden ausverkauft war.",
+    options: ["sodass", "indem", "um", "inwiefern"],
+    correct: "sodass",
+    explanation: "Успіх кампанії спричинив повний розпродаж товару -> 'sodass'."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть порядок слів із пасивним станом у підрядному реченні наслідку:",
+    q: "Der Vertrag enthielt schwere Formfehler, ____.",
+    options: [
+      "sodass er vom Notar für ungültig erklärt werden musste",
+      "sodass musste er vom Notar für ungültig erklärt werden",
+      "sodass er vom Notar für ungültig musste erklärt werden",
+      "sodass für ungültig erklärt werden er vom Notar musste"
+    ],
+    correct: "sodass er vom Notar für ungültig erklärt werden musste",
+    explanation: "У кінці стоїть конструкція: Partizip II (erklärt) + werden + відмінюване дієслово (musste)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть різницю між метою (damit) та наслідком (sodass):",
+    q: "«Die Firma senkte die Preise drastisch, sodass viele Neukunden gewonnen wurden.» Чому тут 'sodass'?",
+    options: [
+      "Тому що це констатація фактично досягнутого результату, а не просто план на майбутнє",
+      "Тому що в реченні дієслово стоїть у минулому часі",
+      "Тому що підмети в обох частинах збігаються",
+      "Тому що дієслово senken є перехідним"
+    ],
+    correct: "Тому що це констатація фактично досягнутого результату, а не просто план на майбутнє",
+    explanation: "Konsekutivsatz ('sodass') фіксує реальний результат події, на відміну від мети/наміру ('damit')."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть сполучник для побудови комунікаційного мосту:",
+    q: "Die Verhandlungspartner fanden einen Kompromiss, ____ beide Seiten bei ihren Maximalforderungen nachgaben.",
+    options: ["indem", "sodass", "damit", "weil"],
+    correct: "indem",
+    explanation: "Взаємні поступки виступили інструментом (способом) досягнення згоди між сторонами."
+  }
         ]
       },
       {
@@ -3472,21 +5302,460 @@
         `,
         questions: [
           {
-            type: "choice",
-            instruction: "Оберіть природну форму для запланованої дії:",
-            q: "Morgen ____ ich meine Oma besuchen.",
-            options: ["besuche", "werde besuchen", "habe besucht", "besuchte"],
-            correct: "besuche",
-            explanation: "З маркером часу (morgen) типово використовують звичайний Präsens."
-          },
-          {
-            type: "choice",
-            instruction: "Оберіть форму припущення на теперішнє:",
-            q: "Er meldet sich nicht. Er ____ wohl noch bei der Arbeit sein.",
-            options: ["wird", "ist", "hat", "wurde"],
-            correct: "wird",
-            explanation: "Futur I (wird sein) часто вживається для припущення в теперішньому часі."
-          }
+    type: "choice",
+    instruction: "Оберіть природну форму для запланованої домовленості з маркером часу:",
+    q: "Morgen um 15 Uhr ____ ich einen festen Termin beim Notar.",
+    options: ["habe", "werde haben", "werde gehabt haben", "hatte"],
+    correct: "habe",
+    explanation: "Для запланованих, точних домовленостей із зазначенням часу (morgen um 15 Uhr) у розмовній та діловій німецькій мові типово вживається звичайний Präsens."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть форму припущення щодо дії в теперішньому моменті (Vermutung):",
+    q: "Er nimmt das Telefon nicht ab. Er ____ wohl gerade im Zug sitzen.",
+    options: ["wird", "ist", "hat", "werde"],
+    correct: "wird",
+    explanation: "Конструкція 'wird + wohl + Infinitiv' (Futur I) є класичним засобом вираження суб'єктивного припущення мовця щодо теперішнього часу ('Він, напевно, зараз сидить у потягу')."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть найбільш природний варіант для офіційного розкладу руху:",
+    q: "Der ICE nach Berlin ____ planmäßig um 09:42 Uhr auf Gleis 3 ____.",
+    options: [
+      "fährt / ab",
+      "wird / abfahren",
+      "ist / abgefahren",
+      "werde / abfahren"
+    ],
+    correct: "fährt / ab",
+    explanation: "Фіксований розклад транспорту та регулярні події завжди передаються у Präsens з відокремлюваним префіксом (fährt ab)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть форму Futur I для твердої офіційної обіцянки (Versprechen):",
+    q: "Ich versichere Ihnen: Wir ____ uns unverzüglich um die Behebung des Fehlers ____.",
+    options: [
+      "werden / kümmern",
+      "kümmern / -",
+      "wurden / gekümmert",
+      "werden / gekümmert haben"
+    ],
+    correct: "werden / kümmern",
+    explanation: "Офіційні гарантії, урочисті обіцянки та тверді зобов'язання стилістично вимагають повної форми Futur I (werden ... kümmern)."
+  },
+  {
+    type: "choice",
+    instruction: "Визначте значення форми Futur I в реченні: «Das Paket wird wohl morgen ankommen.»",
+    q: "Яку функцію виконує Futur I в цьому висловлюванні?",
+    options: [
+      "Припущення / прогноз із часткою сумніву (Vermutung)",
+      "Категоричний наказ адресату (Befehl)",
+      "Суворе правило або заборона (Verbot)",
+      "Констатація вже завершеної дії (Vergangenheit)"
+    ],
+    correct: "Припущення / прогноз із часткою сумніву (Vermutung)",
+    explanation: "Поєднання дієслова werden з модальним словом 'wohl' завжди позначає гіпотезу, прогноз чи непевне припущення."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть правильну форму для регулярної запланованої дії:",
+    q: "Nächsten Montag ____ unsere Abteilung in das neue Bürogebäude um.",
+    options: ["zieht", "wird ziehen", "gezogen ist", "zog"],
+    correct: "zieht",
+    explanation: "З чіткою часовою вказівкою (nächsten Montag) для запланованих подій найприродніше вживати Präsens."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть форму припущення про вік людини (Vermutung):",
+    q: "Er wirkt sehr jung, aber er ____ wohl schon über 40 sein.",
+    options: ["wird", "ist", "werde", "wurde"],
+    correct: "wird",
+    explanation: "Припущення щодо стану, віку або характеристик у теперішньому часі будується за схемою: wird + Adjektiv + sein."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть форму для науково обґрунтованого прогнозу погоди (Prognose):",
+    q: "Laut Deutschem Wetterdienst ____ die Temperaturen in den kommenden Tagen drastisch ____.",
+    options: [
+      "werden / sinken",
+      "sinken / -",
+      "wurden / sinken",
+      "werden / gesunken"
+    ],
+    correct: "werden / sinken",
+    explanation: "Офіційні метеорологічні та наукові прогнози традиційно формулюються за допомогою Futur I (werden sinken)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть форму Präsens для особистого наміру на найближчі вихідні:",
+    q: "Am Wochenende ____ wir Freunde in Hamburg.",
+    options: ["besuchen", "werden besuchen", "besucht haben", "besuchten"],
+    correct: "besuchen",
+    explanation: "Для повсякденних планів на найближчий час у розмовній мові використовують Präsens: Am Wochenende besuchen wir..."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть форму припущення з часткою 'bestimmt':",
+    q: "Keine Sorge, dein Koffer ____ bestimmt beim nächsten Flug dabei sein.",
+    options: ["wird", "ist", "hat", "wurde"],
+    correct: "wird",
+    explanation: "wird + bestimmt + Infinitiv передає високу ймовірність / заспокійливе припущення мовця."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть форму дієслова für категоричну вимогу (замість Imperativ):",
+    q: "Du ____ jetzt sofort deinen Teller leer essen!",
+    options: ["wirst", "werdest", "wird", "isst"],
+    correct: "wirst",
+    explanation: "Futur I у 2-й особі однини (du wirst ... essen!) виступає експресивним замінником суворого наказу."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть варіант для події, що відбудеться за розкладом через кілька хвилин:",
+    q: "Der Film ____ in fünf Minuten.",
+    options: ["beginnt", "wird beginnen", "begonnen hat", "begänne"],
+    correct: "beginnt",
+    explanation: "Дія, що розпочнеться за кілька хвилин, майже завжди виражається звичайним Präsens (beginnt)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть форму припущення про місцеперебування колеги:",
+    q: "Wo steckt eigentlich Herr Weber? – Er ____ wohl noch in der Kantine sein.",
+    options: ["wird", "ist", "werde", "worden"],
+    correct: "wird",
+    explanation: "Futur I служить для відповіді-здогадки про поточне місцеперебування людини."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть правильну конструкцію обіцянки повернути борг:",
+    q: "Ich gebe dir mein Wort, ich ____ dir das Geld pünktlich zum Monatsende ____.",
+    options: [
+      "werde / zurückzahlen",
+      "zahle / zurück",
+      "habe / zurückgezahlt",
+      "werde / zurückgezahlt"
+    ],
+    correct: "werde / zurückzahlen",
+    explanation: "Зі зворотом 'Ich gebe dir mein Wort' (даю слово) для підкреслення урочистого зобов'язання використовують Futur I."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть варіант завершення для загальноекономічного довгострокового прогнозу:",
+    q: "Experten prognostizieren, dass die Inflation im kommenden Jahr leicht ____.",
+    options: [
+      "sinken wird",
+      "sinkt",
+      "gesunken ist",
+      "sinken werden"
+    ],
+    correct: "sinken wird",
+    explanation: "У підрядних реченнях прогнозу (prognostizieren, dass...) перевага надається формі майбутнього часу: Infinitiv + wird."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть форму Präsens для спонтанної щоденної домовленості:",
+    q: "Warte kurz auf mich, ich ____ mir nur schnell eine Jacke an.",
+    options: ["ziehe", "werde ziehen", "gezogen habe", "zog"],
+    correct: "ziehe",
+    explanation: "Спонтанні, миттєві наміри в побуті реалізуються через теперішній час: ich ziehe mir an."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть форму припущення про професійний статус (Vermutung):",
+    q: "Er fährt ein extrem teures Auto. Er ____ wohl ziemlich viel verdienen.",
+    options: ["wird", "wurde", "werde", "verdient"],
+    correct: "wird",
+    explanation: "Логічний висновок на основі спостереження: wird + wohl + Infinitiv (verdienen)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть правильну конструкцію для офіційного звернення / гарантії компанії:",
+    q: "Sehr geehrte Kunden, wir ____ Sie über alle weiteren Entwicklungen umgehend ____.",
+    options: [
+      "werden / informieren",
+      "informieren / -",
+      "wurden / informieren",
+      "haben / informiert"
+    ],
+    correct: "werden / informieren",
+    explanation: "Офіційні ділові листи клієнтам традиційно містять Futur I для підкреслення серйозності зобов'язань (wir werden Sie informieren)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть речення, де Präsens передає значення майбутнього завдяки обставині часу:",
+    q: "У якому реченні форма Präsens фактично виражає майбутню заплановану подію?",
+    options: [
+      "Übermorgen fliege ich für zwei Wochen nach Rom.",
+      "Er liest gerade einen spannenden Kriminalroman.",
+      "Die Erde dreht sich um die Sonne.",
+      "Ich wohne seit fünf Jahren in dieser Stadt."
+    ],
+    correct: "Übermorgen fliege ich für zwei Wochen nach Rom.",
+    explanation: "Слово 'übermorgen' (післязавтра) робить форму Präsens (fliege ich) майбутньою за значенням."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть форму для припущення з часткою 'sicher':",
+    q: "Die Prüfung war schwer, aber mit deiner Vorbereitung ____ du sie sicher bestehen.",
+    options: ["wirst", "werdest", "wird", "werdet"],
+    correct: "wirst",
+    explanation: "Для підмета 'du' форма дієслова werden — 'wirst' (du wirst sicher bestehen)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть форму для вираження впевненого політичного прогнозу на вибори:",
+    q: "Die Wahlbeteiligung ____ nach aktuellen Schätzungen auf über 80 Prozent ____.",
+    options: [
+      "wird / steigen",
+      "steigt / -",
+      "wurde / gestiegen",
+      "wird / gestiegen sein"
+    ],
+    correct: "wird / steigen",
+    explanation: "Електоральні та соціологічні прогнози оформлюються через Futur I: wird steigen."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть найприроднішу форму для щоденного розкладу відкриття магазину:",
+    q: "Die Bäckerei an der Ecke ____ morgen früh wie gewohnt um 06:30 Uhr ____.",
+    options: [
+      "öffnet / -",
+      "wird / öffnen",
+      "hat / geöffnet",
+      "wurde / geöffnet"
+    ],
+    correct: "öffnet / -",
+    explanation: "Повсякденні повторювані години роботи закладів завжди описуються у Präsens."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть форму припущення про причину затримки:",
+    q: "Warum ist sie noch nicht da? – Sie ____ wohl im Berufsverkehr stecken geblieben sein.",
+    options: ["wird", "ist", "hat", "wurde"],
+    correct: "wird",
+    explanation: "wird + Infinitiv II (stecken geblieben sein) = гіпотеза-припущення про минулу причину затримки."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть форму суворого батьківського наказу у Futur I:",
+    q: "Ihr ____ jetzt ohne Widerrede ins Bett gehen!",
+    options: ["werdet", "wird", "wirst", "geht"],
+    correct: "werdet",
+    explanation: "Futur I для 2-ї особи множини (ihr werdet ... gehen!) виражає беззаперечну вимогу дорослих."
+  },
+  {
+    type: "choice",
+    instruction: "Визначте різницю: «Ich helfe dir morgen» проти «Ich werde dir morgen helfen»:",
+    q: "Чим стилістично відрізняється речення з Futur I від речення у Präsens?",
+    options: [
+      "Futur I звучить як більш офіційна, вагома й урочиста обіцянка",
+      "Präsens використовується виключно для дій, що відбуваються прямо зараз",
+      "Futur I позначає дію, яка точно ніколи не відбудеться",
+      "Між цими варіантами немає жодної граматичної чи стилістичної різниці"
+    ],
+    correct: "Futur I звучить як більш офіційна, вагома й урочиста обіцянка",
+    explanation: "Präsens із маркером часу є нейтральним повсякденним засобом, тоді як Futur I додає висловлюванню ваги, урочистості або офіційного характеру обіцянки."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть форму припущення щодо причини поведінки людини (Vermutung):",
+    q: "Er wirkt heute extrem gestresst. Er ____ wohl wieder die ganze Nacht durchgearbeitet haben.",
+    options: ["wird", "ist", "hat", "wurde"],
+    correct: "wird",
+    explanation: "wird + wohl + Infinitiv II (durchgearbeitet haben) передає суб'єктивну гіпотезу мовця щодо причини поточного стану людини."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть форму для вираження офіційного публічного зобов'язання компанії:",
+    q: "Das Unternehmen verspricht: Wir ____ alle betroffenen Kunden vollumfänglich entschädigen.",
+    options: ["werden", "haben", "würden", "wurden"],
+    correct: "werden",
+    explanation: "Офіційні гарантії, письмові запевнення та обіцянки стилістично вимагають повної форми Futur I: werden ... entschädigen."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть найприроднішу форму для фіксованого розкладу транспорту:",
+    q: "Die Fähre nach Oslo ____ morgen früh um 08:00 Uhr planmäßig ____.",
+    options: [
+      "legt / ab",
+      "wird / ablegen",
+      "ist / abgelegt",
+      "werde / ablegen"
+    ],
+    correct: "legt / ab",
+    explanation: "Регулярний розклад руху та заздалегідь встановлені рейси завжди виражаються через Präsens із відокремлюваним префіксом (legt ab)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть форму категоричної вимоги від керівника (замість імперативу):",
+    q: "Sie ____ diesen Bericht bis heute Abend fehlerfrei fertigstellen!",
+    options: ["werden", "werdet", "wird", "würden"],
+    correct: "werden",
+    explanation: "Futur I у ввічливій або 2-й особі (Sie werden / Du wirst) функціонує як безапеляційний наказ замість наказового способу."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть природну форму Präsens для особистого наміру з маркером часу:",
+    q: "Nächste Woche ____ ich meinen Jahresurlaub in den Bergen.",
+    options: ["verbringe", "werde verbringen", "verbrachte", "habe verbracht"],
+    correct: "verbringe",
+    explanation: "Для запланованих побутових подій із чіткою часовою вказівкою (nächste Woche) у німецькій мові стандартно вживається Präsens."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть форму припущення про фінансову вартість об'єкта (Vermutung):",
+    q: "Dieses historische Gebäude in bester Innenstadtlage ____ wohl mehrere Millionen Euro wert sein.",
+    options: ["wird", "ist", "hat", "wäre"],
+    correct: "wird",
+    explanation: "Оцінка вартості або характеристик у формі здогадки будується за схемою: wird + wohl + Infinitiv (wert sein)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть форму Futur I для наукового довгострокового прогнозу:",
+    q: "Klimaforscher warnen davor, dass der Meeresspiegel bis zum Ende des Jahrhunderts weiter ____.",
+    options: [
+      "steigen wird",
+      "steigt",
+      "gestiegen ist",
+      "steigen werden"
+    ],
+    correct: "steigen wird",
+    explanation: "У підрядних реченнях довгострокових прогнозів та гіпотез використовується структура: Infinitiv + wird."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть форму дієслова для спонтанної щоденної дії:",
+    q: "Moment, ich ____ dir schnell beim Tragen dieser schweren Kiste.",
+    options: ["helfe", "werde helfen", "half", "geholfen habe"],
+    correct: "helfe",
+    explanation: "Миттєві спонтанні рішення, які виконуються прямо зараз, виражаються формою Präsens."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть форму припущення щодо теперішнього місцеперебування колеги:",
+    q: "Frau Meier ist nicht an ihrem Schreibtisch. Sie ____ wohl gerade bei der Besprechung sein.",
+    options: ["wird", "ist", "werde", "worden"],
+    correct: "wird",
+    explanation: "Futur I (wird + Infinitiv) разом із 'wohl' вказує на ймовірне перебування особи в певному місці в цю хвилину."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть правильну конструкцію особистої клятви / твердої обіцянки:",
+    q: "Ich gebe dir mein Ehrenwort: Ich ____ dich niemals im Stich ____.",
+    options: [
+      "werde / lassen",
+      "lasse / -",
+      "habe / gelassen",
+      "werde / gelassen haben"
+    ],
+    correct: "werde / lassen",
+    explanation: "Експресивні урочисті обіцянки ('mein Ehrenwort') завжди оформлюються за допомогою повної форми Futur I."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть речення, де форма Präsens виражає майбутнє за рахунок контексту:",
+    q: "У якому варіанті теперішній час граматично позначає майбутню заплановану дію?",
+    options: [
+      "In drei Tagen beginnen endlich die Semesterferien.",
+      "Die Sonne geht im Osten auf.",
+      "Er arbeitet derzeit an seiner Dissertation.",
+      "Wir wohnen seit zehn Jahren in Hamburg."
+    ],
+    correct: "In drei Tagen beginnen endlich die Semesterferien.",
+    explanation: "Маркер часу 'in drei Tagen' переносить значення дієслова beginnen (Präsens) у майбутній план."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть правильну форму для припущення з часткою 'sicher':",
+    q: "Du hast so viel gelernt, du ____ die B2-Prüfung ganz sicher ohne Probleme bestehen.",
+    options: ["wirst", "werdest", "wird", "werdet"],
+    correct: "wirst",
+    explanation: "Для займенника 'du' відмінювана форма — 'wirst' (du wirst sicher bestehen)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть форму дієслова для урочистого відкриття закладу:",
+    q: "Das neue städtische Museum ____ am kommenden Freitag feierlich eröffnet.",
+    options: ["wird", "hat", "werde", "wurde"],
+    correct: "wird",
+    explanation: "Пасивний стан для запланованих урочистих подій: wird eröffnet (Vorgangspassiv Präsens з майбутнім значенням)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть форму припущення про професійний досвід особи:",
+    q: "Sie erklärt alles so souverän. Sie ____ wohl schon jahrelange Erfahrung in diesem Bereich haben.",
+    options: ["wird", "ist", "werde", "worden"],
+    correct: "wird",
+    explanation: "Логічний умовивід-припущення про наявність знань: wird + wohl + Infinitiv (haben)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть форму суворого наказу батьків дітям у Futur I:",
+    q: "Ihr ____ jetzt augenblicklich mit dem Streit aufhören!",
+    options: ["werdet", "wird", "wirst", "hört"],
+    correct: "werdet",
+    explanation: "Futur I у 2-й особі множини (ihr werdet ... aufhören!) виступає експресивною заміною категоричного наказу."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть варіант завершення для економічного прогнозу розвитку ринку:",
+    q: "Analysten gehen davon aus, dass der Immobilienmarkt in den Großstädten stabil ____.",
+    options: [
+      "bleiben wird",
+      "bleibt",
+      "geblieben ist",
+      "bleiben werden"
+    ],
+    correct: "bleiben wird",
+    explanation: "У підрядному реченні прогнозування (gehen davon aus, dass...) пріоритет віддається формі: Infinitiv + wird."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть форму припущення щодо дорожнього затору (Vermutung):",
+    q: "Warum verspäten sich die Gäste? – Sie ____ wohl im Berufsverkehr festhängen.",
+    options: ["werden", "sind", "wurden", "haben"],
+    correct: "werden",
+    explanation: "Для множини (sie) форма припущення: werden + wohl + Infinitiv (festhängen)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть найприроднішу форму для щоденного графіка медичного закладу:",
+    q: "Die Notaufnahme der Klinik ____ Patienten rund um die Uhr ____.",
+    options: [
+      "nimmt / auf",
+      "wird / aufnehmen",
+      "hat / aufgenommen",
+      "wurde / aufgenommen"
+    ],
+    correct: "nimmt / auf",
+    explanation: "Постійний, незмінний режим роботи організацій описується звичайним Präsens (nimmt auf)."
+  },
+  {
+    type: "choice",
+    instruction: "Оберіть правильну конструкцію гарантії безпеки клієнтів:",
+    q: "Die Bank versichert: Ihre persönlichen Daten ____ durch modernste Sicherheitssysteme geschützt ____.",
+    options: [
+      "werden / werden",
+      "wird / werden",
+      "werden / worden",
+      "wurden / werden"
+    ],
+    correct: "werden / werden",
+    explanation: "Офіційна гарантія в майбутньому пасивному часі (Futur I Passiv): werden + Partizip II (geschützt) + werden."
+  },
+  {
+    type: "choice",
+    instruction: "Визначте значення форми Futur I в реченні: «Du wirst mir jetzt die ganze Wahrheit sagen!»",
+    q: "Яку комунікативну функцію виконує конструкція в цьому контексті?",
+    options: [
+      "Категоричний наказ / сувора вимога (Aufforderung)",
+      "Невпевнене припущення мовця (Vermutung)",
+      "Прогноз погоди чи кліматичних змін (Prognose)",
+      "Опис дії, яка відбулася в минулому (Vergangenheit)"
+    ],
+    correct: "Категоричний наказ / сувора вимога (Aufforderung)",
+    explanation: "Futur I у другій особі в поєднанні з безапеляційним тоном використовується як сувора вимога."
+  }
         ]
       },
       {
